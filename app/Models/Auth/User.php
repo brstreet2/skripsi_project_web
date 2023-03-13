@@ -21,9 +21,9 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
 	 * @var array
 	 */
 	protected $fillable = [
+		'name',
 		'email',
 		'password',
-		'name',
         'phone',
         'user_type',
         'created_by'

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\authRequest;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -36,7 +37,13 @@ class AuthController extends Controller
      */
     public function store(authRequest $request)
     {
-        //
+        $credentials = [
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => $request->password
+        ];
+
+        dd(Sentinel::registerAndActivate($credentials));
     }
 
     /**
