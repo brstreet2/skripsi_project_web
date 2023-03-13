@@ -62,19 +62,19 @@
 
                 </div>
                 <div class="column">
-                    <div class="card p-5">
-                        <h1 class="title has-text-centered	">Daftar</h1>
+                    <div class="card px-6 py-5">
+                        <h1 class="title has-text-weight-bold has-text-centered	mt-5">Daftar Akun</h1>
                         <div class="field">
                             <label class="label">Name</label>
                             <div class="control">
-                              <input class="input" type="text" placeholder="Text input">
+                              <input class="input" type="text" placeholder="Masukkan Nama Anda">
                             </div>
                           </div>
                           
                           <div class="field">
-                            <label class="label">Username</label>
+                            <label class="label">Email</label>
                             <div class="control has-icons-left has-icons-right">
-                              <input class="input is-success" type="text" placeholder="Text input" value="bulma">
+                              <input class="input" type="email" placeholder="example@email.com">
                               <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                               </span>
@@ -82,13 +82,13 @@
                                 <i class="fas fa-check"></i>
                               </span>
                             </div>
-                            <p class="help is-success">This username is available</p>
+                            {{-- <p class="help is-success">This username is available</p> --}}
                           </div>
                           
                           <div class="field">
-                            <label class="label">Email</label>
+                            <label class="label">Password</label>
                             <div class="control has-icons-left has-icons-right">
-                              <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
+                              <input class="input" type="password" placeholder="Minimal 8 Karakter ">
                               <span class="icon is-small is-left">
                                 <i class="fas fa-envelope"></i>
                               </span>
@@ -96,26 +96,7 @@
                                 <i class="fas fa-exclamation-triangle"></i>
                               </span>
                             </div>
-                            <p class="help is-danger">This email is invalid</p>
-                          </div>
-                          
-                          <div class="field">
-                            <label class="label">Subject</label>
-                            <div class="control">
-                              <div class="select">
-                                <select>
-                                  <option>Select dropdown</option>
-                                  <option>With options</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div class="field">
-                            <label class="label">Message</label>
-                            <div class="control">
-                              <textarea class="textarea" placeholder="Textarea"></textarea>
-                            </div>
+                            {{-- <p class="help is-danger">This email is invalid</p> --}}
                           </div>
                           
                           <div class="field">
@@ -127,25 +108,9 @@
                             </div>
                           </div>
                           
-                          <div class="field">
+                          <div class="field has-text-centered mt-5 mb-5">
                             <div class="control">
-                              <label class="radio">
-                                <input type="radio" name="question">
-                                Yes
-                              </label>
-                              <label class="radio">
-                                <input type="radio" name="question">
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          
-                          <div class="field is-grouped">
-                            <div class="control">
-                              <button class="button is-link">Submit</button>
-                            </div>
-                            <div class="control">
-                              <button class="button is-link is-light">Cancel</button>
+                              <button class="button is-link is-rounded is-responsive has-text-weight-semibold" style="width: 15rem">Daftar</button>
                             </div>
                           </div>
                     </div>
