@@ -13,14 +13,15 @@
                       <h1 class="title has-text-weight-bold has-text-centered	mt-5">Daftar Akun</h1>
                       <div class="field">
                           <label class="label">Name</label>
-                          <div class="control">
+                          <div class="control @if($errors->has('name')) has-error @endif">
                               <input class="input" type="text" name="name" placeholder="Masukkan Nama Anda">
                           </div>
+                          {!! $errors->first('name', '<p for="name" class="help is-danger">:message</p>') !!}
                       </div>
 
                       <div class="field">
                           <label class="label">Email</label>
-                          <div class="control has-icons-left has-icons-right">
+                          <div class="control has-icons-left has-icons-right @if($errors->has('email')) has-error @endif">
                               <input class="input" type="email" name="email" placeholder="example@email.com">
                               <span class="icon is-small is-left">
                                   <i class="fas fa-user"></i>
@@ -29,12 +30,12 @@
                                   <i class="fas fa-check"></i>
                               </span>
                           </div>
-                          {{-- <p class="help is-success">This username is available</p> --}}
+                          {!! $errors->first('email', '<p for="email" class="help is-danger">:message</p>') !!}
                       </div>
 
                       <div class="field">
                           <label class="label">Password</label>
-                          <div class="control has-icons-left has-icons-right">
+                          <div class="control has-icons-left has-icons-right @if($errors->has('password')) has-error @endif">
                               <input class="input" type="password" name="password" placeholder="Minimal 8 Karakter ">
                               <span class="icon is-small is-left">
                                   <i class="fas fa-envelope"></i>
@@ -43,7 +44,7 @@
                                   <i class="fas fa-exclamation-triangle"></i>
                               </span>
                           </div>
-                          {{-- <p class="help is-danger">This email is invalid</p> --}}
+                          {!! $errors->first('password', '<p for="password" class="help is-danger">:message</p>') !!}
                       </div>
 
                       <div class="field">

@@ -26,8 +26,22 @@ class authRequest extends FormRequest
         return [
             'name'        => 'required|regex:/^(?:[^"\'\<>\ㅤ\⠀])+$/i',
             'email'       => 'required|email|regex:/^(?:[^"\'\<>\ㅤ\⠀+])+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i',
-            'password'    => 'required'
+            'password'    => 'required|min:8'
 
         ];
     }
+
+    /**
+	 * Get the message
+	 *
+	 * @return array
+	 */
+	public function messages() {
+		return [
+			'name.required'       => 'Please enter your name.',
+            'email.required'      => 'Please enter your email address.',
+            'password.required'   => 'Please enter your password.',
+            // 'password.min'        => 'You need to input at least 8 characters.'
+		];
+	}
 }
