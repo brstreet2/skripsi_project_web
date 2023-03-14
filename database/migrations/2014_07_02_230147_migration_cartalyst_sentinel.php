@@ -107,6 +107,7 @@ class MigrationCartalystSentinel extends Migration
             $table->string('created_by')->default('');
             $table->string('updated_by')->default('');
             $table->string('deleted_by')->default('');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
