@@ -14,7 +14,7 @@
                       <div class="field">
                           <label class="label">Name</label>
                           <div class="control @if($errors->has('name')) has-error @endif">
-                              <input class="input" type="text" name="name" placeholder="Masukkan Nama Anda">
+                              <input class="input @if($errors->has('name')) is-danger @endif" type="text" name="name" placeholder="Masukkan Nama Anda">
                           </div>
                           {!! $errors->first('name', '<p for="name" class="help is-danger">:message</p>') !!}
                       </div>
@@ -22,7 +22,7 @@
                       <div class="field">
                           <label class="label">Email</label>
                           <div class="control has-icons-left has-icons-right @if($errors->has('email')) has-error @endif">
-                              <input class="input" type="email" name="email" placeholder="example@email.com">
+                              <input class="input @if($errors->has('email')) is-danger @endif" type="email" name="email" placeholder="example@email.com">
                               <span class="icon is-small is-left">
                                   <i class="fas fa-user"></i>
                               </span>
@@ -36,7 +36,7 @@
                       <div class="field">
                           <label class="label">Password</label>
                           <div class="control has-icons-left has-icons-right @if($errors->has('password')) has-error @endif">
-                              <input class="input" type="password" name="password" placeholder="Minimal 8 Karakter ">
+                              <input class="input @if($errors->has('password')) is-danger @endif" type="password" name="password" placeholder="Minimal 8 Karakter ">
                               <span class="icon is-small is-left">
                                   <i class="fas fa-envelope"></i>
                               </span>
