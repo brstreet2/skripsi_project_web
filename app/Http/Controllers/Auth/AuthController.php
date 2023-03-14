@@ -43,7 +43,7 @@ class AuthController extends Controller
             'password'  => $request->password
         ];
 
-        dd(Sentinel::registerAndActivate($credentials));
+        Sentinel::registerAndActivate($credentials);
     }
 
     /**
