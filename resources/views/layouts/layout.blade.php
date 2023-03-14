@@ -15,54 +15,31 @@
 </head>
 
 <body>
-    <div class="container is-fluid">
+    <div class="container-fluid">
       {{-- Navbar --}}
-        <nav class="navbar mb-3" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-                </a>
-
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                    data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item">
-                        Beranda
-                    </a>
-
-                    <a class="navbar-item">
-                        Tentang
-                    </a>
-
-                    <a class="navbar-item">
-                        Produk
-                    </a>
-
-                    <a class="navbar-item">
-                        Kontak
-                    </a>
-
-                    <div class="buttons ml-5">
-                        <a class="button is-primary">
-                            <strong>Sign up</strong>
-                        </a>
-                    </div>
-
+      <nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-1" href="#"><h5>Skripsi</h5></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                    <a class="nav-item nav-link mx-1" href="#"><span>Beranda</span></a>
+                    <a class="nav-item nav-link mx-1" href="#"><span>Tentang</span></a>
+                    <a class="nav-item nav-link mx-1" href="#"><span>Produk</span></a>
+                    <a class="nav-item nav-link mx-1" href="#"><span>Kontak</span></a>
                 </div>
+                <a class="nav-item nav-link" href="#"><button type="button" class="btn btn-primary px-4">Login</button></a>
+              </div>
             </div>
-
-        </nav>
+      </nav>
         {{--  --}}
 
         {{-- Section --}}
-        @yield('content')
+        <div class="content" style="margin-top: 5rem">
+            @yield('content')
+        </div>
     </div>
 </body>
     {{-- JQuery 3.6.4 --}}

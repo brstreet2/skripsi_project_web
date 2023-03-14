@@ -1,3 +1,16 @@
 body{
     font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #444EFF;  
+}
+
+.registerimg{
+    background-image: url(assets/hunters-race-MYbhN8KaaEc-unsplash.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+#btndaftr{
+    border-radius: 10%;
 }
