@@ -72,12 +72,14 @@
 
     <script>
       $(document).ready(function () {
-        $('#submitBtn').attr('disabled', true);
+        $('#submitBtn').prop('disabled', true);
         $('#termCondition').click(function () {
-          if($(this.checked)) {
-            $('#submitBtn').attr('disabled', false);
-          } else {
-            $('#submitBtn').attr('disabled', true);
+          var state = $(this)[0].checked;
+
+          if (state === true) {
+            $('#submitBtn').prop('disabled', false);
+          } else if(state === false) {
+            $('#submitBtn').prop('disabled', true);
           }
         });
       });
