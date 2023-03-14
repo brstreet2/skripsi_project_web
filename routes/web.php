@@ -22,3 +22,10 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
+
+Route::group([
+    'as'        => "auth."
+], function(){
+    Route::post('/register', [AuthController::class, 'store'])->name('register.post');
+    Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
+});
