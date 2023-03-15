@@ -5,7 +5,7 @@
         <h4 class="fw-bolder mt-3">PRICING PLAN</h4>
         <h2 class="fw-bold">JOIN NOW</h2>
         <div class="col-md-4">
-            <div class="card shadow mt-2" style="border: none">
+            <div class="card shadow zoom mt-2" style="border: none">
                 <div class="card-body text-center">
                     <h1><i class='bx bx-bone' style="color:#fe397a"></i></h1>
                     <h5 class="my-4">BASIC</h5>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow mt-2" style="border: none">
+            <div class="card shadow zoom mt-2" style="border: none">
                 <div class="card-body text-center">
                     <h1><i class='bx bx-star' style="color: #10bb87"></i></h1>
                     <h5 class="my-4">BASIC</h5>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow mt-2" style="border: none">
+            <div class="card shadow zoom mt-2" style="border: none">
                 <div class="card-body text-center">
                     <h1><i class='bx bx-crown' style="color:#5d78ff"></i></h1>
                     <h5 class="my-4">BASIC</h5>
