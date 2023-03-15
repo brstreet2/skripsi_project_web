@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\PricingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +33,10 @@ Route::group([
 ], function(){
     Route::post('/register', [AuthController::class, 'store'])->name('register.post');
     Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
+});
+
+Route::group([
+    'as'        => "pricing."
+], function() {
+    Route::get('/pricing', [PricingController::class, 'index'])->name('index');
 });
