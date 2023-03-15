@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-  <form action="{{ route('register.post') }}" method="POST">
+  <form action="{{ route('auth.register.post') }}" method="POST">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-2">
@@ -33,7 +33,7 @@
 
                                 </div>
                                 <div class="col-10">
-                                    <form method="POST" action="{{ route('register.post') }}">
+                                    <form method="POST" action="{{ route('auth.register.post') }}">
                                         {{ csrf_field() }}
                                             <div class="form-group mb-3">
                                               <label for="inputName" class="mb-1">Nama</label>
