@@ -7,7 +7,7 @@
         <div class="col-md-4">
             <div class="card shadow mt-2" style="border: none">
                 <div class="card-body text-center">
-                    <h1><i class='bx bx-bone'></i></h1>
+                    <h1><i class='bx bx-bone' style="color:#fe397a"></i></h1>
                     <h5 class="my-4">BASIC</h5>
                     <h2 class="fw-bold mb-5">FREE</h2>
                     <p class="my-2"> 10 Participants Max </p>
@@ -22,7 +22,7 @@
         <div class="col-md-4">
             <div class="card shadow mt-2" style="border: none">
                 <div class="card-body text-center">
-                    <h1><i class='bx bx-bone'></i></h1>
+                    <h1><i class='bx bx-star' style="color: #10bb87"></i></h1>
                     <h5 class="my-4">BASIC</h5>
                     <h2 class="fw-bold mb-5">FREE</h2>
                     <p class="my-2"> 10 Participants Max </p>
@@ -37,7 +37,7 @@
         <div class="col-md-4">
             <div class="card shadow mt-2" style="border: none">
                 <div class="card-body text-center">
-                    <h1><i class='bx bx-bone'></i></h1>
+                    <h1><i class='bx bx-crown' style="color:#5d78ff"></i></h1>
                     <h5 class="my-4">BASIC</h5>
                     <h2 class="fw-bold mb-5">FREE</h2>
                     <p class="my-2"> 10 Participants Max </p>
