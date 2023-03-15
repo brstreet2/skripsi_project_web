@@ -11,7 +11,7 @@
         <div class="col">
             <div class="card px-4 py-3 border">
                 <h2 class="text-center mt-4 mb-4">Masuk</h2>
-                <form method="POST" action="{{ route('register.post') }}">
+                <form method="POST" action="{{ route('auth.register.post') }}">
                   {{ csrf_field() }}
                       <div class="form-group mb-3">
                         <label for="inputEmail">Email</label>
