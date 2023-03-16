@@ -35,6 +35,7 @@
                     <a class="nav-item nav-link mx-1 navbarhover" href="#" style="color: #fcfcfc"><span>Produk</span></a>
                     <a class="nav-item nav-link mx-1 navbarhover" href="#" style="color: #fcfcfc"><span>Kontak</span></a>
                 </div>
+                
                 <a class="nav-item nav-link" href="#"><button type="button" class="btn px-4 rounded-pill" style="background-color: #FBF8FF; font-weight:700; width:7rem;">Login</button></a>
               </div>
             </div>
