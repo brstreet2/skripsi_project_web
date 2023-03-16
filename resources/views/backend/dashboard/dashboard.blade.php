@@ -61,7 +61,7 @@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem accusantium ipsa facilis laudantium reprehenderit vitae eum tenetur animi, ex, consequatur dolore? Neque aut, aliquid a deserunt voluptate laborum perferendis ipsam?</div>
+                        <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem accusantium ipsa facilis laudantium reprehenderit vitae eum tenetur animi, ex, consequatur dolore? Neque aut, aliquid a deserunt voluptate laborum perferendis ipsam?</div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem commodi voluptas, quae eligendi quos debitis praesentium doloribus nihil explicabo omnis dolores eum adipisci rem in voluptates tempore, dicta tempora blanditiis?</div>
                     </div>
                 </div>
