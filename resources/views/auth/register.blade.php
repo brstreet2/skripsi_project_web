@@ -7,7 +7,7 @@
         <div class="col-2">
 
         </div>
-        <div class="col mt-4 mb-4">
+        <div class="col mb-2 ">
             <div class="card border-0" style="border-radius: 2rem">
                 <div class="row g-0">
                     <div class="col-5">

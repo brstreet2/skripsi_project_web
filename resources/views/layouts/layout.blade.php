@@ -22,20 +22,20 @@
 <body>
     <div class="container-fluid">
       {{-- Navbar --}}
-      <nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light mb-4">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light mb-4" style="background-color: transparent">
         <div class="container-fluid">
             <a class="navbar-brand mx-1" href="#"><h5>Skripsi</h5></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                    <a class="nav-item nav-link mx-1" href="#"><span>Beranda</span></a>
-                    <a class="nav-item nav-link mx-1" href="#"><span>Tentang</span></a>
-                    <a class="nav-item nav-link mx-1" href="#"><span>Produk</span></a>
-                    <a class="nav-item nav-link mx-1" href="#"><span>Kontak</span></a>
+                    <a class="nav-item nav-link mx-1 navbarhover" href="#" style="color: #fcfcfc"><span>Beranda</span></a>
+                    <a class="nav-item nav-link mx-1 navbarhover" href="#" style="color: #fcfcfc"><span>Tentang</span></a>
+                    <a class="nav-item nav-link mx-1 navbarhover" href="#" style="color: #fcfcfc"><span>Produk</span></a>
+                    <a class="nav-item nav-link mx-1 navbarhover" href="#" style="color: #fcfcfc"><span>Kontak</span></a>
                 </div>
-                <a class="nav-item nav-link" href="#"><button type="button" class="btn btn-primary px-4">Login</button></a>
+                <a class="nav-item nav-link" href="#"><button type="button" class="btn px-4 rounded-pill" style="background-color: #FBF8FF; font-weight:700; width:7rem;">Login</button></a>
               </div>
             </div>
       </nav>
