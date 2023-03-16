@@ -3,6 +3,17 @@ body{
     background-color: #444EFF;  
 }
 
+.btnprimary{
+    color: #fcfcfc;
+    background-color: #444EFF;
+    border-color: #444EFF;
+}
+.btnprimary:hover{
+    color: #fcfcfc;
+    background-color: #00A575;
+    border-color: #00A575;
+}
+
 .registerimg{
     background-image: url(assets/hunters-race-MYbhN8KaaEc-unsplash.jpg);
     background-position: center;

@@ -31,7 +31,7 @@
                             <div class="row g-0">
                                 <div class="col">
 
-                                </div>
+                                </div> 
                                 <div class="col-10">
                                     <form method="POST" action="{{ route('auth.register.post') }}">
                                         {{ csrf_field() }}
@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="row mb-5">
                                                 <div class="col-2"></div>
-                                                <div class="col d-grid"><button type="submit" id="submitBtn" class="btn btn-block btn-primary rounded-pill" style="font-weight: 700; height: 3rem;">Daftar</button></div>
+                                                <div class="col d-grid"><button type="submit" id="submitBtn" class="btn btn-block btnprimary rounded-pill" style="font-weight: 700; height: 3rem;">Daftar</button></div>
                                                 <div class="col-2"></div>
                                             </div>
                                       </form>
@@ -70,7 +70,7 @@
         <div class="col-2">
 
         </div>
-    </div>
+    </div>  
   </form>
 @endsection
   
