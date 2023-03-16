@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\CompanyController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PricingController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +26,7 @@ Route::get('/login', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('backend.dashboard.dashboard');
-});
-
+// Auth
 Route::group([
     'as'        => "auth."
 ], function(){
@@ -36,7 +35,24 @@ Route::group([
 });
 
 Route::group([
-    'as'        => "pricing."
+    'as'        => "dashboard.",
+    'prefix'    => "dashboard"
 ], function() {
-    Route::get('/pricing', [PricingController::class, 'index'])->name('index');
+    Route::get('', [DashboardController::class, 'index'])->name('index');
+});
+
+// Pricing
+Route::group([
+    'as'        => "pricing.",
+    'prefix'    => "pricing"
+], function() {
+    Route::get('', [PricingController::class, 'index'])->name('index');
+});
+
+// Company
+Route::group([
+    'as'        => "company.",
+    'prefix'    => "company"
+], function() {
+    Route::get('', [CompanyController::class, 'index'])->name('index');
 });

@@ -25,10 +25,10 @@
             <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
         </header>
         <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
+            <nav class="nav_side">
                 <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">SKRIPSI</span> </a>
                     <div class="nav_list"> 
-                        <a href="#" class="nav_link {{ request()->route()->named('dashboard')? 'active': '' }}"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span></a> 
+                        <a href="{{ route('dashboard.index') }}" class="nav_link {{ request()->route()->named('dashboard.*')? 'active': '' }}"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span></a> 
                         <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> 
                         <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> 
                         <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> 
@@ -63,12 +63,20 @@
                 nav = document.getElementById(navId),
                 bodypd = document.getElementById(bodyId),
                 headerpd = document.getElementById(headerId)
-            
+
+                nav.classList.toggle('show-nav')
+                    // change icon
+                    toggle.classList.toggle('bx-x')
+                    // add padding to body
+                    bodypd.classList.toggle('body-pd')
+                    // add padding to header
+                    headerpd.classList.toggle('body-pd')
+
                 // Validate that all variables exist
                 if(toggle && nav && bodypd && headerpd){
                     toggle.addEventListener('click', ()=>{
                     // show navbar
-                    nav.classList.toggle('show')
+                    nav.classList.toggle('show-nav')
                     // change icon
                     toggle.classList.toggle('bx-x')
                     // add padding to body
