@@ -43,9 +43,15 @@
                                               <label for="inputEmail" class="mb-1">Email</label>
                                               <input type="email" class="form-control" name="email" id="inputEmail" aria-describedby="emailHelp" placeholder="example@email.com" style="border-radius: .75rem">
                                             </div>
+                                            <label for="inputPassword" class="mb-1">Password</label>
                                             <div class="form-group mb-3">
-                                              <label for="inputPassword" class="mb-1">Password</label>
-                                              <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Minimal 8 Karakter" style="border-radius: .75rem">
+                                              <div class="input-group flex-nowrap">
+                                                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Minimal 8 Karakter" style="border-radius: .75rem 0 0 .75rem">
+                                                    <button class="btn btnprimary" type="button" id="basic-addon2" style="border-radius: 0 .75rem .75rem 0" onclick="password_show_hide();">
+                                                        <i class="fa-regular fa-eye" id="show_eye"></i>
+                                                        <i class="fa-regular fa-eye-slash d-none" id="hide_eye"></i>
+                                                    </button>
+                                              </div>
                                             </div>
                                             <div class="form-check mb-5">
                                               <input type="checkbox" class="form-check-input" id="termCondition">
@@ -72,6 +78,23 @@
         </div>
     </div>  
   </form>
+  <script>
+    function password_show_hide() {
+      var x = document.getElementById("inputPassword");
+      var show_eye = document.getElementById("show_eye");
+      var hide_eye = document.getElementById("hide_eye");
+      hide_eye.classList.remove("d-none");
+      if (x.type === "password") {
+        x.type = "text";
+        show_eye.style.display = "none";
+        hide_eye.style.display = "block";
+      } else {
+        x.type = "password";
+        show_eye.style.display = "block";
+        hide_eye.style.display = "none";
+      }
+    }
+    </script>
 @endsection
   
     @push('scripts')
