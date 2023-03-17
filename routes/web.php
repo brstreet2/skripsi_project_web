@@ -56,3 +56,9 @@ Route::group([
 ], function() {
     Route::get('', [CompanyController::class, 'index'])->name('index');
 });
+
+//Error
+Route::get('/404', function () {
+    return view('errors.error');
+});
+
