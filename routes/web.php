@@ -34,6 +34,7 @@ Route::group([
     Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
 });
 
+// Dashboard
 Route::group([
     'as'        => "dashboard.",
     'prefix'    => "dashboard"
