@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 
-<body id="body-pd" style="background-color: #e6e7ff ">
-        <header class="header" id="header">
+<body id="body-pd" style="background-color: #f2f3ff ">
+        <header class="header" id="header" style="background-color: #fcfcfc">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
             <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
         </header>
