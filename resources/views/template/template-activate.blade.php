@@ -15,7 +15,7 @@
                     <tr>
                       <td class="contentalignmentContainer" style="word-break:break-word;font-size:0px;padding:0px;text-align:center">
                         {{-- image logo --}}
-                        <img src="" alt="image" width="258" style="font-family:'Plus Jakarta Sans',sans-serif;;font-size:20px;width:43%">
+                        <img src="https://cdn-icons-png.flaticon.com/512/10078/10078906.png" width="90" height="90" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px">
                       </td>
                     </tr>
                   </tbody>
@@ -43,8 +43,8 @@
                           <p align="center" style="color:#767e81;font-family:'Plus Jakarta Sans', sans-serif;;font-size:16px;font-weight:400;line-height:1.6;margin:0;padding:0">
                             <a href="{{route('auth.activate', [$code])}}" style="display:inline-block;background-color:#0eadff;border-radius:32px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;;font-weight:700;letter-spacing:1px;margin:0;padding:12px 56px;text-decoration:none"><span class="il">Verify</span> Email</a>
                           </p>
-                          {{-- <p class="contenttext-text-block contenttextstyle-scope" align="center" style="color:rgb(52,52,52);font-family:'Plus Jakarta Sans',sans-serif;;font-size:18px;padding:0px;margin:13px 0px;line-height:1.6"><a href="{{route('auth.activate', [$code])}}">{{route('auth.activate', [$code])}}</a></p> --}}
-                          <p class="contenttext-text-block contenttextstyle-scope" align="center" style="color:rgb(52,52,52);font-family:'Plus Jakarta Sans',sans-serif;;font-size:18px;padding:0px;margin:13px 0px;line-height:1.6">Thanks.</p>
+                          <p class="contenttext-text-block contenttextstyle-scope" align="center" style="color:rgb(52,52,52);font-family:'Plus Jakarta Sans',sans-serif;;font-size:15px;padding:0px;margin:13px 0px;line-height:1.6">Anda dapat memverifikasi akun Anda dengan menyalin dan menempelkan URL di bawah ini ke browser Anda:</p>
+                          <p class="contenttext-text-block contenttextstyle-scope" align="center" style="color:rgb(52,52,52);font-family:'Plus Jakarta Sans',sans-serif;;font-size:15px;padding:0px;margin:13px 0px;line-height:1.6"><a href="{{route('auth.activate', [$code])}}">{{route('auth.activate', [$code])}}</a></p>
                           <p class="contenttext-text-block contenttextstyle-scope" align="center" style="color:rgb(52,52,52);font-family:'Plus Jakarta Sans',sans-serif;;font-size:14px;padding:0px;margin:13px 0px 0px;line-height:1.6"><br></p>
                         </div>
                       </td>
