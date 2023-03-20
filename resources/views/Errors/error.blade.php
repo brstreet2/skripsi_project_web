@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Laravel</title>
 
@@ -22,33 +21,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 </head>
-
 <body>
-    <div class="container ">
+    <div class="container">
         {{-- Section --}}
+        <div class="row" style="margin-bottom: 9rem"></div>
         <div class="row">
-            <div class="col">
-                <div class="xs-12 md-6 mx-auto">
-                    <div id="content">
-                        <div class="errortitle">ERROR</h1>
-                        <div class="number">404 </h1>
-                        <div class="errortext">We can't find the page you are looking for.</h1>
+            <div class="col-1">
+
+            </div>
+
+            <div class="col-10  justify-content-center align-center">
+                <div class="row  ">
+
+                    <div class="col-5 d-flex justify-content-center align-items-center">
+                        <div class="card border-0  text-center justify-content-center" style="background-color: #444EFF">
+                            <div class="card-body">
+                                <h1 class="errortitle" style="font-size:2rem;color:#fcfcfc">ERROR</h1>
+                                <h2 class="number" style="font-size:2.5rem;color:#fcfcfc">404 </h2>
+                                <p class="errortext" style="font-size:1rem;color:#fcfcfc">We can't find the page you are looking for.</p>
+                                <button type="submit" id="backBtn" class="btn btn-block btnprimary rounded-pill" style="font-weight: 700; height: 3rem;">Homepage</button>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-1 d-flex justify-content-center align-items-center" style="height:25rem">
+                        <div class="vr" style="width:5px; color:#fcfcfc; opacity:0.8; border-radius: 10 rem"></div>
+                    </div>
+
+                    <div class="col-6 d-flex justify-content-center">
+                       <h1><iframe src="https://embed.lottiefiles.com/animation/90569" width="400rem" height="400rem"></iframe></h1>
+                    </div>
+
                 </div>
             </div>
+
+            <div class="col-1">
+
+            </div>
+
         </div>
+        <div class="row" style="margin-top: 8rem"></div>
+    </div>
 </body>
 
-    {{-- JQuery 3.6.4 --}}
-    <script
-    src="https://code.jquery.com/jquery-3.6.4.js"
-    integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-    crossorigin="anonymous"></script>
-
-    {{-- Bootstrap --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    @stack('scripts')
-
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </html>
-
