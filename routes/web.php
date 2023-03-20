@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DocumentController;
 use App\Http\Controllers\Dashboard\PricingController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +57,15 @@ Route::group([
     'prefix'    => "company"
 ], function() {
     Route::get('', [CompanyController::class, 'index'])->name('index');
+});
+
+// Document
+Route::group([
+    'as'        => "document.",
+    'prefix'    => "document"
+], function() {
+    Route::get('', [DocumentController::class, 'index'])->name('index');
+    Route::post('', [DocumentController::class, 'store'])->name('store');
 });
 
 //Error
