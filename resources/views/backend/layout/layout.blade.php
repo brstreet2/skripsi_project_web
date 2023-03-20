@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/dashboard.css') }}">
+    
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,9 +22,11 @@
     {{-- Additional CSS --}}
     @stack('css')
     
+    {{-- FontAwesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 
-<body id="body-pd">
+<body id="body-pd" style="background-color: #e6e7ff ">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
             <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
@@ -47,7 +50,7 @@
         {{--  --}}
 
         {{-- Section --}}
-        <div class="content" style="margin-top: 5rem">
+        <div class="container-fluid" style="margin-top: 5rem">
             @yield('content')
         </div>
     </div>

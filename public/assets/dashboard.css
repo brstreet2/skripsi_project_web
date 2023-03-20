@@ -21,6 +21,7 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: 0.5s;
+    color: #1c1c1c;
 }
 a {
     text-decoration: none;
