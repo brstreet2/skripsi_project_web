@@ -31,9 +31,6 @@
     </div>
 
   </div>
-  <form action="{{ route('document.destroy.bulk') }}" id="invisibleBulk" method="POST">
-    @csrf
-  </form>
 @endsection
 
 @push('css')
@@ -46,6 +43,7 @@
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
   <script src="{{ asset('plugins/jquery-datatables-checkboxes/js/dataTables.checkboxes.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
   <script>
     $(document).ready(function () {
@@ -75,20 +73,71 @@
         },      
       });
 
-      $('#deleteBulk').click(function (e) {
+      $('#deleteBulk').click(function () {
         let form = $('#invisibleBulk');
         var rowSelected = table.column(0).checkboxes.selected();
-        $.each(rowSelected, function (index, rowId){
-          $(form).append(
-            $('<input>')
-              .attr('type', 'hidden')
-              .attr('name', 'id[]')
-              .val(rowId)
-          );
-          $(form).submit();
+        Swal.fire({
+          title: 'Delete Confirmation',
+          text: "Data will be removed permanently",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes',
+          width: '28em',
+          customClass: {
+            confirmButton: 'px-5 btn btn-sm',
+            cancelButton: 'px-5 btn btn-sm' 
+          }
+        }).then((result) => {
+            if (result.isConfirmed) {
+              $.each(rowSelected, function (index, rowId){
+                let id = [rowId];
+                $.ajax({
+                  headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  method: "POST",
+                  url: "{{ route('document.destroy.bulk') }}",
+                  data: {
+                      "_token": "{{ csrf_token() }}",
+                      'id': id,
+                  },
+                  success: function(data) {
+                      Swal.fire({
+                          position: 'center',
+                          icon: 'success',
+                          title: 'Data successfully deleted!',
+                          showConfirmButton: false,
+                          timer: 15004,
+                          width: '28em',
+                      })
+                  },
+                  error: function(data) {
+                      console.log("Error Status: ", data.status);
+                      Swal.fire({
+                          icon: 'error',
+                          title: 'Oops...',
+                          text: 'There was an error!',
+                          footer: '<a>Try again later ...</a>',
+                          width: '28em'
+                      })
+                  }
+                });
+              });
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Cancelled',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    width: '28em',
+                })
+            }
         });
-
       });
+
     });
   </script>
 @endpush
