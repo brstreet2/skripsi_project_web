@@ -144,4 +144,13 @@ class DocumentController extends Controller
         ->rawColumns(array('action','checkbox', 'description'))
         ->make(true);
     }
+
+    public function destroyBulk (Request $request)
+    {
+        $data = DocumentTemplate::whereIn('id', $request->id)->get();
+        return response()->json([
+            'success',
+            'data' => $data
+        ]);
+    }
 }
