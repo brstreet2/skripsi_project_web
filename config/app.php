@@ -187,6 +187,7 @@ return [
          */
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...

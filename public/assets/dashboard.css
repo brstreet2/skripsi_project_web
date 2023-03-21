@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+@font-face {
+    font-family: "Maven Pro Bold";
+    src: url("../fonts/mavenpro/MavenPro-Bold.ttf");
+    src: url("../fonts/mavenpro/MavenPro-Bold.ttf") format("ttf"),
+    url("../fonts/mavenpro/MavenPro-Bold.ttf") format("truetype");
+}
+
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
@@ -125,6 +133,16 @@ a {
 .height-100 {
     height: 100vh;
 }
+
+.font-mpb {
+    font-family: 'Maven Pro Bold', sans-serif;
+    font-size: 1.75rem;
+}
+
+.text-color-primary {
+    color: var(--first-color);
+}
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
