@@ -77,7 +77,7 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -127,9 +127,10 @@ class DocumentController extends Controller
             'action',
             function ($dataDb) {
                 return '
-                <button class="btn"><i class="fa-solid fa-download fa-lg text-color-primary"></i></button>
-                <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color:rgb(231, 220, 19)"></i></button>
-                <button class="btn"><i class="fa-solid fa-trash fa-lg" style="color: #fa0000;"></i></button>';
+                <button class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></button>
+                <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
+                <button class="btn"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
+                <button class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></button>';
                 // return '<a href="' . route('banner.show', $dataDb->id) . '" id="tooltip" title="' . trans('global.show') . '"><span class="label label-primary label-sm"><i class="fa fa-arrows-alt"></i></span></a>
                 //     <a href="'.route('banner.edit', [$dataDb->id]).'" id="tooltip" title="'.trans('global.update').'"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
                 //     <a href="#" data-message="'.trans('auth.delete_confirmation', ['name' => $dataDb->title]).'" data-href="'.route('banner.destroy', [$dataDb->id]).'" id="tooltip" data-method="DELETE" data-title="'.trans('global.delete').'" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
