@@ -1,5 +1,5 @@
 @extends('backend.layout.layout')
 
-@section('main')
-    
+@section('content')
+
 @endsection
