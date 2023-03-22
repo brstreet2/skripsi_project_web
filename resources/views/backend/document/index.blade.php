@@ -6,7 +6,6 @@
       <strong>DOCUMENT</strong>
     </h5>
     <p style="font-size: 16px">Documents listed below are document templates that has been created.</p>
-
     <div class="card shadow" style="border: none; background-color: ">
       <div class="card-body">
         <a href="{{ route('document.create') }}">
@@ -29,7 +28,6 @@
         </table>
       </div>
     </div>
-
   </div>
 @endsection
 

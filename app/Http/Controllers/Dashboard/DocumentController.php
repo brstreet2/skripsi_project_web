@@ -46,7 +46,6 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $user       = 'AZKA';
-        dd(Carbon::now()->format('d-m-Y'));
         DB::beginTransaction();
         try {
             $documentTemplate                   = new DocumentTemplate();
@@ -72,6 +71,7 @@ class DocumentController extends Controller
             $documentTemplate->save();
 
             DB::commit();
+            notify()->success('Document has been saved', 'Success');
             return redirect()->route('document.index');
         } catch (\Exception $e) {
             DB::rollback();
