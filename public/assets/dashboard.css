@@ -16,11 +16,10 @@
 
 :root {
     --header-height: 3rem;
-    --nav-width: 68px;
+    --nav-width: 4rem;
     --first-color: #444eff;
     --first-color-light: #7cdeff;
-    --white-color: #f7f6fb;
-    --body-font: "Nunito", sans-serif;
+    --white-color: #fcfcfc;
     --normal-font-size: 1rem;
     --z-fixed: 100;
 }
@@ -33,11 +32,12 @@ body {
     position: relative;
     margin: var(--header-height) 0 0 0;
     padding: 0 1rem;
-    font-family: var(--body-font);
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: var(--normal-font-size);
     transition: 0.5s;
     color: #1c1c1c;
 }
+
 a {
     text-decoration: none;
 }
@@ -89,6 +89,7 @@ a {
     justify-content: space-between;
     overflow: hidden;
 }
+
 .nav_logo,
 .nav_link {
     display: grid;
@@ -191,4 +192,34 @@ a {
 
 .inset-0 {
     top: auto!important;
+}
+@media screen and (max-width: 768px){
+    body {
+        margin: calc(var(--header-height) + 1rem) 0 0 0;
+        padding-left: calc(var(--nav-width) + 2rem);
+    }
+    .header {
+        height: calc(var(--header-height) + 1rem);
+        padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+    }
+    .header_img {
+        width: 40px;
+        height: 40px;
+    }
+    .header_img img {
+        width: 45px;
+    }
+    .l-navbar {
+        left: 0;
+        padding: 1rem 1rem 0 0;
+    }
+    .show-nav {
+        width: 50%;
+    }
+    .body-pd {
+        padding-left: calc(var(--nav-width) + 9rem);
+    }
+    /* .bx-x{
+        display: none;
+    } */
 }
