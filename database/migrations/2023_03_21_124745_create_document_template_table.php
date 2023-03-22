@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('document_template', function (Blueprint $table) {
             $table->id();
-            $table->string('document_name')->default('');
+            $table->string('name')->default('');
+            $table->string('slug')->default('')->nullable();
             $table->text('description')->nullable();
             $table->text('content')->nullable();
-            $table->text('document_url')->nullable();
+            $table->text('url')->nullable();
             $table->string('created_by')->default('');
             $table->string('updated_by')->default('');
             $table->string('deleted_by')->default('');

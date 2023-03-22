@@ -62,7 +62,7 @@
         }],
         columns: [
             {data: 'id', name: 'id', visible: true},
-            {data: 'document_name', name: 'document_name'},
+            {data: 'name', name: 'name'},
             {data: 'description', name: 'description'},
             {
                 data: 'action', name: 'action', orderable: false, searchable: false

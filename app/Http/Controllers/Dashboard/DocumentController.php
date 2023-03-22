@@ -10,8 +10,10 @@ use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class DocumentController extends Controller
 {
@@ -44,28 +46,36 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $user       = 'AZKA';
-        $base_url   = 'http://skripsi_project_web.test/';
-
+        dd(Carbon::now()->format('d-m-Y'));
         DB::beginTransaction();
         try {
             $documentTemplate                   = new DocumentTemplate();
-            $documentTemplate->document_name    = $request->document_name;
+            $documentTemplate->name             = $request->document_name;
+            $documentTemplate->slug             = Str::slug($request->document_name, '-');
             $documentTemplate->description      = Purifier::clean($request->description);
             $documentTemplate->content          = $request->content;
             
             $timestamp = Carbon::now();
             $hash      = hash('md2', $timestamp);
-            $pdf = Pdf::loadHTML($request->content)->setPaper('a4', 'portrait')->setWarnings(false)->save($hash.'.pdf');
-            
-            $documentTemplate->document_url     = $base_url.$hash.'.pdf';
+            $pdf = Pdf::loadHTML($request->content)->setPaper('a4', 'portrait')->setWarnings(false);
+            $filenamePath  = 'documents/'.$hash.'_'.$documentTemplate->slug.'.pdf';
+            try {
+                $s3     = Storage::disk('s3')->put($filenamePath, $pdf->output(), 'public');
+                $url    = Storage::url($filenamePath);
+            } catch (\Exception $e) {
+                report($e);
+                session()->flash('error', 'Something went wrong ...');
+                return back();
+            }
+            $documentTemplate->url              = $url;
             $documentTemplate->created_by       = 'AZKA';
             $documentTemplate->save();
 
             DB::commit();
             return redirect()->route('document.index');
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollback();
-            dd($th->getMessage());
+            dd($e->getMessage());
         }
     }
 
