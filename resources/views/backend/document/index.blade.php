@@ -18,10 +18,10 @@
         <table id="documentTable" class="table table-borderless text-center" style="width: 100%">
           <thead>
             <tr>
-              <th class="text-center">&nbsp;</th>
-              <th class="text-center">Document Name</th>
-              <th class="text-center">Document Category</th>
-              <th class="text-center">Action</th>
+              <th class="text-center font-mp">&nbsp;</th>
+              <th class="text-center font-mp">Document Name</th>
+              <th class="text-center font-mp">Document Category</th>
+              <th class="text-center font-mp">Action</th>
             </tr>
           </thead>
           <tbody>
