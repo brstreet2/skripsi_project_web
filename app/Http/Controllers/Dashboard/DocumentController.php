@@ -47,6 +47,13 @@ class DocumentController extends Controller
     {
         $user       = 'AZKA';
         DB::beginTransaction();
+        $check  = DocumentTemplate::where('slug', Str::slug($request->document_name, '-'))->first();
+        
+        if ($check) {
+            notify()->error('Please choose a different name for the document.', 'Error');
+            return back();
+        }
+        
         try {
             $documentTemplate                   = new DocumentTemplate();
             $documentTemplate->name             = $request->document_name;
