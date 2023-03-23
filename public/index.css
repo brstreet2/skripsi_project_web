@@ -1,27 +1,29 @@
-body{
+body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: #444EFF;  
+    background-color: #444EFF;
 }
 
-.btnprimary{
+.btnprimary {
     color: #fcfcfc;
     background-color: #444EFF;
     border-color: #444EFF;
 }
-.btnprimary:hover{
+
+.btnprimary:hover {
     color: #fcfcfc;
     background-color: #00A575;
     border-color: #00A575;
 }
 
-.registerimg{
+.registerimg {
     background-image: url(assets/hunters-race-MYbhN8KaaEc-unsplash.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
 }
-.glassmorphism{
+
+.glassmorphism {
     background: rgba(255, 255, 255, 0);
     border-radius: 16px;
     backdrop-filter: blur(10px);
@@ -29,19 +31,20 @@ body{
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#btndaftr{
+#btndaftr {
     border-radius: 10%;
 }
 
-.daftarakun{
+.daftarakun {
     font-weight: 700;
 }
 
-.navbarhover{
+.navbarhover {
     display: inline-block;
     position: relative;
 }
-.navbarhover:hover{
+
+.navbarhover:hover {
     font-weight: 700;
 }
 
@@ -56,9 +59,9 @@ body{
     background-color: #FBF8FF;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-  }
-  
-  .navbarhover:hover:after {
+}
+
+.navbarhover:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
