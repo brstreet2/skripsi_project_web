@@ -18,21 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [AuthController::class, 'store'])->name('register.post');
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
-Route::get('/login', function () {
-    return view('auth.login');
-});
 
 // Auth
 Route::group([
     'as'        => "auth."
 ], function(){
-    Route::post('/register', [AuthController::class, 'store'])->name('register.post');
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
     Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Dashboard

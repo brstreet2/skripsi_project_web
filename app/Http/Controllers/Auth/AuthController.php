@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\authRequest;
+use App\Http\Requests\Auth\loginRequest;
+use App\Http\Requests\Auth\registerRequest;
 use App\Mail\activationEmail;
+use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
+use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -28,18 +31,19 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(authRequest $request)
+
+    public function registerForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(registerRequest $request)
     {
         $credentials = [
             'name'      => $request->name,
@@ -52,6 +56,48 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new activationEmail($user, $activation->code));
         session()->flash('success', 'Check your email inbox to activate your account!');
         return back();
+    }
+
+    public function loginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(loginRequest $request)
+    {
+        $credentials = array(
+            'email'     => $request->email,
+            'password'  => $request->password
+        );
+
+        $remember = $request->remember == 'On' ? true : false;
+
+        try {
+            if(Sentinel::authenticate($credentials, $remember)) {
+                // notify()->success('Welcome back '.Sentinel::getUser()->name.'!', 'Success');
+                if($request->rto !== null)  {
+                    return redirect()->to($request->rto);
+                } else {
+                    return redirect()->route('dashboard.index');
+                }
+            } else {
+                notify()->error('Invalid Credentials!', 'Error');
+                return redirect()->route('login.form');
+            }
+        } catch(ThrottlingException $ex){
+			dd($ex);
+			return redirect()->route('login.form');
+		}
+		catch(NotActivatedException $ex){
+            dd($ex);
+			return redirect()->route('login.form');
+		}
+    }
+
+    public function logout()
+    {
+        Sentinel::logout();
+        return redirect()->route('auth.login.form');
     }
 
     /**
@@ -117,14 +163,14 @@ class AuthController extends Controller
                     $userDb->save();
                 } else {
                     session()->flash('Your account has been activated');
-                    return view('auth.login');
+                    return redirect()->route('login.form');
                 }
             } else {
                 session()->flash('error', 'Link not found');
-                return view('auth.login');
+                return redirect()->route('login.form');
             }
             DB::commit();
-            return view('auth.login');
+            return redirect()->route('login.form');
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }

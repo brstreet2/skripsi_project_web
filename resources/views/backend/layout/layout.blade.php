@@ -52,7 +52,7 @@
                         <a href="{{ route('pricing.index') }}" class="nav_link {{ request()->route()->named('pricing.*')? 'active-nav': '' }}"> <i class='bx bx-dollar-circle nav_icon'></i> <span class="nav_name">Pricing</span> </a> 
                     </div>
                 </div> 
-                <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
+                <a href="{{ route('auth.logout') }}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
             </nav>
         </div>
         {{--  --}}

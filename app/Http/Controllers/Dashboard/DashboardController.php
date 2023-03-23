@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,7 +15,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard.dashboard');
+        if (!Sentinel::getUser()) {
+            return redirect()->route('login.form');
+        } else {
+            return view('backend.dashboard.dashboard');
+        }
     }
 
     /**

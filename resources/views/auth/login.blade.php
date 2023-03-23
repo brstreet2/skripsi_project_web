@@ -31,8 +31,8 @@
 
                           </div>
                           <div class="col-10">
-                              <form method="POST" action="{{ route('auth.register.post') }}">
-                       
+                              <form method="POST" action="{{ route('auth.login.post') }}">
+                                  {{ csrf_field() }}
                                 <div class="form-group mb-3">
                                   <label for="inputEmail" class="mb-1">Email</label>
                                   <input type="email" class="form-control" name="email" id="inputEmail" aria-describedby="emailHelp" placeholder="example@email.com" style="border-radius: .75rem">
