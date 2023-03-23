@@ -14,7 +14,6 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.12",
-        "mckenziearts/laravel-notify": "^2.3",
         "mews/purifier": "^3.4",
         "tymon/jwt-auth": "^2.0",
         "yajra/laravel-datatables": "^9.0"
