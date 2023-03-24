@@ -81,7 +81,7 @@ class AuthController extends Controller
                     return redirect()->route('dashboard.index');
                 }
             } else {
-                toastr()->error('Invalid Credentials!', 'Error');
+                toastr()->error('Invalid email or password!', 'Error');
                 return redirect()->route('auth.login.form');
             }
         } catch(ThrottlingException $ex){

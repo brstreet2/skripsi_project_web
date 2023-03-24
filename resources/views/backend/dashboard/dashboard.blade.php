@@ -4,7 +4,7 @@
         <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
             <div class="card-body">
                 <h4 class="fw-bold">
-                    Welcome Back, Azka!
+                    Welcome Back, {{ Sentinel::getUser()->name }}!
                 </h4>
                 <p style="color:#999999">
                     Time: {{ Carbon\Carbon::now()->format('D F Y') }}
