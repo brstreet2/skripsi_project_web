@@ -45,12 +45,12 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $user       = 'AZKA';
+        $user       = Sentinel::getUser();
         DB::beginTransaction();
         $check  = DocumentTemplate::where('slug', Str::slug($request->document_name, '-'))->first();
         
         if ($check) {
-            notify()->error('Please choose a different name for the document.', 'Error');
+            toastr()->error('Please choose a different name for the document.', 'Error');
             return back();
         }
         
@@ -70,15 +70,15 @@ class DocumentController extends Controller
                 $url    = Storage::url($filenamePath);
             } catch (\Exception $e) {
                 report($e);
-                session()->flash('error', 'Something went wrong ...');
+                toastr()->error('Something went wrong ...', 'Error');
                 return back();
             }
             $documentTemplate->url              = $url;
-            $documentTemplate->created_by       = 'AZKA';
+            $documentTemplate->created_by       = $user->name;
             $documentTemplate->save();
 
             DB::commit();
-            notify()->success('Document has been saved', 'Success');
+            toastr()->success('Data has been saved successfully!', 'Success');
             return redirect()->route('document.index');
         } catch (\Exception $e) {
             DB::rollback();

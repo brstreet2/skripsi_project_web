@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         if (!Sentinel::getUser()) {
+            toastr()->error('You are not authorized!', 'Error');
             return redirect()->route('auth.login.form');
         } else {
             return view('backend.dashboard.dashboard');
