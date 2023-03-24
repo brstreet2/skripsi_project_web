@@ -163,14 +163,14 @@ class AuthController extends Controller
                     $userDb->save();
                 } else {
                     session()->flash('Your account has been activated');
-                    return redirect()->route('login.form');
+                    return redirect()->route('auth.login.form');
                 }
             } else {
                 session()->flash('error', 'Link not found');
-                return redirect()->route('login.form');
+                return redirect()->route('auth.login.form');
             }
             DB::commit();
-            return redirect()->route('login.form');
+            return redirect()->route('auth.login.form');
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
