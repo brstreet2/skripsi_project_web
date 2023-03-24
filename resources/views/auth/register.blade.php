@@ -27,7 +27,7 @@
                     <div class="col">
                         <div class="card px-4 py-3 border-0" style="border-radius: 0 1rem 1rem 0">
                             <h3 class="text-center mt-5 mb-2 daftarakun">Daftar Akun</h3>
-                            <p class="text-center mb-4">Sudah memiliki akun? Masuk <a style="text-decoration:underline; font-weight:700; color:#444EFF">disini.</a></p></h6>
+                            <p class="text-center mb-4">Sudah memiliki akun? Masuk <a href="{{ route('auth.login.form') }}" style="text-decoration:underline; font-weight:700; color:#444EFF">disini</a></p></h6>
                             <div class="row g-0">
                                 <div class="col">
 
