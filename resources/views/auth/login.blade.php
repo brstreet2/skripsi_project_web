@@ -51,7 +51,7 @@
                                     
                                       
                                       <div class="form-check mb-5">
-                                        <input type="checkbox" class="form-check-input" id="termCondition">
+                                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
                                         <small class="form-check-label" for="exampleCheck1" style="font-style: italic">Ingat Akun Saya</small>
                                       </div>
                                    

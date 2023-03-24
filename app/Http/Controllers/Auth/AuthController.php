@@ -74,23 +74,23 @@ class AuthController extends Controller
 
         try {
             if(Sentinel::authenticate($credentials, $remember)) {
-                // notify()->success('Welcome back '.Sentinel::getUser()->name.'!', 'Success');
+                toastr()->success('Welcome back '.Sentinel::getUser()->name.'!', 'Success');
                 if($request->rto !== null)  {
                     return redirect()->to($request->rto);
                 } else {
                     return redirect()->route('dashboard.index');
                 }
             } else {
-                notify()->error('Invalid Credentials!', 'Error');
-                return redirect()->route('login.form');
+                toastr()->error('Invalid Credentials!', 'Error');
+                return redirect()->route('auth.login.form');
             }
         } catch(ThrottlingException $ex){
 			dd($ex);
-			return redirect()->route('login.form');
+			return redirect()->route('auth.login.form');
 		}
 		catch(NotActivatedException $ex){
             dd($ex);
-			return redirect()->route('login.form');
+			return redirect()->route('auth.login.form');
 		}
     }
 
