@@ -136,65 +136,67 @@
                 });
             });
 
-            $('#deleteButton').click(function () {
-                var thisData = $('#deleteButton');
-                Swal.fire({
-                    title: 'Remove ' + thisData.data('name') + '?',
-                    text: 'This data will be permanently removed from our system.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    width: '28em',
-                    customClass: {
-                        confirmButton: 'px-5 btn btn-sm',
-                        cancelButton: 'px-5 btn btn-sm'
-                    }
-                }).then((result) => {
-                    if(result.isConfirmed) {
-                        var url = "{{ route('document.destroy', ":id") }}";
-                        url = url.replace(':id', thisData.data('id'));
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
-                                    .attr('content')
-                            },
-                            method: 'DELETE',
-                            url: url,
-                            success: function(data) {
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: 'Data successfully deleted!',
-                                    showConfirmButton: false,
-                                    timer: 15004,
-                                    width: '28em',
-                                })
-                            },
-                            error: function(data) {
-                                console.log("Error Status: ", data.status);
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'There was an error!',
-                                    footer: '<a>Try again later ...</a>',
-                                    width: '28em'
-                                })
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Cancelled',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            width: '28em',
-                        })
-                    }
-                });
+            $(document).on('click', '#deleteButton', function() {
+              var thisData = $('#deleteButton');
+              Swal.fire({
+                  title: 'Remove ' + thisData.data('name') + '?',
+                  text: 'This data will be permanently removed from our system.',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes',
+                  width: '28em',
+                  customClass: {
+                      confirmButton: 'px-5 btn btn-sm',
+                      cancelButton: 'px-5 btn btn-sm'
+                  }
+              }).then((result) => {
+                  if(result.isConfirmed) {
+                      var url = "{{ route('document.destroy', ":id") }}";
+                      url = url.replace(':id', thisData.data('id'));
+                      $.ajax({
+                          headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                                  .attr('content')
+                          },
+                          method: 'DELETE',
+                          url: url,
+                          success: function(data) {
+                              table.ajax.reload();
+                              Swal.fire({
+                                  position: 'center',
+                                  icon: 'success',
+                                  title: 'Data successfully deleted!',
+                                  showConfirmButton: false,
+                                  timer: 15004,
+                                  width: '28em',
+                              })
+                          },
+                          error: function(data) {
+                              console.log("Error Status: ", data.status);
+                              Swal.fire({
+                                  icon: 'error',
+                                  title: 'Oops...',
+                                  text: 'There was an error!',
+                                  footer: '<a>Try again later ...</a>',
+                                  width: '28em'
+                              })
+                          }
+                      });
+                  } else {
+                      Swal.fire({
+                          position: 'center',
+                          icon: 'error',
+                          title: 'Cancelled',
+                          showConfirmButton: false,
+                          timer: 1500,
+                          width: '28em',
+                      })
+                  }
+              });
             });
         });
+
     </script>
 @endpush

@@ -70,10 +70,5 @@
                 ['view', ['fullscreen', 'codeview', 'help']]
             ]
         });
-
-        $(document).ready(function() {
-            var table = $('#documentTable');
-            table.DataTable();
-        });
     </script>
 @endpush

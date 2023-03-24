@@ -128,7 +128,32 @@ class DocumentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $documentDb     = DocumentTemplate::find($id);
+        
+        DB::beginTransaction();
+
+        try {
+            if($documentDb) {
+                $trim = Str::after($documentDb->url, 'https://s3-id-jkt-1.kilatstorage.id/skripsi-hr/');
+                if(Storage::disk('s3')->exists($trim)) {
+                    try {
+                        Storage::disk('s3')->delete($trim);
+                    } catch (\Throwable $th) {
+                        return back();
+                    }
+                $documentDb->deleted_at = Carbon::now();
+                $documentDb->deleted_by = Sentinel::getUser()->name;
+                $documentDb->save();
+    
+                DB::commit();
+                return response()->json(['STATUS' => 'OK']);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            report($e);
+        }
+
     }
 
     public function destroyBulk (Request $request)
