@@ -67,7 +67,7 @@ class DocumentController extends Controller
             $filenamePath  = 'documents/'.$hash.'_'.$documentTemplate->slug.'.pdf';
             try {
                 $s3     = Storage::disk('s3')->put($filenamePath, $pdf->output(), 'public');
-                $url    = Storage::url($filenamePath);
+                $url    = Storage::disk('s3')->url($filenamePath);
             } catch (\Exception $e) {
                 report($e);
                 toastr()->error('Something went wrong ...', 'Error');
