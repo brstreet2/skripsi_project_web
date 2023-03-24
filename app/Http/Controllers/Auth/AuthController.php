@@ -54,7 +54,7 @@ class AuthController extends Controller
         $user       = Sentinel::register($credentials);
         $activation = Activation::create($user);
         Mail::to($user->email)->send(new activationEmail($user, $activation->code));
-        session()->flash('success', 'Check your email inbox to activate your account!');
+        toastr()->success('Registration completed, check your inbox to activate your account!', 'Success');
         return back();
     }
 
@@ -97,6 +97,7 @@ class AuthController extends Controller
     public function logout()
     {
         Sentinel::logout();
+        toastr()->info('Successfully logged out.', 'Info');
         return redirect()->route('auth.login.form');
     }
 
@@ -162,11 +163,12 @@ class AuthController extends Controller
                     $userDb->email_verified_at = date('Y-m-d H:i:s');
                     $userDb->save();
                 } else {
-                    session()->flash('Your account has been activated');
+                    // session()->flash('Your account has been activated');
+                    toastr()->info('Your account has been activated.', 'Info');
                     return redirect()->route('auth.login.form');
                 }
             } else {
-                session()->flash('error', 'Link not found');
+                toastr()->error('Invalid Link!', 'Error');
                 return redirect()->route('auth.login.form');
             }
             DB::commit();
