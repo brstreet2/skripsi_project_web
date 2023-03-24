@@ -178,7 +178,7 @@ class DocumentController extends Controller
             'action',
             function ($dataDb) {
                 return '
-                <button class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></button>
+                <a href="'.$dataDb->url.'" target="_blank" class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></a>
                 <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
                 <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="'.$dataDb->id.'" data-name="'.$dataDb->name.'" type="button" data-bs-placement="bottom" title="Delete '.$dataDb->name.'?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
                 <a href="'.route('document.show', $dataDb->slug).'"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Document" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
