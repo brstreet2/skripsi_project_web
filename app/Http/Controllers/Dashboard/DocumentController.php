@@ -139,7 +139,7 @@ class DocumentController extends Controller
                     try {
                         Storage::disk('s3')->delete($trim);
                     } catch (\Throwable $th) {
-                        return back();
+                        return response()->json(['status' => '404', 'data' => null, 'message: Data not found.']);
                     }
                 $documentDb->deleted_at = Carbon::now();
                 $documentDb->deleted_by = Sentinel::getUser()->name;

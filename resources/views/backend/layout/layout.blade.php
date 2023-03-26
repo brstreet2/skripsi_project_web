@@ -40,10 +40,10 @@
             <nav class="nav_side">
                 <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">SKRIPSI</span> </a>
                     <div class="nav_list"> 
-                        <a href="{{ route('dashboard.index') }}" class="nav_link {{ request()->route()->named('dashboard.*')? 'active-nav': '' }}"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span></a> 
+                        <a href="{{ route('dashboard.index') }}" class="nav_link {{ request()->route()->named('dashboard.*') ? 'active-nav' : '' }}"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span></a> 
                         <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> 
-                        <a href="{{ route('company.index') }}" class="nav_link {{ request()->route()->named('company.*')? 'active-nav': '' }}"> <i class='bx bx-buildings nav-icon'></i> <span class="nav_name">Company</span> </a> 
-                        <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> 
+                        <a href="{{ route('company.index') }}" class="nav_link {{ request()->route()->named('company.*') ? 'active-nav' : '' }}"> <i class='bx bx-buildings nav-icon'></i> <span class="nav_name">Company</span> </a> 
+                        <a href="{{ route('document.index') }}" class="nav_link {{ request()->route()->named('document.*') ? 'active-nav' : '' }}"> <i class='bx bx-file nav_icon'></i> <span class="nav_name">Document</span> </a> 
                         <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a> 
                         <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> 
                         <a href="{{ route('pricing.index') }}" class="nav_link {{ request()->route()->named('pricing.*')? 'active-nav': '' }}"> <i class='bx bx-dollar-circle nav_icon'></i> <span class="nav_name">Pricing</span> </a> 
