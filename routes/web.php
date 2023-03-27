@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\EmployeesController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentController;
@@ -53,6 +54,13 @@ Route::group([
     'prefix'    => "company"
 ], function() {
     Route::get('', [CompanyController::class, 'index'])->name('index');
+});
+
+Route::group([
+    'as'        => "employee.",
+    'prefix'    => "employee"
+], function () {
+    Route::get('', [EmployeesController::class, 'index'])->name('index');
 });
 
 // Document
