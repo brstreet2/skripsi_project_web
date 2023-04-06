@@ -72,6 +72,7 @@ Route::group([
     Route::post('', [DocumentController::class, 'store'])->name('store');
     Route::get('create', [DocumentController::class, 'create'])->name('create');
     Route::get('ajax/datatables', [DocumentController::class, 'datatables'])->name('ajax.datatables');
+    Route::get('/edit/{slug}', [DocumentController::class, 'edit'])->name('edit');
     Route::post('destroy/bulk', [DocumentController::class, 'destroyBulk'])->name('destroy.bulk');
     Route::get('/show/{slug}', [DocumentController::class, 'show'])->name('show');
     Route::delete('delete/{id}', [DocumentController::class, 'destroy'])->name('destroy');
