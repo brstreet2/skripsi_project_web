@@ -32,7 +32,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="content">Document Content <span style="color: red">*</span></label>
-                                <textarea class="form-control" id="summernote" name="content" rows="3"></textarea>
+                                <textarea class="form-control" id="summernote" name="content" rows="3">{{ old('content',$documentDb->content)}}</textarea>
                             </div>
                             <div class="text-end mt-3">
                                 <a href="{{ route('document.index') }}">
