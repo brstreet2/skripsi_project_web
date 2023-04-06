@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Document Description <span style="color: red">*</span></label>
-                        <textarea class="form-control mb-2" name="description" required id="description" placeholder="Deskripsi Isi Dokumen" style="height: 20rem; border-radius: .5rem">{!! old('description', $documentDb->description) !!}</textarea>
+                        <textarea class="form-control mb-2" name="description" required id="description" placeholder="Deskripsi Isi Dokumen" style="height: 20rem; border-radius: .5rem">{!! old('description', htmlentities($documentDb->description)) !!}</textarea>
                     </div>
                 </div>
                 <div class="col">
