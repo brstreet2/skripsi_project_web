@@ -48,19 +48,19 @@ class DocumentController extends Controller
         $user       = Sentinel::getUser();
         DB::beginTransaction();
         $check  = DocumentTemplate::where('slug', Str::slug($request->document_name, '-'))->first();
-        
+
         if ($check) {
             toastr()->error('Please choose a different name for the document.', 'Error');
             return back();
         }
-        
+
         try {
             $documentTemplate                   = new DocumentTemplate();
             $documentTemplate->name             = $request->document_name;
             $documentTemplate->slug             = Str::slug($request->document_name, '-');
             $documentTemplate->description      = Purifier::clean($request->description);
             $documentTemplate->content          = $request->content;
-            
+
             $timestamp = Carbon::now();
             $hash      = hash('md2', $timestamp);
             $pdf = Pdf::loadHTML($request->content)->setPaper('a4', 'portrait')->setWarnings(false);
@@ -103,9 +103,9 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        return view('backend.document.edit',['documentDb' => DocumentTemplate::where('slug',$slug)->first()]);
     }
 
     /**
@@ -129,7 +129,7 @@ class DocumentController extends Controller
     public function destroy($id)
     {
         $documentDb     = DocumentTemplate::find($id);
-        
+
         DB::beginTransaction();
 
         try {
@@ -144,7 +144,7 @@ class DocumentController extends Controller
                 $documentDb->deleted_at = Carbon::now();
                 $documentDb->deleted_by = Sentinel::getUser()->name;
                 $documentDb->save();
-    
+
                 DB::commit();
                 return response()->json(['STATUS' => 'OK']);
                 }
@@ -179,9 +179,10 @@ class DocumentController extends Controller
             function ($dataDb) {
                 return '
                 <a href="'.$dataDb->url.'" target="_blank" class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></a>
-                <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
+                <a href="'.route('document.edit', $dataDb->slug).'"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Document" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>
                 <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="'.$dataDb->id.'" data-name="'.$dataDb->name.'" type="button" data-bs-placement="bottom" title="Delete '.$dataDb->name.'?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
                 <a href="'.route('document.show', $dataDb->slug).'"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Document" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
+                // <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
                 // <button class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></button>';
                 // return '<a href="' . route('banner.show', $dataDb->id) . '" id="tooltip" title="' . trans('global.show') . '"><span class="label label-primary label-sm"><i class="fa fa-arrows-alt"></i></span></a>
                 //     <a href="'.route('banner.edit', [$dataDb->id]).'" id="tooltip" title="'.trans('global.update').'"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
