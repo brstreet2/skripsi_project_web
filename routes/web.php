@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 // Auth
 Route::group([
     'as'        => "auth."
-], function(){
+], function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
@@ -34,31 +34,35 @@ Route::group([
 
 // Dashboard
 Route::group([
-    'as'        => "dashboard.",
-    'prefix'    => "dashboard"
-], function() {
+    'as'            => "dashboard.",
+    'prefix'        => "dashboard",
+    'middleware'    => ["auth.middleware"],
+], function () {
     Route::get('', [DashboardController::class, 'index'])->name('index');
 });
 
 // Pricing
 Route::group([
     'as'        => "pricing.",
-    'prefix'    => "pricing"
-], function() {
+    'prefix'    => "pricing",
+    'middleware'    => ["auth.middleware"],
+], function () {
     Route::get('', [PricingController::class, 'index'])->name('index');
 });
 
 // Company
 Route::group([
     'as'        => "company.",
-    'prefix'    => "company"
-], function() {
+    'prefix'    => "company",
+    'middleware'    => ["auth.middleware"],
+], function () {
     Route::get('', [CompanyController::class, 'index'])->name('index');
 });
 
 Route::group([
     'as'        => "employee.",
-    'prefix'    => "employee"
+    'prefix'    => "employee",
+    'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [EmployeesController::class, 'index'])->name('index');
 });
@@ -66,8 +70,9 @@ Route::group([
 // Document
 Route::group([
     'as'        => "document.",
-    'prefix'    => "document"
-], function() {
+    'prefix'    => "document",
+    'middleware'    => ["auth.middleware"],
+], function () {
     Route::get('', [DocumentController::class, 'index'])->name('index');
     Route::post('', [DocumentController::class, 'store'])->name('store');
     Route::get('create', [DocumentController::class, 'create'])->name('create');
@@ -82,4 +87,3 @@ Route::group([
 Route::get('/404', function () {
     return view('errors.error');
 });
-
