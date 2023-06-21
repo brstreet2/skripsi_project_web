@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TimeManagementController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class TimeManagementController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.attendance.index');
     }
 
     /**
