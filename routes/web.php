@@ -67,6 +67,15 @@ Route::group([
     Route::get('', [EmployeesController::class, 'index'])->name('index');
 });
 
+// SlipGaji
+Route::group([
+    'as'            => "slip-gaji.",
+    'prefix'        => "slip-gaji",
+    'middleware'    => ["auth.middleware"],
+], function () {
+    Route::get('', [PayrollController::class, 'index'])->name('index');
+});
+
 // Document
 Route::group([
     'as'        => "document.",
