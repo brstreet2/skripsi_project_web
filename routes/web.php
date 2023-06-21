@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\EmployeesController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentController;
+use App\Http\Controllers\Dashboard\PayrollController;
 use App\Http\Controllers\Dashboard\PricingController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,10 +68,10 @@ Route::group([
     Route::get('', [EmployeesController::class, 'index'])->name('index');
 });
 
-// SlipGaji
+// Payroll
 Route::group([
-    'as'            => "slip-gaji.",
-    'prefix'        => "slip-gaji",
+    'as'            => "payroll.",
+    'prefix'        => "payroll",
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [PayrollController::class, 'index'])->name('index');

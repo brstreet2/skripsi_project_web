@@ -14,7 +14,7 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        return view('backend.slip gaji.index');
+        return view('backend.payroll.index');
     }
 
     /**
