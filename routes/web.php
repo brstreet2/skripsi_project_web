@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentController;
 use App\Http\Controllers\Dashboard\PayrollController;
 use App\Http\Controllers\Dashboard\PricingController;
+use App\Http\Controllers\Dashboard\TimeManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,6 +76,15 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [PayrollController::class, 'index'])->name('index');
+});
+
+// Time Management
+Route::group([
+    'as'            => "time-management.",
+    'prefix'        => "time-management",
+    'middleware'    => ["auth.middleware"],
+], function () {
+    Route::get('', TimeManagementController::class, 'index')->name('index');
 });
 
 // Document
