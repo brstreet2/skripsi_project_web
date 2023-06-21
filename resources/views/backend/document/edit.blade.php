@@ -32,11 +32,12 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="content">Document Content <span style="color: red">*</span></label>
-                                <textarea class="form-control" id="summernote" name="content" rows="3">{{ old('content',$documentDb->content)}}</textarea>
+                                <textarea class="form-control" id="summernote" name="content" rows="3">{{ old('content', $documentDb->content) }}</textarea>
                             </div>
                             <div class="text-end mt-3">
                                 <a href="{{ route('document.index') }}">
-                                    <button class="px-4 fw-bolder" type="button" style="color:#E80015">Back</button>
+                                    <button class="btn btn-danger text-center rounded-pill px-5 py-2 fw-bolder"
+                                        type="button">Back</button>
                                 </a>
                                 <button class="btn rounded-pill text-center btn-primary px-5 py-2 fw-bolder" type="submit"
                                     style="background-color: #444EFF">Save</button>
