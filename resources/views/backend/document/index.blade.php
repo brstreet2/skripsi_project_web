@@ -5,7 +5,7 @@
         <h5 class="font-mpb text-color-primary">
             <strong>DOCUMENT</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">Documents listed below are document templates that has been created.</p>
+        <p class="mb-3" style="font-size: 16px">Create New Documents</p>
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <a href="{{ route('document.create') }}">
