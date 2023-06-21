@@ -107,3 +107,13 @@ Route::group([
 Route::get('/404', function () {
     return view('errors.error');
 });
+
+//view attendance
+Route::get('/attendance/view', function () {
+    return view('backend.attendance.view');
+});
+
+//timeoff attendance
+Route::get('/attendance/timeoff', function () {
+    return view('backend.attendance.timeoff');
+});
