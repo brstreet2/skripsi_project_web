@@ -73,9 +73,9 @@ class AuthController extends Controller
         $remember = $request->remember == 'On' ? true : false;
 
         try {
-            if(Sentinel::authenticate($credentials, $remember)) {
-                toastr()->success('Welcome back '.Sentinel::getUser()->name.'!', 'Success');
-                if($request->rto !== null)  {
+            if (Sentinel::authenticate($credentials, $remember)) {
+                toastr()->success('Welcome back ' . Sentinel::getUser()->name . '!', 'Success');
+                if ($request->rto !== null) {
                     return redirect()->to($request->rto);
                 } else {
                     return redirect()->route('dashboard.index');
@@ -84,14 +84,13 @@ class AuthController extends Controller
                 toastr()->error('Invalid email or password!', 'Error');
                 return redirect()->route('auth.login.form');
             }
-        } catch(ThrottlingException $ex){
-			dd($ex);
-			return redirect()->route('auth.login.form');
-		}
-		catch(NotActivatedException $ex){
-            dd($ex);
-			return redirect()->route('auth.login.form');
-		}
+        } catch (ThrottlingException $ex) {
+            toastr()->error('Something went wrong ...', 'Error');
+            return redirect()->route('auth.login.form');
+        } catch (NotActivatedException $ex) {
+            toastr()->error('You need to activate the account!', 'Error');
+            return redirect()->route('auth.login.form');
+        }
     }
 
     public function logout()
@@ -146,19 +145,19 @@ class AuthController extends Controller
         //
     }
 
-    public function activateAccount($code) 
+    public function activateAccount($code)
     {
         DB::beginTransaction();
         try {
             $activation = Activation::where('code', $code)->first();
-            if($activation){
-                if($activation->completed == 0){
+            if ($activation) {
+                if ($activation->completed == 0) {
                     $userDb = Sentinel::findById($activation->user_id);
 
                     $activation->completed    = 1;
                     $activation->completed_at = date('Y-m-d H:i:s');
                     $activation->save();
-                    
+
                     $userDb->token             = '';
                     $userDb->email_verified_at = date('Y-m-d H:i:s');
                     $userDb->save();
@@ -172,6 +171,7 @@ class AuthController extends Controller
                 return redirect()->route('auth.login.form');
             }
             DB::commit();
+            toastr()->info('Your have successfully activate your account!', 'Success');
             return redirect()->route('auth.login.form');
         } catch (\Throwable $th) {
             dd($th->getMessage());
