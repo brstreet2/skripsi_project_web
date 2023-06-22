@@ -82,4 +82,8 @@ class EmployeesController extends Controller
     {
         //
     }
+
+    public function datatables(Request $request)
+    {
+    }
 }
