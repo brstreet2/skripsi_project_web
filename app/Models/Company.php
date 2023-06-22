@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DocumentTemplate extends Model
+class Company extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'document_template';
+    protected $table = 'company';
+
+    public function user_company()
+    {
+        return $this->hasMany(UserCompany::class, 'company_id', 'id');
+    }
 
     public function getCreatedAtAttribute($value)
     {
