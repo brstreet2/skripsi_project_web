@@ -37,7 +37,18 @@
                     </div>
                 </div>
                 <div class="row" id="tableContainer">
-
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th> 
+                                    Hari / Tanggal
+                                </th>
+                                <th>
+                                    Approval
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
     </div>
@@ -73,6 +84,10 @@
         var dayHeader = document.createElement("th");
         dayHeader.textContent = "Hari / Tanggal";
         headerRow.appendChild(dayHeader);
+
+        var approveHeader = document.createElement("th");
+        approveHeader.textContent = "Approval";
+        headerRow.appendChild(approveHeader);
 
         // Tambahkan baris header ke dalam tabel
         tableBody.appendChild(headerRow);
