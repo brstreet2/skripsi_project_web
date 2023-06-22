@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Models\UserCompany;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Authenticatable;
@@ -15,15 +16,15 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
 {
     use Authenticatable, HasApiTokens, SoftDeletes;
     const last_login = null;
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = [
-		'name',
-		'email',
-		'password',
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
         'phone',
         'user_type',
         'created_by'
@@ -49,97 +50,94 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
         return [];
     }
 
-	/**
-	 * The attributes that should be hidden for arrays.
-	 *
-	 * @var array
-	 */
-	protected $hidden = [
-		'password'
-	];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password'
+    ];
 
-    public function user_role(){
+    public function user_role()
+    {
         return $this->hasOne(UserRole::class, 'user_id', 'id');
+    }
+
+    public function user_company()
+    {
+        return $this->hasOne(UserCompany::class, 'user_id', 'id');
     }
 
     public function getCreatedAtAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
         }
     }
 
     public function getUpdatedAtAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
         }
     }
 
     public function getDeletedAtAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
         }
     }
 
     public function getLastLoginAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
         }
     }
 
     public function getEmailVerifiedAtAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
         }
     }
 
     public function getOtpExpiredAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
         }
     }
 
     public function getTokenAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return $value;
         }
     }
 
     public function getPermissionsAttribute($value)
     {
-        if($value == null){
+        if ($value == null) {
             return '';
-        }
-        else{
+        } else {
             return $value;
         }
     }
-
 }
