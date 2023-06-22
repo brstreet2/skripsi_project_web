@@ -117,3 +117,13 @@ Route::get('/attendance/view', function () {
 Route::get('/attendance/timeoff', function () {
     return view('backend.attendance.timeoff');
 });
+
+//edit company
+Route::get('/company/edit', function () {
+    return view('backend.company.editcompany');
+});
+
+//edit tax company
+Route::get('/company/tax', function () {
+    return view('backend.company.taxcompany');
+});

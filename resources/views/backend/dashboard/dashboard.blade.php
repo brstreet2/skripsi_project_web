@@ -1,6 +1,7 @@
 @extends('backend.layout.layout')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('assets/progressbar.css') }}">
         <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
             <div class="card-body">
                 <h4 class="fw-bold">
@@ -11,6 +12,56 @@
                 </p>
             </div>
         </div>
+
+        <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
+            <div class="card-body">
+                <form id="form">
+                    <ul id="progressbar">
+                        <li class="active" id="step1">
+                            <strong>Register</strong>
+                        </li>
+                        <li id="step2"><strong>Set Company Profile</strong></li>
+                        <li id="step3"><strong>Add Employee</strong></li>
+                        <li id="step4"><strong>Finished</strong></li>
+                    </ul>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div> <br>
+                    <fieldset>
+                        <p>Please Set Your Company Profile</p>
+                        <input type="button" name="next-step" 
+                            class="next-step" value="Next Step" />
+                    </fieldset>
+                    <fieldset>
+                        <p>Please Add Employee</p>
+                        <input type="button" name="next-step" 
+                            class="next-step" value="Next Step" />
+                        <input type="button" name="previous-step" 
+                            class="previous-step" 
+                            value="Previous Step" />
+                    </fieldset>
+                    <fieldset>
+                        <h2>Finished</h2>
+                        <input type="button" name="next-step" 
+                            class="next-step" value="Final Step" />
+                        <input type="button" name="previous-step" 
+                            class="previous-step" 
+                            value="Previous Step" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="finish">
+                            <h2 class="text text-center">
+                                <strong>FINISHED</strong>
+                            </h2>
+                        </div>
+                        <input type="button" name="previous-step" 
+                            class="previous-step" 
+                            value="Previous Step" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
@@ -19,13 +70,13 @@
                         <div class="col mr-2">
                             <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
                                 Employees</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-300">
+                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-300">
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                                     <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                     <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>  
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-auto">
                             <i class="fa-regular fa-user fa-2x"></i>
@@ -72,7 +123,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Shift Change Request</div>
+                                Payroll</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
@@ -84,9 +135,9 @@
         </div>
         
     </div>
-    <div class="row mb-5">
-        <div class="col-lg-12">
-            <div class="card shadow" style="border: none;">
+    <div class="row">
+        <div class="col-lg-12 mb-5">
+            <div class="card" style="border: 1px solid #cccfff; border-radius:.75rem">
                 <div class="card-body">
                     <nav>
                         <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
@@ -102,4 +153,6 @@
             </div>
         </div>
     </div>
+<script src="assets\progress-bar.js"></script>
+<script src="assets\app.js"></script>
 @endsection

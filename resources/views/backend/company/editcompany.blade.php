@@ -3,53 +3,23 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb text-color-primary">
-            <strong>YOUR COMPANY</strong>
+            <strong>EDIT COMPANY INFO</strong>
         </h5>
         <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms below.</p>
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                NO LOGO
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-8">
-                        <div class="row">
-                            <h5>Company Logo</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="input-group mb-3">
-                                    <input type="file" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #444EFF">Submit</button>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
                     <div class="col-4">
                         <h4>Company Info</h4>
-                    </div>
-                    <div class="col-4">
-                        <a href="/company/edit"><button class="btn"><i class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
-                    </div>
-                    <div class="col-2">
-
-                    </div>
+                    </div>  
 
                     <div class="mt-3">
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <p>Company Name</p>
                             </div>
                             <div class="col-md-6">
-                                PT. Peler Kuda
+                                <input type="text" class="form-control" id="companyNameInput" placeholder="(example: PT. XYZ)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
@@ -59,171 +29,81 @@
                                 <p>Company Phone Number</p>
                             </div>
                             <div class="col-md-6">
-                                081383278323
+                                <input type="text" class="form-control" id="companyNumberInput" placeholder="(example: 08XX-XXXX-XXXX)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <p>Supervisor Email</p>
                             </div>
                             <div class="col-md-6">
-                                azkasecio0405@gmail.com
+                                <input type="text" class="form-control" id="companyEmailInput" placeholder="(example: yourname@email.com)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <p>Address</p>
                             </div>
                             <div class="col-md-6">
-                                Jl. Pembangunan III, Blok G/33
+                                <input type="text" class="form-control" id="companyAddressInput" placeholder="(example: Jl. Alamat No. 45)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <p>Province</p>
                             </div>
                             <div class="col-md-6">
-                                Banten
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: DKI Jakarta)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <p>City</p>
                             </div>
                             <div class="col-md-6">
-                                Kota Tangerang
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: Jakarta)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <p>Industry</p>
                             </div>
                             <div class="col-md-6">
-                                Food & Beverage
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: Food & Beverage)">
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-2">
+                                <p>Employee Size</p>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: 50)">
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Size</p>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <a href="/company">
+                                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" href="" style="background-color: #444EFF" >Submit</button>
+                                    </a>
                             </div>
-                            <div class="col-md-6">
-                                0 - 50
-                            </div>
-                            <div class="col-md-4"></div>
                         </div>
-
                     </div>
                 </div>
-
-                <div class="row mt-5">
-                    <div class="col-4">
-                        <h4>Tax Info</h4>
-                    </div>
-                    <div class="col-4">
-                        <a href="/company/tax">
-                            <button class="btn"><i class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button>
-                        </a>
-                    </div>
-                    <div class="col-2">
-
-                    </div>
-
-                    <div class="mt-3">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Name</p>
-                            </div>
-                            <div class="col-md-6">
-                                PT. Peler Kuda
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Phone Number</p>
-                            </div>
-                            <div class="col-md-6">
-                                081383278323
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Supervisor Email</p>
-                            </div>
-                            <div class="col-md-6">
-                                azkasecio0405@gmail.com
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Address</p>
-                            </div>
-                            <div class="col-md-6">
-                                Jl. Pembangunan III, Blok G/33
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Province</p>
-                            </div>
-                            <div class="col-md-6">
-                                Banten
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>City</p>
-                            </div>
-                            <div class="col-md-6">
-                                Kota Tangerang
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Industry</p>
-                            </div>
-                            <div class="col-md-6">
-                                Food & Beverage
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Size</p>
-                            </div>
-                            <div class="col-md-6">
-                                0 - 50
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
