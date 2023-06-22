@@ -127,3 +127,8 @@ Route::get('/company/edit', function () {
 Route::get('/company/tax', function () {
     return view('backend.company.taxcompany');
 });
+
+//generate report
+Route::get('/report', function () {
+    return view('backend.report.index');
+});

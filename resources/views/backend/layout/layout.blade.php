@@ -45,8 +45,8 @@
                     <a href="{{ route('dashboard.index') }}"
                         class="nav_link {{ request()->route()->named('dashboard.*')? 'active-nav': '' }}"> <i
                             class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span></a>
-                    <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Users</span> </a>
+                    <a href="/report" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
+                            class="nav_name">Report</span> </a>
                     <a href="{{ route('company.index') }}"
                         class="nav_link {{ request()->route()->named('company.*')? 'active-nav': '' }}"> <i
                             class='bx bx-buildings nav-icon'></i> <span class="nav_name">Company</span> </a>
