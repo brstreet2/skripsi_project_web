@@ -5,15 +5,13 @@
         <h5 class="font-mpb text-color-primary">
             <strong>YOUR COMPANY</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms below.</p>
+        <p class="mb-3" style="font-size: 16px">Company Information</p>
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="card">
-                            <div class="card-body">
-                                NO LOGO
-                            </div>
+                            <img class="card-img-top" id="companyImage" src="..." alt="No Logo Yet :(">
                         </div>
                     </div>
 
@@ -24,7 +22,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="input-group mb-3">
-                                    <input type="file" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input type="file" id="imgInput" class="form-control" accept="image/png, image/jpeg">
                                     <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #444EFF">Submit</button>
                                   </div>
                             </div>
@@ -43,7 +41,7 @@
 
                     </div>
 
-                    <div class="mt-3">
+                    {{-- <div class="mt-3">
                         <div class="row">
                             <div class="col-md-2">
                                 <p>Company Name</p>
@@ -124,109 +122,24 @@
                             <div class="col-md-4"></div>
                         </div>
 
-                    </div>
+                    </div> --}}
                 </div>
-
-                <div class="row mt-5">
-                    <div class="col-4">
-                        <h4>Tax Info</h4>
-                    </div>
-                    <div class="col-4">
-                        <a href="/company/tax">
-                            <button class="btn"><i class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button>
-                        </a>
-                    </div>
-                    <div class="col-2">
-
-                    </div>
-
-                    <div class="mt-3">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Name</p>
-                            </div>
-                            <div class="col-md-6">
-                                PT. Peler Kuda
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Phone Number</p>
-                            </div>
-                            <div class="col-md-6">
-                                081383278323
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Supervisor Email</p>
-                            </div>
-                            <div class="col-md-6">
-                                azkasecio0405@gmail.com
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Address</p>
-                            </div>
-                            <div class="col-md-6">
-                                Jl. Pembangunan III, Blok G/33
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Province</p>
-                            </div>
-                            <div class="col-md-6">
-                                Banten
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>City</p>
-                            </div>
-                            <div class="col-md-6">
-                                Kota Tangerang
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Industry</p>
-                            </div>
-                            <div class="col-md-6">
-                                Food & Beverage
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Size</p>
-                            </div>
-                            <div class="col-md-6">
-                                0 - 50
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-
-                    </div>
+                <div class="row">
+                    <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms</p>
                 </div>
-
             </div>
         </div>
     </div>
+
+    <script>
+        imgInput.onchange = evt => {
+        const [file] = imgInput.files
+        if (file) {
+            companyImage.src = URL.createObjectURL(file)
+        }
+        }
+    </script>
+
 @endsection
 
 @push('css')
