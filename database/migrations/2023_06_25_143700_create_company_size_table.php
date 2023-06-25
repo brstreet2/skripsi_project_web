@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('company_size', function (Blueprint $table) {
             $table->id();
             $table->string('size')->default('');
-            $table->int('value_min')->nullable();
-            $table->int('value_max')->nullable();
+            $table->integer('value_min')->nullable();
+            $table->integer('value_max')->nullable();
             $table->timestamps();
         });
     }

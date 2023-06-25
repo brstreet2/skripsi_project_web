@@ -59,9 +59,12 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [CompanyController::class, 'index'])->name('index');
+    Route::get('/create', [CompanyController::class, 'create'])->name('create');
+    Route::post('/store', [CompanyController::class, 'store'])->name('store');
     Route::get('/ajax/provinces', [CompanyController::class, 'getProvinces'])->name('ajax.provinces');
     Route::post('/ajax/regencies', [CompanyController::class, 'getRegencies'])->name('ajax.regencies');
     Route::get('/ajax/industries', [CompanyController::class, 'getIndustries'])->name('ajax.industries');
+    Route::get('/ajax/company/size', [CompanyController::class, 'getCompanySizes'])->name('ajax.sizes');
 });
 
 Route::group([

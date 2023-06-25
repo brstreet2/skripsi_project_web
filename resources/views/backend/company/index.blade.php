@@ -22,9 +22,11 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="input-group mb-3">
-                                    <input type="file" id="imgInput" class="form-control" accept="image/png, image/jpeg">
-                                    <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #444EFF">Submit</button>
-                                  </div>
+                                    <input type="file" id="imgInput" class="form-control"
+                                        accept="image/png, image/jpeg">
+                                    <button class="btn btn-primary" type="button" id="button-addon2"
+                                        style="background-color: #444EFF">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -35,7 +37,8 @@
                         <h4>Company Info</h4>
                     </div>
                     <div class="col-4">
-                        <a href="/company/edit"><button class="btn"><i class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
+                        <a href="{{ route('company.create') }}"><button class="btn"><i
+                                    class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
                     </div>
                     <div class="col-2">
 
@@ -133,13 +136,12 @@
 
     <script>
         imgInput.onchange = evt => {
-        const [file] = imgInput.files
-        if (file) {
-            companyImage.src = URL.createObjectURL(file)
-        }
+            const [file] = imgInput.files
+            if (file) {
+                companyImage.src = URL.createObjectURL(file)
+            }
         }
     </script>
-
 @endsection
 
 @push('css')

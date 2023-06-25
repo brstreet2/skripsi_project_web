@@ -18,6 +18,11 @@ class Company extends Model
         return $this->hasMany(UserCompany::class, 'company_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'pic_id');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         if ($value == null) {

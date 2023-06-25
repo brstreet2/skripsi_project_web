@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Models\Company;
 use App\Models\UserCompany;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -67,6 +68,11 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
     public function user_company()
     {
         return $this->hasOne(UserCompany::class, 'user_id', 'id');
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'pic_id', 'id');
     }
 
     public function getCreatedAtAttribute($value)

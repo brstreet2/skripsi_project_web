@@ -6,7 +6,7 @@
             <strong>EDIT COMPANY INFO</strong>
         </h5>
         <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms below.</p>
-        <form action="" method="POST">
+        <form action="{{ route('company.store') }}" method="POST">
             {{ csrf_field() }}
             <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
                 <div class="card-body">
@@ -109,8 +109,11 @@
                                     <p>Employee Size</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        name="company_size" placeholder="(example: 50)">
+                                    <select class="form-control" id="sizeInput" name="company_size">
+                                        <option disabled selected="Selected" value="null">Pilih
+                                            Jumlah Karyawan
+                                            ...</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -155,6 +158,36 @@
                 containerCssClass: ':all:',
                 ajax: {
                     url: '{{ route('company.ajax.provinces') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                            page: params.page,
+                        };
+                    },
+                    processResults: function(data, params) {
+
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.data,
+                            pagination: {
+                                more: (params.page * data.per_page) < data.total
+                            }
+                        };
+                    },
+                    cache: true,
+                }
+            });
+
+            $('#sizeInput').select2({
+                theme: "bootstrap",
+                placeholder: "Select",
+                width: '100%',
+                containerCssClass: ':all:',
+                ajax: {
+                    url: '{{ route('company.ajax.sizes') }}',
                     dataType: 'json',
                     delay: 250,
                     data: function(params) {

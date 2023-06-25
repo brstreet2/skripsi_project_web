@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('city_string')->default('');
             $table->unsignedBigInteger('industry')->nullable();
             $table->string('industry_string')->default('');
-            $table->string('company_size')->default('');
+            $table->unsignedBigInteger('company_size_id')->nullable();
+            $table->string('company_size_string')->default('');
             $table->unsignedBigInteger('pic_id')->nullable();
             $table->foreign('pic_id')->references('id')->on('users');
             $table->string('created_by')->default('');
