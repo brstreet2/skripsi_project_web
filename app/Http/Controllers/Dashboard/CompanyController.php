@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Province;
+use App\Models\Regency;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class CompanyController extends Controller
 {
@@ -81,5 +84,45 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProvinces(Request $request)
+    {
+        try {
+            $perPage = 10;
+            $page    = $request->page ?? 1;
+            $term = $request->term;
+
+            Paginator::currentPageResolver(
+                function () use ($page) {
+                    return $page;
+                }
+            );
+
+            $count = Province::count();
+
+            if ($count > $perPage) {
+                $perPage = $count;
+            }
+
+            $dataDb = Province::select('id', 'name as text')->where('name', 'LIKE', '%' . $request->term . '%')->paginate($perPage);
+
+            return $dataDb;
+        } catch (\Exception $exception) {
+            // dd($exception->getMessage());
+            return $exception->getCode();
+        }
+    }
+
+    public function getRegencies(Request $request)
+    {
+        try {
+            $dataDb = Regency::where('province_id', $request->province_id)->get();
+
+            return response()->json($dataDb);
+        } catch (\Exception $exception) {
+            // dd($exception->getMessage());
+            return $exception->getCode();
+        }
     }
 }
