@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Company\companyRequest;
+use App\Models\Company;
+use App\Models\Industry;
 use App\Models\Province;
 use App\Models\Regency;
+use Carbon\Carbon;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
@@ -27,7 +34,6 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -36,9 +42,43 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(companyRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $companyDb                  = new Company();
+            $companyDb->name            = $request->company_name;
+            $companyDb->phone           = $request->company_phone;
+            $companyDb->pic_email       = $request->company_spv;
+            $companyDb->address         = $request->company_address;
+            $companyDb->province_id     = $request->company_province;
+            $companyDb->province_string = '';
+            $companyDb->city_id         = $request->company_city;
+            $companyDb->city_string     = '';
+            $companyDb->industry        = $request->company_industry;
+            $companyDb->industry_string = '';
+            $companyDb->company_size_id = $request->company_size;
+            $companyDb->pic_id          = Sentinel::getUser()->id();
+            $companyDb->created_by      = Sentinel::getUser()->name();
+            $companyDb->created_at      = Carbon::now();
+
+            DB::commit();
+            return back();
+        } catch (\Exception $e) {
+            Log::error("----------------------------------------------------");
+            Log::error("Error Log Date: " . Carbon::now('Y-m-d H:i:s'));
+            Log::error("Error Exception Code: " . $e->getCode());
+            Log::error("Error at controller: CompanyController");
+            Log::error("Error at function / method: store");
+            Log::error("Error Message: " . $e->getMessage());
+            Log::error("Rolling Back Process ...");
+            DB::rollback();
+            Log::error("Rollback Success!");
+            Log::error("Redirecting back ...");
+            Log::error("----------------------------------------------------");
+            return back();
+        }
     }
 
     /**
@@ -120,6 +160,34 @@ class CompanyController extends Controller
             $dataDb = Regency::where('province_id', $request->province_id)->get();
 
             return response()->json($dataDb);
+        } catch (\Exception $exception) {
+            // dd($exception->getMessage());
+            return $exception->getCode();
+        }
+    }
+
+    public function getIndustries(Request $request)
+    {
+        try {
+            $perPage = 10;
+            $page    = $request->page ?? 1;
+            $term = $request->term;
+
+            Paginator::currentPageResolver(
+                function () use ($page) {
+                    return $page;
+                }
+            );
+
+            $count = Industry::count();
+
+            if ($count > $perPage) {
+                $perPage = $count;
+            }
+
+            $dataDb = Industry::select('id', 'name as text')->where('name', 'LIKE', '%' . $request->term . '%')->paginate($perPage);
+
+            return $dataDb;
         } catch (\Exception $exception) {
             // dd($exception->getMessage());
             return $exception->getCode();

@@ -95,8 +95,11 @@
                                     <p>Industry</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        name="company_industry" placeholder="(example: Food & Beverage)">
+                                    <select class="form-control" id="industryInput" name="company_industry">
+                                        <option disabled selected="Selected" value="null">Pilih
+                                            Industri
+                                            ...</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -152,6 +155,36 @@
                 containerCssClass: ':all:',
                 ajax: {
                     url: '{{ route('company.ajax.provinces') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                            page: params.page,
+                        };
+                    },
+                    processResults: function(data, params) {
+
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.data,
+                            pagination: {
+                                more: (params.page * data.per_page) < data.total
+                            }
+                        };
+                    },
+                    cache: true,
+                }
+            });
+
+            $('#industryInput').select2({
+                theme: "bootstrap",
+                placeholder: "Select",
+                width: '100%',
+                containerCssClass: ':all:',
+                ajax: {
+                    url: '{{ route('company.ajax.industries') }}',
                     dataType: 'json',
                     delay: 250,
                     data: function(params) {

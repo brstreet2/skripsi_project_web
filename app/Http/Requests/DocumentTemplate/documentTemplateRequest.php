@@ -32,15 +32,16 @@ class documentTemplateRequest extends FormRequest
     }
 
     /**
-	 * Get the message
-	 *
-	 * @return array
-	 */
-	public function messages() {
-		return [
-			'document_name.required'       => 'Please provide a name for the document.',
-            'email.required'               => 'Please provide a short description for the document.',
+     * Get the message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'document_name.required'       => 'Please provide a name for the document.',
+            'description.required'         => 'Please provide a short description for the document.',
             'content.required'             => 'Please design the template.',
-		];
-	}
+        ];
+    }
 }
