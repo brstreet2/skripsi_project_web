@@ -59,6 +59,8 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [CompanyController::class, 'index'])->name('index');
+    Route::get('/ajax/provinces', [CompanyController::class, 'getProvinces'])->name('ajax.provinces');
+    Route::post('/ajax/regencies', [CompanyController::class, 'getRegencies'])->name('ajax.regencies');
 });
 
 Route::group([

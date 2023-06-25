@@ -6,106 +6,124 @@
             <strong>EDIT COMPANY INFO</strong>
         </h5>
         <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms below.</p>
-        <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <h4>Company Info</h4>
-                    </div>  
-
-                    <div class="mt-3">
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <p>Company Name</p>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="companyNameInput" placeholder="(example: PT. XYZ)">
-                            </div>
-                            <div class="col-md-4"></div>
+        <form action="" method="POST">
+            {{ csrf_field() }}
+            <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <h4>Company Info</h4>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p>Company Phone Number</p>
+                        <div class="mt-3">
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <p>Company Name</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="companyNameInput" name="company_name"
+                                        placeholder="(example: PT. XYZ)">
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="companyNumberInput" placeholder="(example: 08XX-XXXX-XXXX)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <p>Supervisor Email</p>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p>Company Phone Number</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="companyNumberInput" name="company_phone"
+                                        placeholder="(example: 08XX-XXXX-XXXX)">
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="companyEmailInput" placeholder="(example: yourname@email.com)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <p>Address</p>
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <p>Supervisor Email</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="companyEmailInput" name="company_spv"
+                                        placeholder="(example: yourname@email.com)">
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="companyAddressInput" placeholder="(example: Jl. Alamat No. 45)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <p>Province</p>
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <p>Address</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="companyAddressInput"
+                                        name="company_address" placeholder="(example: Jl. Alamat No. 45)">
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: DKI Jakarta)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <p>City</p>
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <p>Province</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="provinceInput" name="company_province"
+                                        placeholder="(example: DKI Jakarta)">
+                                        <option disabled selected="Selected" value="null">Pilih
+                                            Provinsi
+                                            ...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: Jakarta)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row mb-2">
-                            <div class="col-md-2">
-                                <p>Industry</p>
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <p>City</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="cityInput" name="company_city"
+                                        placeholder="(example: DKI Jakarta)">
+                                        <option disabled selected="Selected" value="null">Pilih
+                                            Kota / Kabupaten
+                                            ...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: Food & Beverage)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-2">
-                                <p>Employee Size</p>
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <p>Industry</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        name="company_industry" placeholder="(example: Food & Beverage)">
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="(example: 50)">
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-6 d-flex justify-content-end">
-                                <a href="/company">
-                                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" href="" style="background-color: #444EFF" >Submit</button>
-                                    </a>
+                            <div class="row mb-4">
+                                <div class="col-md-2">
+                                    <p>Employee Size</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        name="company_size" placeholder="(example: 50)">
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-6 d-flex justify-content-end">
+                                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" type="submit"
+                                        style="background-color: #444EFF">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 
@@ -113,6 +131,8 @@
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css" rel="stylesheet">
     <link href="{{ asset('plugins/jquery-datatables-checkboxes/css/dataTables.checkboxes.css') }}">
+    <link rel="stylesheet" href="{{ url('plugins/select2/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ url('plugins/select2/css/select2-bootstrap.css') }}">
 @endpush
 
 @push('scripts')
@@ -120,9 +140,79 @@
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="{{ asset('plugins/jquery-datatables-checkboxes/js/dataTables.checkboxes.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url('plugins/select2/js/select2.full.js') }}"></script>
+    <script src="{{ url('plugins/daterangepicker/moment.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
+            $('#provinceInput').select2({
+                theme: "bootstrap",
+                placeholder: "Select",
+                width: '100%',
+                containerCssClass: ':all:',
+                ajax: {
+                    url: '{{ route('company.ajax.provinces') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                            page: params.page,
+                        };
+                    },
+                    processResults: function(data, params) {
+
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.data,
+                            pagination: {
+                                more: (params.page * data.per_page) < data.total
+                            }
+                        };
+                    },
+                    cache: true,
+                }
+            });
+
+            $('#cityInput').select2({
+                theme: "bootstrap",
+                placeholder: "Piliih Kota / Kabupaten ...",
+                width: '100%',
+                containerCssClass: ':all:'
+            });
+
+            $('#provinceInput').on('change', function() {
+                let province_id = $(this).val();
+                if (province_id === "null") {
+                    $('#cityInput').prop('readonly', true);
+                    $('#cityInput').prop('disabled', true);
+                } else {
+                    $('#cityInput').prop('readonly', false);
+                    $('#cityInput').prop('disabled', false);
+                    $('#cityInput').empty();
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'POST',
+                        url: '{{ route('company.ajax.regencies') }}',
+                        data: {
+                            'province_id': province_id
+                        },
+                        success: function(response) {
+                            $('#cityInput').append(
+                                '<option value="null">Pilih Kota / Kabupaten ...</option>');
+                            $.each(response, function(i, val) {
+                                $('#cityInput').append(`<option value="` + val.id +
+                                    `">` + val.name +
+                                    `</option>`);
+                            });
+                        }
+                    });
+                }
+            });
+
             var table = $('#documentTable').DataTable({
                 ajax: {
                     url: '{!! route('document.ajax.datatables') !!}',
