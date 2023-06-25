@@ -65,14 +65,14 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
         return $this->hasOne(UserRole::class, 'user_id', 'id');
     }
 
-    public function user_company()
+    public function company_employees()
     {
-        return $this->hasOne(UserCompany::class, 'user_id', 'id');
+        return $this->hasOne(CompanyEmployees::class, 'user_id', 'id');
     }
 
     public function company()
     {
-        return $this->hasOne(Company::class, 'pic_id', 'id');
+        return $this->hasOne(Company::class, 'owner_id', 'id');
     }
 
     public function getCreatedAtAttribute($value)

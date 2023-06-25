@@ -20,7 +20,7 @@ class Company extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'pic_id');
+        return $this->belongsTo(User::class, 'id', 'owner_id');
     }
 
     public function getCreatedAtAttribute($value)
