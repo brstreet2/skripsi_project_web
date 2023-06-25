@@ -14,51 +14,21 @@
         </div>
 
         <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
-            <div class="card-body">
-                <form id="form">
-                    <ul id="progressbar">
-                        <li class="active" id="step1">
-                            <strong>Register</strong>
-                        </li>
-                        <li id="step2"><strong>Set Company Profile</strong></li>
-                        <li id="step3"><strong>Add Employee</strong></li>
-                        <li id="step4"><strong>Finished</strong></li>
-                    </ul>
-                    <div class="progress">
-                        <div class="progress-bar"></div>
-                    </div> <br>
-                    <fieldset>
-                        <p>Please Set Your Company Profile</p>
-                        <input type="button" name="next-step" 
-                            class="next-step" value="Next Step" />
-                    </fieldset>
-                    <fieldset>
-                        <p>Please Add Employee</p>
-                        <input type="button" name="next-step" 
-                            class="next-step" value="Next Step" />
-                        <input type="button" name="previous-step" 
-                            class="previous-step" 
-                            value="Previous Step" />
-                    </fieldset>
-                    <fieldset>
-                        <h2>Finished</h2>
-                        <input type="button" name="next-step" 
-                            class="next-step" value="Final Step" />
-                        <input type="button" name="previous-step" 
-                            class="previous-step" 
-                            value="Previous Step" />
-                    </fieldset>
-                    <fieldset>
-                        <div class="finish">
-                            <h2 class="text text-center">
-                                <strong>FINISHED</strong>
-                            </h2>
-                        </div>
-                        <input type="button" name="previous-step" 
-                            class="previous-step" 
-                            value="Previous Step" />
-                    </fieldset>
-                </form>
+            <div class="card-body p5-">
+                <ol class="steps" style="margin-top: 3rem">
+                    <li class="step is-complete" data-step="1">
+                      Create Account
+                    </li>
+                    <li class="step is-complete" data-step="2">
+                      Add Company Profile
+                    </li>
+                    <li class="step is-active" data-step="3">
+                      Add Employees
+                    </li>
+                    <li class="step" data-step="4">
+                      Completed
+                    </li>
+                  </ol>
             </div>
         </div>
 
