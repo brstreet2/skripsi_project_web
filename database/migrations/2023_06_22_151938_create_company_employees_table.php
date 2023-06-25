@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_users', function (Blueprint $table) {
+        Schema::create('company_employees', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('company_id')->unsigned();
+            $table->string('rank')->default('');
+            $table->string('job_title')->default('');
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_users');
+        Schema::dropIfExists('company_employees');
     }
 };

@@ -61,7 +61,7 @@ class CompanyController extends Controller
             $companyDb->industry_string     = Industry::where('id', $request->company_industry)->first()->value('name');;
             $companyDb->company_size_id     = $request->company_size;
             $companyDb->company_size_string = CompanySize::where('id', $request->company_size)->first()->value('size');
-            $companyDb->pic_id              = Sentinel::getUser()->id;
+            $companyDb->owner_id            = Sentinel::getUser()->id;
             $companyDb->created_by          = Sentinel::getUser()->name;
             $companyDb->created_at          = Carbon::now();
             $companyDb->save();

@@ -7,11 +7,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserCompany extends Model
+class CompanyEmployees extends Model
 {
     use HasFactory;
 
-    protected $table = 'company_users';
+    protected $table = 'company_employees';
 
     public function company()
     {

@@ -13,9 +13,9 @@ class Company extends Model
 
     protected $table = 'company';
 
-    public function user_company()
+    public function company_employees()
     {
-        return $this->hasMany(UserCompany::class, 'company_id', 'id');
+        return $this->hasMany(CompanyEmployees::class, 'company_id', 'id');
     }
 
     public function user()
