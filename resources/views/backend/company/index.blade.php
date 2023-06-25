@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="card">
-                                <img class="card-img-top" id="companyImage" src="..." alt="No Logo Yet :(">
+                                <img class="card-img-top" id="companyImage" src="..." alt="No Logo Yet :(" onerror="this.onerror=null; this.src='assets/no-image.png'";>
                             </div>
                         </div>
 
@@ -23,10 +23,8 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="input-group mb-3">
-                                        <input type="file" id="imgInput" class="form-control"
-                                            accept="image/png, image/jpeg">
-                                        <button class="btn btn-primary" type="button" id="button-addon2"
-                                            style="background-color: #444EFF">Submit</button>
+                                        <input type="file" id="imgInput" class="form-control" accept="image/png, image/jpeg" style="border-radius: 2rem 0rem 0rem 2rem">
+                                    <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #444EFF; border-radius: 0rem 2rem 2rem 0rem">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -36,102 +34,87 @@
                     <div class="row mt-5">
                         <div class="col-4">
                             <h4>Company Info</h4>
+                            <small class="mb-3" style="color: red" >You haven't set up your company, let's fill the forms</small>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 d-flex justify-content-end">
                             <a href="{{ route('company.create') }}"><button class="btn"><i
                                         class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
                         </div>
-                        <div class="col-2">
-
-                        </div>
-
-                        {{-- <div class="mt-3">
+                    </div>
+                <div class="row mt-4">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Company Name</p>
                             </div>
                             <div class="col-md-6">
-                                PT. Peler Kuda
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Company Phone Number</p>
                             </div>
                             <div class="col-md-6">
-                                081383278323
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Supervisor Email</p>
                             </div>
                             <div class="col-md-6">
-                                azkasecio0405@gmail.com
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Address</p>
                             </div>
                             <div class="col-md-6">
-                                Jl. Pembangunan III, Blok G/33
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Province</p>
                             </div>
                             <div class="col-md-6">
-                                Banten
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>City</p>
                             </div>
                             <div class="col-md-6">
-                                Kota Tangerang
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Industry</p>
                             </div>
                             <div class="col-md-6">
-                                Food & Beverage
+                                -
                             </div>
                             <div class="col-md-4"></div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <p>Company Size</p>
                             </div>
                             <div class="col-md-6">
-                                0 - 50
+                                -
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
-
-                    </div> --}}
                     </div>
-                    <div class="row">
-                        <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms</p>
-                    </div>
-                </div>
             </div>
         </div>
     @elseif (Sentinel::getUser()->company != null)
