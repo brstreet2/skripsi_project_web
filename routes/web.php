@@ -67,12 +67,16 @@ Route::group([
     Route::get('/ajax/company/size', [CompanyController::class, 'getCompanySizes'])->name('ajax.sizes');
 });
 
+
+// Employee
 Route::group([
     'as'        => "employee.",
     'prefix'    => "employee",
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [EmployeesController::class, 'index'])->name('index');
+    Route::post('/store', [EmployeesController::class, 'store'])->name('store');
+    Route::get('/ajax/datatables', [EmployeesController::class, 'datatables'])->name('ajax.datatables');
 });
 
 // Payroll

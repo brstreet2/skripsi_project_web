@@ -19,9 +19,9 @@
                     <thead>
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
-                            <th class="text-center font-mp">Document Name</th>
-                            <th class="text-center font-mp">Document Category</th>
-                            <th class="text-center font-mp">Action</th>
+                            <th class="text-center font-mp">User Name</th>
+                            <th class="text-center font-mp">Rank</th>
+                            <th class="text-center font-mp">Job Title</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,36 +33,44 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content" style="border-radius: 15px">
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold" id="exampleModalLabel">Form Tambah Karyawan</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group mb-2">
+                <form action="{{ route('employee.store') }}" method="POST">
+                    <div class="modal-content" style="border-radius: 15px">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold" id="exampleModalLabel">Form Tambah Karyawan</h5>
+                        </div>
+                        <div class="modal-body">
+
+                            {{ csrf_field() }}
+                            <div class="form-group mb-4">
                                 <label for="namaKaryawan">Nama</label>
                                 <input type="text" class="form-control" id="namaKaryawan" aria-describedby="namaHelp"
-                                    placeholder="Nama Karyawan">
+                                    name="name" placeholder="Nama Karyawan">
                             </div>
-                            <div class="form-group mb-2">
+                            <div class="form-group mb-4">
                                 <label for="emailKaryawan">Email</label>
                                 <input type="email" class="form-control" id="emailKaryawan" aria-describedby="emailHelp"
-                                    placeholder="Email Karyawan">
+                                    name="email" placeholder="Email Karyawan">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="emailKaryawan">Nomor Telepon</label>
+                                <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
+                                    name="phone" placeholder="Email Karyawan">
                             </div>
                             <div class="form-group">
                                 <label for="passwordKaryawan">Password</label>
-                                <input type="password" class="form-control" id="passwordKaryawan"
+                                <input type="password" class="form-control" id="passwordKaryawan" name="password"
                                     placeholder="Password Karyawan">
                             </div>
-                        </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-secondary rounded-pill"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary rounded-pill"
+                                style="background-color: #444eff">Simpan</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-secondary rounded-pill"
-                            data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary rounded-pill"
-                            style="background-color: #444eff">Simpan</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -85,7 +93,7 @@
         $(document).ready(function() {
             var table = $('#documentTable').DataTable({
                 ajax: {
-                    url: '{!! route('document.ajax.datatables') !!}',
+                    url: '{!! route('employee.ajax.datatables') !!}',
                     dataType: 'json'
                 },
                 serverSide: true,
@@ -97,21 +105,21 @@
                     }
                 }],
                 columns: [{
-                        data: 'id',
-                        name: 'id',
+                        data: 'user_id',
+                        name: 'user_id',
                         visible: true
                     },
                     {
-                        data: 'name',
-                        name: 'name'
+                        data: 'user_name',
+                        name: 'user_name'
                     },
                     {
-                        data: 'description',
-                        name: 'description'
+                        data: 'job_title',
+                        name: 'job_title'
                     },
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'rank',
+                        name: 'rank',
                         orderable: false,
                         searchable: false
                     }
