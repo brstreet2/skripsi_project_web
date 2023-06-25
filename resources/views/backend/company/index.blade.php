@@ -1,50 +1,51 @@
 @extends('backend.layout.layout')
 
 @section('content')
-    <div class="row">
-        <h5 class="font-mpb text-color-primary">
-            <strong>YOUR COMPANY</strong>
-        </h5>
-        <p class="mb-3" style="font-size: 16px">Company Information</p>
-        <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="card">
-                            <img class="card-img-top" id="companyImage" src="..." alt="No Logo Yet :(">
+    @if (Sentinel::getUser()->company == null)
+        <div class="row">
+            <h5 class="font-mpb text-color-primary">
+                <strong>YOUR COMPANY</strong>
+            </h5>
+            <p class="mb-3" style="font-size: 16px">Company Information</p>
+            <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="card">
+                                <img class="card-img-top" id="companyImage" src="..." alt="No Logo Yet :(">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-8">
-                        <div class="row">
-                            <h5>Company Logo</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="input-group mb-3">
-                                    <input type="file" id="imgInput" class="form-control"
-                                        accept="image/png, image/jpeg">
-                                    <button class="btn btn-primary" type="button" id="button-addon2"
-                                        style="background-color: #444EFF">Submit</button>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <h5>Company Logo</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <input type="file" id="imgInput" class="form-control"
+                                            accept="image/png, image/jpeg">
+                                        <button class="btn btn-primary" type="button" id="button-addon2"
+                                            style="background-color: #444EFF">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-5">
-                    <div class="col-4">
-                        <h4>Company Info</h4>
-                    </div>
-                    <div class="col-4">
-                        <a href="{{ route('company.create') }}"><button class="btn"><i
-                                    class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
-                    </div>
-                    <div class="col-2">
+                    <div class="row mt-5">
+                        <div class="col-4">
+                            <h4>Company Info</h4>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ route('company.create') }}"><button class="btn"><i
+                                        class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
+                        </div>
+                        <div class="col-2">
 
-                    </div>
+                        </div>
 
-                    {{-- <div class="mt-3">
+                        {{-- <div class="mt-3">
                         <div class="row">
                             <div class="col-md-2">
                                 <p>Company Name</p>
@@ -126,13 +127,15 @@
                         </div>
 
                     </div> --}}
-                </div>
-                <div class="row">
-                    <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms</p>
+                    </div>
+                    <div class="row">
+                        <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @elseif (Sentinel::getUser()->company != null)
+    @endif
 
     <script>
         imgInput.onchange = evt => {
