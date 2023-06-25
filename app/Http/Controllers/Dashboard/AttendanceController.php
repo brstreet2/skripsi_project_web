@@ -82,4 +82,8 @@ class AttendanceController extends Controller
     {
         //
     }
+
+    public function datatables(Request $request)
+    {
+    }
 }
