@@ -22,12 +22,13 @@
                 <li class="step {{ Sentinel::getUser()->company ? 'is-complete' : 'is-active' }}" data-step="2">
                     Add Company Profile
                 </li>
-                <li class="step {{ sizeof(Sentinel::getUser()->company->company_employees) <= 0 ? 'is-active' : 'is-complete' }}"
+
+                <li class="step {{ Sentinel::getUser()->company ? 'is-active' : '' }} {{ $count <= 0 ? '' : 'is-complete' }}"
                     data-step="3">
                     Add Employees
                 </li>
-                <li class="step {{ sizeof(Sentinel::getUser()->company->company_employees) <= 0 ? '' : 'is-complete' }}"
-                    data-step="4">
+
+                <li class="step {{ $count <= 0 ? '' : 'is-complete' }}" data-step="4">
                     Completed
                 </li>
             </ol>
