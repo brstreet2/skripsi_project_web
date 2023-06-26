@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Traits\Users\AttachRoleTrait;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -9,6 +10,7 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
+    use AttachRoleTrait;
     /**
      * Run the database seeds.
      *
@@ -28,5 +30,7 @@ class UserSeeder extends Seeder
 
         //Create a new user and activated that users
         $user = Sentinel::registerAndActivate($data);
+
+        $this->attach($user, 'Root');
     }
 }
