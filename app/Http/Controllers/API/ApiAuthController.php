@@ -72,9 +72,7 @@ class ApiAuthController extends Controller
             if ($user->user_role) {
                 $activation = Activation::where('user_id', $user->id)->first();
 
-                if ($user->user_role->role->slug == 'investor') {
-                    $investorAccount = 1;
-                }
+                $investorAccount = 1;
 
                 if ($investorAccount == 0) {
                     $message = 'username/password is invalid';
