@@ -16,6 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Exceptions\OAuthServerException;
 use Laravel\Passport\Token;
+use Lcobucci\JWT\Parser;
 
 class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenController
 {
@@ -184,7 +185,7 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
 
         try {
             $bearerToken = request()->bearerToken();
-            if($bearerToken == null){
+            if ($bearerToken == null) {
                 DB::rollBack();
 
                 return response()->json([
@@ -197,8 +198,8 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
 
             $tokenId = app(Parser::class)->parse($bearerToken)->claims()->get('jti');
             $revoked = Token::find($tokenId)->revoked;
-            
-            if($revoked){
+
+            if ($revoked) {
                 DB::rollBack();
 
                 return response()->json([
@@ -207,8 +208,7 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                     'data'      => '',
                     'status'    => 401
                 ], 401);
-            }
-            else{
+            } else {
                 $userId = app(Parser::class)->parse($bearerToken)->claims()->get('sub');
 
                 $user = User::find($userId);
@@ -218,8 +218,7 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                     $message    = 'Email not found';
                     $user       = '';
                     $status     = 403;
-                }
-                else {
+                } else {
                     //revoke available token
                     $userTokens = $user->tokens;
                     foreach ($userTokens as $token) {
@@ -228,12 +227,10 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                                 if ($token->client_id == "2") { //for android device
                                     $token->revoke();
                                 }
-                            }
-                            else {
+                            } else {
                                 $token->revoke();
                             }
-                        }
-                        else {
+                        } else {
                             $token->revoke();
                         }
                     }
@@ -256,8 +253,7 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                     'status'     => $status
                 ], $status);
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return response()->json([
