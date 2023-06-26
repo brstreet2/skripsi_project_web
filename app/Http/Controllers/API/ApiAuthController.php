@@ -59,12 +59,6 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
             $username  = $request->getParsedBody()['username'];
             $client_id = $request->getParsedBody()['client_id'];
 
-            if (isset($request->getParsedBody()['firebase_device_token']) == false) {
-                $firebase_device_token = '';
-            } else {
-                $firebase_device_token = $request->getParsedBody()['firebase_device_token'];
-            }
-
             //get user
             $user = User::where('email', $username)->firstOrFail();
 
@@ -109,7 +103,6 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                             }
 
                             $user->last_login            = date('Y-m-d H:i:s');
-                            $user->firebase_device_token = $firebase_device_token;
                             $user->updated_by            = $user->name;
                             $user->save();
 
@@ -124,7 +117,6 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                                 'email' => $user->email,
                                 'name'  => $user->name,
                                 'phone' => $user->phone,
-                                'saldo' => $user->saldo
                             ];
                         }
                     }
@@ -234,7 +226,6 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                         'name'   => $user->name,
                         'email'  => $user->email,
                         'phone'  => $user->phone,
-                        'saldo'  => $user->saldo,
                         'limit'  => $user->limit,
                         'total_share' => $user->total_share,
                         'created_at'  => $user->created_at,
