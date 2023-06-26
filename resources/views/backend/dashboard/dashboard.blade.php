@@ -19,13 +19,15 @@
                 <li class="step is-complete" data-step="1">
                     Create Account
                 </li>
-                <li class="step is-complete" data-step="2">
+                <li class="step {{ Sentinel::getUser()->company ? 'is-complete' : 'is-active' }}" data-step="2">
                     Add Company Profile
                 </li>
-                <li class="step is-active" data-step="3">
+                <li class="step {{ sizeof(Sentinel::getUser()->company->company_employees) <= 0 ? 'is-active' : 'is-complete' }}"
+                    data-step="3">
                     Add Employees
                 </li>
-                <li class="step" data-step="4">
+                <li class="step {{ sizeof(Sentinel::getUser()->company->company_employees) <= 0 ? '' : 'is-complete' }}"
+                    data-step="4">
                     Completed
                 </li>
             </ol>
