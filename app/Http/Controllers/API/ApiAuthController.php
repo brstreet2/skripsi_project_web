@@ -10,12 +10,14 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Psr\Http\Message\ServerRequestInterface;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Exceptions\OAuthServerException;
+use Laravel\Passport\Token;
 
-class ApiLoginController extends Controller
+class ApiAuthController extends Controller
 {
     public function login(ServerRequestInterface $request)
     {
@@ -181,6 +183,78 @@ class ApiLoginController extends Controller
                 "token"      => $issuedToken,
                 "expires_in" => $expires_in,
             ], $status);
+        }
+    }
+
+    public function profile($request)
+    {
+        DB::beginTransaction();
+        $error   = false;
+        $message = '';
+
+        try {
+            $bearerToken = request()->bearerToken();
+            if ($bearerToken == null) {
+                DB::rollBack();
+
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Invalid Token',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            }
+
+            $tokenId = app(Parser::class)->parse($bearerToken)->claims()->get('jti');
+            $revoked = Token::find($tokenId)->revoked;
+
+            if ($revoked) {
+                DB::rollBack();
+
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Not Allowed',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            } else {
+                $userId = app(Parser::class)->parse($bearerToken)->claims()->get('sub');
+
+                $user = User::find($userId);
+                $user->updated_by = $user->name;
+                $user->save();
+
+                $status = 200;
+
+                DB::commit();
+
+                return response()->json([
+                    'error'   => false,
+                    'message' => 'OK',
+                    'data'    => [
+                        'id'     => $user->id,
+                        'name'   => $user->name,
+                        'email'  => $user->email,
+                        'phone'  => $user->phone,
+                        'saldo'  => $user->saldo,
+                        'limit'  => $user->limit,
+                        'total_share' => $user->total_share,
+                        'created_at'  => $user->created_at,
+                        'bank_name'   => $user->bank_name,
+                        'bank_number' => $user->bank_number
+                    ],
+                    'status' => $status
+                ], $status);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => '',
+                'status'    => 403
+            ], 403);
         }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [ApiLoginController::class, "login"])->name('api.login');
+Route::post('/login', [ApiAuthController::class, "login"])->name('api.login');
