@@ -9,7 +9,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Exceptions\OAuthServerException;
 use Laravel\Passport\Token;
 
-class ApiAuthController extends Controller
+class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenController
 {
     public function login(ServerRequestInterface $request)
     {
