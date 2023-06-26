@@ -68,6 +68,8 @@ class MigrationCartalystSentinel extends Migration
             $table->string('slug');
             $table->string('name');
             $table->text('permissions')->nullable();
+            $table->string('created_by')->default('');
+            $table->string('updated_by')->default('');
             $table->timestamps();
 
             $table->engine = 'InnoDB';
