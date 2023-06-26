@@ -1,36 +1,36 @@
 @extends('backend.layout.layout')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/progressbar.css') }}">
-        <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
-            <div class="card-body">
-                <h4 class="fw-bold">
-                    Welcome Back, {{ Sentinel::getUser()->name }}!
-                </h4>
-                <p style="color:#999999">
-                    Time: {{ Carbon\Carbon::now()->format('D F Y') }}
-                </p>
-            </div>
+    <link rel="stylesheet" href="{{ asset('assets/progressbar.css') }}">
+    <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
+        <div class="card-body">
+            <h4 class="fw-bold">
+                Welcome Back, {{ Sentinel::getUser()->name }}!
+            </h4>
+            <p style="color:#999999">
+                Time: {{ Carbon\Carbon::now()->formatLocalized('%A, %d %B %Y') }}
+            </p>
         </div>
+    </div>
 
-        <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
-            <div class="card-body p5-">
-                <ol class="steps" style="margin-top: 3rem">
-                    <li class="step is-complete" data-step="1">
-                      Create Account
-                    </li>
-                    <li class="step is-complete" data-step="2">
-                      Add Company Profile
-                    </li>
-                    <li class="step is-active" data-step="3">
-                      Add Employees
-                    </li>
-                    <li class="step" data-step="4">
-                      Completed
-                    </li>
-                  </ol>
-            </div>
+    <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
+        <div class="card-body p5-">
+            <ol class="steps" style="margin-top: 3rem">
+                <li class="step is-complete" data-step="1">
+                    Create Account
+                </li>
+                <li class="step is-complete" data-step="2">
+                    Add Company Profile
+                </li>
+                <li class="step is-active" data-step="3">
+                    Add Employees
+                </li>
+                <li class="step" data-step="4">
+                    Completed
+                </li>
+            </ol>
         </div>
+    </div>
 
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-lg-12 mb-5">
@@ -111,18 +111,28 @@
                 <div class="card-body">
                     <nav>
                         <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-                          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Announcement</button>
-                          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Who's off today</button>
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true">Announcement</button>
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Who's off
+                                today</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem accusantium ipsa facilis laudantium reprehenderit vitae eum tenetur animi, ex, consequatur dolore? Neque aut, aliquid a deserunt voluptate laborum perferendis ipsam?</div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem commodi voluptas, quae eligendi quos debitis praesentium doloribus nihil explicabo omnis dolores eum adipisci rem in voluptates tempore, dicta tempora blanditiis?</div>
+                        <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
+                            accusantium ipsa facilis laudantium reprehenderit vitae eum tenetur animi, ex, consequatur
+                            dolore? Neque aut, aliquid a deserunt voluptate laborum perferendis ipsam?</div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem
+                            ipsum dolor sit amet consectetur adipisicing elit. Autem commodi voluptas, quae eligendi quos
+                            debitis praesentium doloribus nihil explicabo omnis dolores eum adipisci rem in voluptates
+                            tempore, dicta tempora blanditiis?</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<script src="assets\progress-bar.js"></script>
-<script src="assets\app.js"></script>
+    <script src="assets\progress-bar.js"></script>
+    <script src="assets\app.js"></script>
 @endsection
