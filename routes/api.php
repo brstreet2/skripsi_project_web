@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', [ApiAuthController::class, "login"])->name('api.login');
+Route::get('/profile', [ApiAuthController::class, "profile"])->name('api.profile');
