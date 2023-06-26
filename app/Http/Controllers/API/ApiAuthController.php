@@ -235,7 +235,6 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                         }
                     }
 
-                    $user->firebase_device_token = null;
                     $user->updated_by            = $user->name;
                     $user->save();
 
