@@ -86,6 +86,8 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [PayrollController::class, 'index'])->name('index');
+    Route::post('/store', [PayrollController::class, 'store'])->name('store');
+    Route::get('/ajax/datatables', [PayrollController::class, 'datatables'])->name('ajax.datatables');
 });
 
 // Time Management

@@ -15,7 +15,7 @@
                         New</button>
 
                 </div>
-                <table id="documentTable" class="table table-borderless text-center" style="width: 100%">
+                <table id="employee_table" class="table table-borderless text-center" style="width: 100%">
                     <thead>
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
@@ -91,7 +91,7 @@
 
     <script>
         $(document).ready(function() {
-            var table = $('#documentTable').DataTable({
+            var table = $('#employee_table').DataTable({
                 ajax: {
                     url: '{!! route('employee.ajax.datatables') !!}',
                     dataType: 'json'
