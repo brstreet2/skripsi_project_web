@@ -264,7 +264,7 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
         }
     }
 
-    public function profile($request)
+    public function profile()
     {
         DB::beginTransaction();
         $error   = false;
