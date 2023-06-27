@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Token;
+use Lcobucci\JWT\Parser;
 
 class ApiAttendanceController extends Controller
 {
@@ -109,7 +110,9 @@ class ApiAttendanceController extends Controller
                     $employeeAttendanceDetailDb                 = new EmployeeAttendanceDetail();
                     $employeeAttendanceDetailDb->date           = $request->date;
                     $employeeAttendanceDetailDb->clock_in       = $employee_clock_in;
-                    $employeeAttendanceDetailDb->clock_out      = $employee_clock_out;
+                    if ($request->has('clock_out')) {
+                        $employeeAttendanceDetailDb->clock_out      = $employee_clock_out;
+                    }
                     $employeeAttendanceDetailDb->status         = 0;
                     $employeeAttendanceDetailDb->status_string  = 'Waiting for Approval';
                     $employeeAttendanceDetailDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
@@ -128,7 +131,7 @@ class ApiAttendanceController extends Controller
 
             return response()->json([
                 'error'     => true,
-                'message'   => $e->getMessage(),
+                'message'   => dd($e),
                 'data'      => '',
                 'status'    => 407
             ], 407);
@@ -141,9 +144,146 @@ class ApiAttendanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getAttendance(Request $request)
     {
-        //
+        DB::beginTransaction();
+        $error      = false;
+        $message    = '';
+
+        try {
+            $bearerToken = request()->bearerToken();
+            if ($bearerToken == null) {
+                DB::rollBack();
+
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Invalid Token',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            }
+
+            $tokenId = app(Parser::class)->parse($bearerToken)->claims()->get('jti');
+            $period  = Carbon::now()->format('Y-m-d');
+            $revoked = Token::find($tokenId)->revoked;
+
+            if ($revoked) {
+                DB::rollBack();
+
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Not Allowed',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            } else {
+                $userId = app(Parser::class)->parse($bearerToken)->claims()->get('sub');
+
+                $user = User::find($userId);
+                $user->updated_by = $user->name;
+                $user->save();
+
+                $attendanceDb       = EmployeeAttendance::where('employee_id', $user->id)->where('period', $period)->first();
+                if ($attendanceDb) {
+                    $status = 200;
+                    return response()->json([
+                        'error'   => false,
+                        'message' => 'OK',
+                        'data'    => $attendanceDb,
+                        'status' => $status
+                    ], $status);
+                } else {
+                    $status = 200;
+                    return response()->json([
+                        'error'   => false,
+                        'message' => 'OK',
+                        'data'    => null,
+                        'status' => $status
+                    ], $status);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'error'     => true,
+                'message'   => dd($e),
+                'data'      => '',
+                'status'    => 403
+            ], 403);
+        }
+    }
+
+    public function getAttendanceDetail(Request $request)
+    {
+        DB::beginTransaction();
+        $error      = false;
+        $message    = '';
+
+        try {
+            $bearerToken = request()->bearerToken();
+            if ($bearerToken == null) {
+                DB::rollBack();
+
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Invalid Token',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            }
+
+            $tokenId = app(Parser::class)->parse($bearerToken)->claims()->get('jti');
+            $period  = Carbon::now()->format('Y-m-d');
+            $revoked = Token::find($tokenId)->revoked;
+
+            if ($revoked) {
+                DB::rollBack();
+
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Not Allowed',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            } else {
+                $userId = app(Parser::class)->parse($bearerToken)->claims()->get('sub');
+
+                $user = User::find($userId);
+                $user->updated_by = $user->name;
+                $user->save();
+
+                $attendanceDb       = EmployeeAttendance::where('employee_id', $user->id)->where('period', $period)->first();
+                if ($attendanceDb) {
+                    $attendanceDetailDb = EmployeeAttendanceDetail::where('attendance_id', $attendanceDb->id)->first();
+                    $status = 200;
+                    return response()->json([
+                        'error'   => false,
+                        'message' => 'OK',
+                        'data'    => $attendanceDetailDb,
+                        'status' => $status
+                    ], $status);
+                } else {
+                    $attendanceDetailDb = null;
+                    $status = 200;
+                    return response()->json([
+                        'error'   => false,
+                        'message' => 'OK',
+                        'data'    => 'No Data',
+                        'status' => $status
+                    ], $status);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'error'     => true,
+                'message'   => dd($e),
+                'data'      => '',
+                'status'    => 403
+            ], 403);
+        }
     }
 
     /**

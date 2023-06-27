@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiAttendanceController;
 use App\Http\Controllers\API\ApiAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [ApiAuthController::class, "login"])->name('api.login');
 Route::get('/logout', [ApiAuthController::class, "logout"])->name('api.logout');
 Route::get('/profile', [ApiAuthController::class, "profile"])->name('api.profile');
+
+// Api Attendance
+Route::get('/get-attendance', [ApiAttendanceController::class, 'getAttendance'])->name('api.get.attendance');
+Route::get('/get-attendance-detail', [ApiAttendanceController::class, 'getAttendanceDetail'])->name('api.get.attendance.detail');
+Route::post('/post-attendance', [ApiAttendanceController::class, 'store'])->name('api.post.attendance');
