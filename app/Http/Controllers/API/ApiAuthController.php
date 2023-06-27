@@ -297,7 +297,6 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                 ], 401);
             } else {
                 $userId = app(Parser::class)->parse($bearerToken)->claims()->get('sub');
-
                 $user = User::find($userId);
                 $user->updated_by = $user->name;
                 $user->save();

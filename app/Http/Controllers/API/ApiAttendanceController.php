@@ -73,7 +73,7 @@ class ApiAttendanceController extends Controller
                     'status'    => 401
                 ], 401);
             } else {
-                $userId     = app(Parser::class)->parse($bearerToken)->claims()->get('jti');
+                $userId     = app(Parser::class)->parse($bearerToken)->claims()->get('sub');
 
                 $user       = User::find($userId);
 
@@ -95,7 +95,7 @@ class ApiAttendanceController extends Controller
                 $employee_clock_in          = $request->clock_in;
                 $employee_clock_out         = $request->clock_out;
 
-                $employeeAttendanceDb               = EmployeeAttendance::where('employee_id', $user->id)->where('period', $request->period);
+                $employeeAttendanceDb               = EmployeeAttendance::where('employee_id', $user->id)->where('period', $request->period)->first();
 
                 if ($employeeAttendanceDb) {
                     $employeeAttendanceDetailDb             = EmployeeAttendanceDetail::where('attendance_id', $employeeAttendanceDb->id);
@@ -108,6 +108,7 @@ class ApiAttendanceController extends Controller
                     $employeeAttendanceDb->save();
 
                     $employeeAttendanceDetailDb                 = new EmployeeAttendanceDetail();
+                    $employeeAttendanceDetailDb->attendance_id  = $employeeAttendanceDb->id;
                     $employeeAttendanceDetailDb->date           = $request->date;
                     $employeeAttendanceDetailDb->clock_in       = $employee_clock_in;
                     if ($request->has('clock_out')) {
