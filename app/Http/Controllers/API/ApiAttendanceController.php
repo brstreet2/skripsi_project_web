@@ -9,6 +9,7 @@ use App\Models\EmployeeAttendanceDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Token;
 use Lcobucci\JWT\Parser;
@@ -78,7 +79,7 @@ class ApiAttendanceController extends Controller
                 $user       = User::find($userId);
 
                 $validator  = Validator::make($request->all(), [
-                    'date'      => 'required|date_format:Y-m-d',
+                    'date'      => 'required',
                 ]);
 
                 if ($validator->fails()) {
@@ -119,6 +120,7 @@ class ApiAttendanceController extends Controller
                     $employeeAttendanceDetailDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
                     $employeeAttendanceDetailDb->save();
                 }
+
                 DB::commit();
                 return response()->json([
                     'error'     => false,
