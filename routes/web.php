@@ -144,3 +144,8 @@ Route::get('/company/tax', function () {
 Route::get('/report', function () {
     return view('backend.report.index');
 });
+
+//generate report
+Route::get('/home', function () {
+    return view('auth.dashboard');
+});

@@ -17,19 +17,19 @@
         <div class="card-body p5-">
             <ol class="steps" style="margin-top: 3rem">
                 <li class="step is-complete" data-step="1">
-                    Create Account
+                    Buat Akun
                 </li>
                 <li class="step {{ Sentinel::getUser()->company ? 'is-complete' : 'is-active' }}" data-step="2">
-                    Add Company Profile
+                    Tambah Profil bisnis
                 </li>
 
                 <li class="step {{ Sentinel::getUser()->company ? 'is-active' : '' }} {{ $count <= 0 ? '' : 'is-complete' }}"
                     data-step="3">
-                    Add Employees
+                    Tambah Karyawan
                 </li>
 
                 <li class="step {{ $count <= 0 ? '' : 'is-complete' }}" data-step="4">
-                    Completed
+                    Selesai!
                 </li>
             </ol>
         </div>
@@ -42,7 +42,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Employees</div>
+                                Karyawan</div>
                             {{-- <div class="h5 mb-0 font-weight-bold text-gray-300">
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
@@ -64,7 +64,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Attendance</div>
+                                Kehadiran</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
@@ -80,7 +80,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Time Off Request</div>
+                                Permohonan Absen</div>
                             <div class="h5 mb-0 font-weight-bold"></div>
                         </div>
                         <div class="col-auto">
@@ -96,7 +96,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Payroll</div>
+                                Gaji</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">

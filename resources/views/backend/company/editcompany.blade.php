@@ -3,22 +3,22 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb text-color-primary">
-            <strong>EDIT COMPANY INFO</strong>
+            <strong>EDIT PROFIL BISNIS</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">You haven't set up your company, let's fill the forms below.</p>
+        <p class="mb-3" style="font-size: 16px">Mohon isi seluruh form di bawah ini</p>
         <form action="{{ route('company.store') }}" method="POST">
             {{ csrf_field() }}
             <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4">
-                            <h4>Company Info</h4>
+                            <h4>Informasi Bisnis</h4>
                         </div>
 
                         <div class="mt-3">
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>Company Name</p>
+                                    <p>Nama Bisnis</p>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="companyNameInput" name="company_name"
@@ -27,9 +27,9 @@
                                 <div class="col-md-4"></div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>Company Phone Number</p>
+                                    <p>No. Telephone Bisnis</p>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="companyNumberInput" name="company_phone"
@@ -40,7 +40,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>Supervisor Email</p>
+                                    <p>Email Supervisor</p>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="companyEmailInput" name="company_spv"
@@ -51,7 +51,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>Address</p>
+                                    <p>Alamat</p>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="companyAddressInput"
@@ -62,7 +62,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>Province</p>
+                                    <p>Provinsi</p>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control" id="provinceInput" name="company_province"
@@ -77,7 +77,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>City</p>
+                                    <p>Kota</p>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control" id="cityInput" name="company_city"
@@ -92,7 +92,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <p>Industry</p>
+                                    <p>Industri</p>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control" id="industryInput" name="company_industry">
@@ -106,7 +106,7 @@
 
                             <div class="row mb-4">
                                 <div class="col-md-2">
-                                    <p>Employee Size</p>
+                                    <p>Jumlah Karyawan</p>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control" id="sizeInput" name="company_size">
@@ -122,7 +122,7 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6 d-flex justify-content-end">
                                     <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" type="submit"
-                                        style="background-color: #444EFF">Submit</button>
+                                        style="background-color: #444EFF">Simpan</button>
                                 </div>
                             </div>
                         </div>

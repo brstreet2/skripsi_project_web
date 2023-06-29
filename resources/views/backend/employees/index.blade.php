@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-6">
             <h5 class="font-mpb text-color-primary">
-                <strong>Employee</strong>
+                <strong>KARYAWAN</strong>
             </h5>
         </div>
 
@@ -19,9 +19,9 @@
                     <thead>
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
-                            <th class="text-center font-mp">User Name</th>
-                            <th class="text-center font-mp">Rank</th>
-                            <th class="text-center font-mp">Job Title</th>
+                            <th class="text-center font-mp">Nama Karyawan</th>
+                            <th class="text-center font-mp">Jabatan</th>
+                            <th class="text-center font-mp">Pekerjaan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,34 +41,51 @@
                         <div class="modal-body">
 
                             {{ csrf_field() }}
-                            <div class="form-group mb-4">
+                            <div class="form-group mb-2">
                                 <label for="namaKaryawan">Nama</label>
                                 <input type="text" class="form-control" id="namaKaryawan" aria-describedby="namaHelp"
                                     name="name" placeholder="Nama Karyawan">
                             </div>
-                            <div class="form-group mb-4">
-                                <label for="emailKaryawan">Email</label>
-                                <input type="email" class="form-control" id="emailKaryawan" aria-describedby="emailHelp"
-                                    name="email" placeholder="Email Karyawan">
-                            </div>
-                            <div class="form-group mb-4">
+                            <div class="form-group mb-2">
                                 <label for="emailKaryawan">Nomor Telepon</label>
                                 <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
-                                    name="phone" placeholder="Email Karyawan">
+                                    name="phone" placeholder="No. Telephone Karyawan">
                             </div>
+                            <div class="form-group mb-2">
+                                <label for="emailKaryawan">Jabatan</label>
+                                <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
+                                    name="phone" placeholder="(ex: Staff)">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="emailKaryawan">Pekerjaan</label>
+                                <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
+                                    name="phone" placeholder="(ex: Sales)">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="emailKaryawan">Email</label>
+                                <input type="email" class="form-control" id="emailKaryawan" aria-describedby="emailHelp"
+                                name="email" placeholder="Email Karyawan">
+                                <small class="text-danger">*digunakan untuk masuk ke aplikasi mobile TimKerjaKu</small>
+                            </div>
+                           
                             <div class="form-group">
                                 <label for="passwordKaryawan">Password</label>
                                 <input type="password" class="form-control" id="passwordKaryawan" name="password"
                                     placeholder="Password Karyawan">
+                                    <small class="text-danger">*digunakan untuk masuk ke aplikasi mobile TimKerjaKu</small>
                             </div>
 
                         </div>
+
+                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger btn-secondary rounded-pill"
-                                data-bs-dismiss="modal">Close</button>
+                                data-bs-dismiss="modal">Kembali</button>
                             <button type="submit" class="btn btn-primary rounded-pill"
                                 style="background-color: #444eff">Simpan</button>
                         </div>
+
+                    </div>
                     </div>
                 </form>
             </div>

@@ -3,26 +3,24 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb text-color-primary">
-            <strong>DOCUMENT</strong>
+            <strong>DOKUMEN</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">Create New Documents</p>
+        <p class="mb-3" style="font-size: 16px">Dokumen Bisnis</p>
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <a href="{{ route('document.create') }}">
-                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF">Add
-                        New</button>
+                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF">Tambah Dokumen</button>
                 </a>
                 <a href="#">
                     <button class="btn btn-danger fw-bolder mb-4 px-4 rounded-pill" style="background-color:#E80015"
-                        id="deleteBulk">Delete
-                        Bulk</button>
+                        id="deleteBulk">Hapus Dokumen</button>
                 </a>
                 <table id="documentTable" class="table table-borderless text-center" style="width: 100%">
                     <thead>
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
-                            <th class="text-center font-mp">Document Name</th>
-                            <th class="text-center font-mp">Document Category</th>
+                            <th class="text-center font-mp">Nama Dokumen</th>
+                            <th class="text-center font-mp">Kategori Dokumen</th>
                             <th class="text-center font-mp">Action</th>
                         </tr>
                     </thead>

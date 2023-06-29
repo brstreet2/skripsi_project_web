@@ -2,17 +2,17 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb mb-2 text-color-primary">
-            <strong>Payroll</strong>
+            <strong>SLIP GAJI</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">Upload Payroll Document</p>
+        <p class="mb-3" style="font-size: 16px">Upload Slip Gaji</p>
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <table id="employee_table" class="table table-borderless text-center" style="width: 100%">
                     <thead>
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
-                            <th class="text-center font-mp">User Name</th>
-                            <th class="text-center font-mp">Job Title</th>
+                            <th class="text-center font-mp">Nama Karyawan</th>
+                            <th class="text-center font-mp">Pekerjaan</th>
                             <th class="text-center font-mp">Action</th>
                         </tr>
                     </thead>

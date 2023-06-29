@@ -16,8 +16,8 @@
                             <div class="col-1 p-0"></div>
                         <div class="col">
                             <div class="card glassmorphism align-self-center text-left p-4">
-                                <h4 class="mb-4" style="font-weight: 700; color:#fcfcfc">Sistem HR Terbaik, <br>Ada Disini</h4>
-                                <p style="color:#fcfcfc">Penyedia aplikasi sistem Manajemen Sumber Daya Manusia terbaik </p>
+                                <h4 class="mb-4" style="font-weight: 700; color:#fcfcfc">TimKerjaKu</h4>
+                                <p style="color:#fcfcfc">Apliakasi Sistem Pengelolaan Sumber Daya Manusia</p>
                             </div>
                         </div>
                         <div class="col-1 p-0"></div>

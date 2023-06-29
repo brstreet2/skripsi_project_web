@@ -4,10 +4,10 @@
     @if (Sentinel::getUser()->company == null)
         <div class="row">
             <h5 class="font-mpb text-color-primary">
-                <strong>YOUR COMPANY</strong>
+                <strong>PROFIL BISNIS</strong>
             </h5>
-            <p class="mb-3" style="font-size: 16px">Company Information</p>
-            <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
+            <p class="mb-3" style="font-size: 16px">Informasi Bisnis Anda</p>
+            <div class="card mb-5" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
@@ -18,7 +18,7 @@
 
                         <div class="col-md-8">
                             <div class="row">
-                                <h5>Company Logo</h5>
+                                <h5>Logo Bisnis</h5>
                             </div>
                             <div class="row">
                                 <div class="col-8">
@@ -32,11 +32,11 @@
                     </div>
 
                     <div class="row mt-5">
-                        <div class="col-4">
-                            <h4>Company Info</h4>
-                            <small class="mb-3" style="color: red" >You haven't set up your company, let's fill the forms</small>
+                        <div class="col-5">
+                            <h4>informasi Bisnis</h4>
+                            <small class="mb-3" style="color: red" >Anda belum membuat profil bisnis, mohon mengisi form di bawah</small>
                         </div>
-                        <div class="col-4 d-flex justify-content-end">
+                        <div class="col-1 d-flex justify-content-end">
                             <a href="{{ route('company.create') }}"><button class="btn"><i
                                         class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
                         </div>
@@ -44,7 +44,7 @@
                 <div class="row mt-4">
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Company Name</p>
+                                <p>Nama Bisnis</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -53,7 +53,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Company Phone Number</p>
+                                <p>No. Telephone</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -62,7 +62,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Supervisor Email</p>
+                                <p>Email Supervisor</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -71,7 +71,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Address</p>
+                                <p>Alamat</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -80,7 +80,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Province</p>
+                                <p>Provinsi</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -89,7 +89,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>City</p>
+                                <p>Kota</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -98,7 +98,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Industry</p>
+                                <p>Industri Bisnis</p>
                             </div>
                             <div class="col-md-6">
                                 -
@@ -108,7 +108,7 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <p>Company Size</p>
+                                <p>Jumlah Pegawai</p>
                             </div>
                             <div class="col-md-6">
                                 -
