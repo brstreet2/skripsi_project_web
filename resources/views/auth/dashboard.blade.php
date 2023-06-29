@@ -8,8 +8,8 @@
 
         <div class="home-main row">
           <div class="col-md-6 align-self-center">
-            <div class="card" style="border: none; background-color: #444EFF">
-              <div class="card-header" style="background-color: #444EFF">
+            <div class="card" style="border: none; background-color: transparent">
+              <div class="card-header" style="background-color: transparent">
                 <h1 class="text-white">
                   Sistem Pengelolaan Sumber Daya Manusia
                 </h1>
@@ -18,7 +18,7 @@
                   dan mobile untuk menunjang bisnis anda
                 </p>
               </div>
-              <div class="card-footer" style="background-color: #444EFF; border-top: 2px solid white">
+              <div class="card-footer" style="background-color: transparent; border-top: 2px solid white">
                 <button class="btn btn-lg rounded-pill btn-light mt-4">
                     Resgistrasi Sekarang!
                 </button>

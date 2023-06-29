@@ -27,18 +27,18 @@
 <body>
     <div class="container-fluid">
       {{-- Navbar --}}
-      <nav class="navbar fixed-top navbar-expand-lg navbar-light mb-4" style="background-color: transparent">
+      <nav class="navbar navigation fixed-top navbar-expand-lg navbar-light mb-4">
         <div class="container-fluid">
-            <a class="navbar-brand mx-1" href="/home  "><h5 class="fw-bold text-white">TimKerjaKu</h5></a>
+            <a class="navbar-brand  title mx-1" href="/home  "><h5 class="fw-bold text-white">TimKerjaKu</h5></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                    <a class="nav-item nav-link mx-1 navbarhover" href="/home" style="color: #fcfcfc"><span>Beranda</span></a>
-                    <a class="nav-item nav-link mx-1 navbarhover" id="tentang" href="#tentangkami" style="color: #fcfcfc"><span>Tentang</span></a>
-                    <a class="nav-item nav-link mx-1 navbarhover" id="produk" href="#produkkami" style="color: #fcfcfc"><span>Produk</span></a>
-                    <a class="nav-item nav-link mx-1 navbarhover" id="kontak" href="#" style="color: #fcfcfc"><span>Kontak</span></a>
+                    <a class="nav-item  title nav-link mx-1 navbarhover" href="/home" style="color: #fcfcfc"><span>Beranda</span></a>
+                    <a class="nav-item  title nav-link mx-1 navbarhover" id="tentang" href="#tentangkami " style="color: #fcfcfc"><span>Tentang</span></a>
+                    <a class="nav-item  title nav-link mx-1 navbarhover" id="produk" href="#produkkami" style="color: #fcfcfc"><span>Produk</span></a>
+                    <a class="nav-item  title nav-link mx-1 navbarhover" id="kontak" href="#" style="color: #fcfcfc"><span>Kontak</span></a>
                 </div>
                 
                 <a class="nav-item nav-link" href="{{ route('auth.login.form') }}"><button type="button" class="btn px-4 rounded-pill" style="background-color: #FBF8FF; font-weight:700; width:7rem;">Login</button></a>
