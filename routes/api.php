@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApiAttendanceController;
 use App\Http\Controllers\API\ApiAuthController;
+use App\Http\Controllers\API\ApiPayrollController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,7 @@ Route::get('/profile', [ApiAuthController::class, "profile"])->name('api.profile
 // Api Attendance
 Route::get('/get-attendance', [ApiAttendanceController::class, 'getAttendance'])->name('api.get.attendance');
 Route::get('/get-attendance-detail', [ApiAttendanceController::class, 'getAttendanceDetail'])->name('api.get.attendance.detail');
-Route::post('/post-attendance', [ApiAttendanceController::class, 'store'])->name('api.post.attendance');
+Route::post('/post-attendance', [ApiAttendanceController::class, 'post'])->name('api.post.attendance');
+
+// Api Payroll
+Route::get('/get-payroll', [ApiPayrollController::class, 'get'])->name('api.get.payroll');
