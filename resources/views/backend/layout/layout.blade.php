@@ -62,8 +62,8 @@
                     <a href="{{ route('attendance.index') }}"
                         class="nav_link {{ request()->route()->named('attendance.*')? 'active-nav': '' }}"> <i
                             class='bx bx-folder nav_icon'></i> <span class="nav_name">Kehadiran</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
-                            class="nav_name">Stats</span> </a>
+                    <a href="/announcement" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                            class="nav_name">Pengumuman</span> </a>
                     <a href="{{ route('pricing.index') }}"
                         class="nav_link {{ request()->route()->named('pricing.*')? 'active-nav': '' }}"> <i
                             class='bx bx-dollar-circle nav_icon'></i> <span class="nav_name">Upgrade</span> </a>

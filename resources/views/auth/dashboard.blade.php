@@ -19,14 +19,28 @@
                 </p>
               </div>
               <div class="card-footer" style="background-color: transparent; border-top: 2px solid white">
-                <button class="btn btn-lg rounded-pill btn-light mt-4">
-                    Resgistrasi Sekarang!
-                </button>
+                <a href="/register">
+                  <button class="btn btn-lg rounded-pill btn-light mt-4 fw-bold">
+                      Registrasi Sekarang!
+                  </button>
+                </a>
               </div>
             </div>
           </div>
 
-          <div class="home-image"></div>
+          <div class="col-md-6 col-sm-12">
+            <div class="card" style="border: none; background-color: transparent">
+              <img
+              alt="image"
+              src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDN8fGJ1c2luZXNzJTIwdGVhbXxlbnwwfHx8fDE2ODc5NzM3Nzd8MA&ixlib=rb-4.0.3&w=1400"
+              class="card-img-top"
+              style="width: 450px;
+                    height: 550px;
+                    object-fit: cover;
+                    border-radius: 10px"
+            />
+            </div>
+          </div>
         </div>
 
           <div class="row mt-5 mb-5">
@@ -79,6 +93,7 @@
             alt="image"
             src="https://images.unsplash.com/photo-1671418285905-acc08f6c4b59?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDcxfHxlbXBsb3llZSUyMHBob25lfGVufDB8fHx8MTY4Nzk3Mzg3Mnww&amp;ixlib=rb-4.0.3&amp;w=400"
             class="card-img-top"
+            style="border-radius: 10px"
             />
           </div>
         </div>

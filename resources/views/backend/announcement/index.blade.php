@@ -3,31 +3,29 @@
 @section('content')
     <div class="row mb-4">
         <h5 class="font-mpb text-color-primary">
-            <strong>BUAT DOKUMEN</strong>
+            <strong>BUAT PENGUMUMAN</strong>
         </h5>
         <p class="mb-3" style="font-size: 16px">Mohon mengisi form di bawah ini</p>
-
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
         <div class="card" style="border-radius: .75rem; border: none; background-color: #fcfcfc;">
             <div class="card-body">
                 
                 <form action="{{ route('document.store') }}" class="needs-validation" method="POST">
                     {{ csrf_field() }}
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group has-danger">
-                            <label for="document_name">Nama Dokumen <span style="color: red">*</span></label>
-                            <input type="text" class="form-control mb-2" name="document_name" required id="document_name"
-                                placeholder="Masukkan Nama Dokumen" style="border-radius: .5rem">
-                            <div class="invalid-feedback">
-                                Mohon cantumkan nama dokumen
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Deskripsi Dokumen<span style="color: red">*</span></label>
-                            <textarea class="form-control" name="description" required id="description" placeholder="Deskripsi Isi Dokumen" style="height: 20rem; border-radius: .5rem"></textarea>
+                    <div class="form-group has-danger mb-2">
+                        <label for="document_name">Judul Pengumuman<span style="color: red">*</span></label>
+                        <input type="text" class="form-control mb-2" name="announcement_name" required id="announcement_name"
+                            placeholder="Masukkan Judul Pengumuman" style="border-radius: .5rem">
+                        <div class="invalid-feedback">
+                            Mohon cantumkan judul untuk pengumuman anda
                         </div>
                     </div>
-                    <div class="col">
+                        <div class="form-group has-danger mb-2">
+                            <label for="document_name">Tanggal dibuat</label>
+                            <input id="date-time" type="text" class="form-control mb-2"
+                                value="" style="border-radius: .5rem" readonly>
+                        </div>
                         <div class="form-group">
                             <label for="content">Isi Dokumen<span style="color: red">*</span></label>
                             <textarea class="form-control" id="summernote" name="content" rows="3" required></textarea>
@@ -57,7 +55,7 @@
 
     <script>
         $('#summernote').summernote({
-            placeholder: 'Masukkan Isi Dokumen',
+            placeholder: 'Masukan Isi Pengumuman',
             tabsize: 2,
             height: 350,
             toolbar: [
@@ -65,9 +63,13 @@
                 ['font', ['bold', 'underline', 'clear']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
+                ['insert', ['link']],
             ]
         });
+    </script>
+
+    <script>
+    var dt = new Date();
+    document.getElementById('date-time').value = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+"-"+" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));;
     </script>
 @endpush

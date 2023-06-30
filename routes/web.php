@@ -149,3 +149,8 @@ Route::get('/report', function () {
 Route::get('/home', function () {
     return view('auth.dashboard');
 });
+
+//announcement
+Route::get('/announcement', function () {
+    return view('backend.announcement.index');
+});

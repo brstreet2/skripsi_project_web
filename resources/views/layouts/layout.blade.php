@@ -29,7 +29,7 @@
       {{-- Navbar --}}
       <nav class="navbar navigation fixed-top navbar-expand-lg navbar-light mb-4">
         <div class="container-fluid">
-            <a class="navbar-brand  title mx-1" href="/home  "><h5 class="fw-bold text-white">TimKerjaKu</h5></a>
+            <a class="navbar-brand  title mx-1 fw-bold text-light" href="/home"><img alt="logo" src="/assets/logo.png" width="30" height="30" class="d-inline-block align-top"/> TimKerjaKu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
