@@ -31,15 +31,18 @@ class loginRequest extends FormRequest
     }
 
     /**
-	 * Get the message
-	 *
-	 * @return array
-	 */
-	public function messages() {
-		return [
-            'email.required'      => 'Please enter your email address.',
-            'password.required'   => 'Please enter your password.',
-            // 'password.min'        => 'You need to input at least 8 characters.'
-		];
-	}
+     * Get the message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.required'      => 'Email tidak boleh kosong.',
+            'email.email'         => "Format Email salah.",
+            'email.regex'         => "Format Email salah.",
+            'password.required'   => 'Password tidak boleh kosong.',
+            'password.min'        => 'Password minimal 8 karakter.'
+        ];
+    }
 }
