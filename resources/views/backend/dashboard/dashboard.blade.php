@@ -5,10 +5,10 @@
     <div class="card mb-3"style="border: 1px solid #cccfff; border-radius:.75rem">
         <div class="card-body">
             <h4 class="fw-bold">
-                Welcome Back, {{ Sentinel::getUser()->name }}!
+                Selamat datang kembali, {{ Sentinel::getUser()->name }}!
             </h4>
             <p style="color:#999999">
-                Time: {{ Carbon\Carbon::now()->formatLocalized('%A, %d %B %Y') }}
+                Time: {{ Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('l, j F Y') }}
             </p>
         </div>
     </div>
@@ -22,11 +22,16 @@
                 <li class="step {{ Sentinel::getUser()->company ? 'is-complete' : 'is-active' }}" data-step="2">
                     Tambah Profil bisnis
                 </li>
-
-                <li class="step {{ Sentinel::getUser()->company ? 'is-active' : '' }} {{ $count <= 0 ? '' : 'is-complete' }}"
-                    data-step="3">
-                    Tambah Karyawan
-                </li>
+                @if ($count <= 0)
+                    <li class="step {{ Sentinel::getUser()->company ? 'is-active' : '' }} {{ $count <= 0 ? '' : 'is-complete' }}"
+                        data-step="3">
+                        Tambah Karyawan
+                    </li>
+                @else
+                    <li class="step {{ $count <= 0 ? '' : 'is-complete' }}" data-step="3">
+                        Tambah Karyawan
+                    </li>
+                @endif
 
                 <li class="step {{ $count <= 0 ? '' : 'is-complete' }}" data-step="4">
                     Selesai!
