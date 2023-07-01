@@ -12,7 +12,7 @@
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
                             <th class="text-center font-mp">Nama Karyawan</th>
-                            <th class="text-center font-mp">Pekerjaan</th>
+                            <th class="text-center font-mp">Status</th>
                             <th class="text-center font-mp">Action</th>
                         </tr>
                     </thead>
@@ -92,8 +92,8 @@
                         name: 'user_name'
                     },
                     {
-                        data: 'job_title',
-                        name: 'job_title'
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'action',
@@ -134,9 +134,10 @@
                                 url: "{{ route('document.destroy.bulk') }}",
                                 data: {
                                     "_token": "{{ csrf_token() }}",
-                                    'id': id,
+                                    'id': id
                                 },
-                                success: function(data) {
+                                dataType: 'text',
+                                success: function(response) {
                                     Swal.fire({
                                         position: 'center',
                                         icon: 'success',
@@ -146,8 +147,9 @@
                                         width: '28em',
                                     })
                                 },
-                                error: function(data) {
-                                    console.log("Error Status: ", data.status);
+                                error: function(response) {
+                                    console.log("Error Status: ", response
+                                        .status);
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Oops...',
@@ -217,19 +219,19 @@
                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
-                                    title: 'Data successfully uploaded!',
+                                    title: 'Payroll for ' + thisData.data(
+                                        'name') + ' successfully uploaded!',
                                     showConfirmButton: false,
                                     timer: 15004,
                                     width: '28em',
                                 })
                             },
                             error: function(response) {
-                                console.log("Error Status: ", data.status);
+                                console.log("Error Status: ", response);
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'There was an error!',
-                                    footer: '<a>Try again later ...</a>',
+                                    title: 'Error',
+                                    text: 'Harap lampirkan file slip gaji!',
                                     width: '28em'
                                 })
                             }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auth\User;
 use App\Models\CompanyEmployees;
 use App\Models\EmployeePayroll;
 use Carbon\Carbon;
@@ -10,6 +11,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class PayrollController extends Controller
 {
@@ -44,17 +46,43 @@ class PayrollController extends Controller
         DB::beginTransaction();
         try {
             if ($request->hasFile('fileToUpload')) {
-                $file_name = $request->file('fileToUpload')->getClientOriginalName();
-                $earn_proof = $request->file('fileToUpload')->storeAs("public/files/", $file_name);
+                $employee       = User::findOrFail($request->user_id);
+                $employeeSlug   = Str::slug($employee->name, '-');
+                try {
+                    $filePayroll                    = $request->file('fileToUpload');
+                    $destinationPath                = 'employee-payroll/' . $employeeSlug . '/' . Carbon::now()->format('Y-m') . '/';
+                    $originalFile                   = $filePayroll->getClientOriginalName();
+                    $filenamePayroll                = strtotime(date('Y-m-d-H:isa')) . $originalFile;
+                    $filePayroll->move($destinationPath, $filenamePayroll);
+                    $payrollDb                  = new EmployeePayroll();
+                    $payrollDb->employee_id     = $request->user_id;
+                    $payrollDb->url             = 'http://skripsi_project_web.test/' . $destinationPath . $filenamePayroll;
+                    $payrollDb->date            = Carbon::now()->format('Y-m-d H:i:s');
+                    $payrollDb->save();
 
-                $payrollDb                  = new EmployeePayroll();
-                $payrollDb->employee_id     = $request->user_id;
-                $payrollDb->url             = $file_name;
-                $payrollDb->date            = Carbon::now()->format('Y-m-d H:i:s');
-                $payrollDb->save();
-
-                DB::commit();
-                return response()->json(['success' => true], 200);
+                    DB::commit();
+                    return response()->json([
+                        'error'   => false,
+                        'message' => 'OK',
+                        'data'    => $payrollDb,
+                        'status'  => 200
+                    ], 200);
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    return response()->json([
+                        'error'   => false,
+                        'message' => $e->getMessage(),
+                        'data'    => null,
+                        'status'  => 500
+                    ], 500);
+                }
+            } else {
+                return response()->json([
+                    'error'   => false,
+                    'message' => 'No file uploaded.',
+                    'data'    => null,
+                    'status'  => 401
+                ], 401);
             }
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -132,10 +160,26 @@ class PayrollController extends Controller
                 'action',
                 function ($dataDb) {
                     $user = Sentinel::findById($dataDb->user_id);
-                    return '<button class="btn" data-bs-toggle="tooltip" id="uploadButton" data-id="' . $dataDb->user_id . '" data-name="' . $user->name . '" type="button" data-bs-placement="bottom" title="Delete ' . $dataDb->name . '?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>';
+                    $payrollDb = EmployeePayroll::where('employee_id', $dataDb->user_id)->whereMonth('date', Carbon::now())->first();
+                    if ($payrollDb) {
+                        return '<a href="' . $payrollDb->url . '" target="_blank" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
+                    } else {
+                        return '<button class="btn" data-bs-toggle="tooltip" id="uploadButton" data-id="' . $dataDb->user_id . '" data-name="' . $user->name . '" type="button" data-bs-placement="bottom" title="Upload File"><i class="fa-solid fa-plus fa-lg" style="color: #6893df;"></i></button>';
+                    }
                 }
             )
-            ->rawColumns(array('checkbox', 'action', 'user_name'))
+            ->addColumn(
+                'status',
+                function ($dataDb) {
+                    $payrollDb = EmployeePayroll::where('employee_id', $dataDb->user_id)->whereMonth('date', Carbon::now())->first();
+                    if ($payrollDb) {
+                        return '<span class="badge bg-success">Telah di upload</span>';
+                    } else {
+                        return '<span class="badge bg-secondary">Belum di upload</span>';
+                    }
+                }
+            )
+            ->rawColumns(array('checkbox', 'action', 'user_name', 'status'))
             ->make(true);
     }
 }
