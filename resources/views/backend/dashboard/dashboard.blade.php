@@ -122,9 +122,6 @@
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
                                 aria-selected="true">Announcement</button>
-                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Who's off
-                                today</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -132,10 +129,6 @@
                             aria-labelledby="nav-home-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
                             accusantium ipsa facilis laudantium reprehenderit vitae eum tenetur animi, ex, consequatur
                             dolore? Neque aut, aliquid a deserunt voluptate laborum perferendis ipsam?</div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem
-                            ipsum dolor sit amet consectetur adipisicing elit. Autem commodi voluptas, quae eligendi quos
-                            debitis praesentium doloribus nihil explicabo omnis dolores eum adipisci rem in voluptates
-                            tempore, dicta tempora blanditiis?</div>
                     </div>
                 </div>
             </div>
