@@ -45,7 +45,11 @@ class AttendanceController extends Controller
     {
         $user = User::find($request->user_id);
 
-        $dataDb = EmployeeAttendance::where('employee_id', $user->id)->with('attendance_detail')->get();
+        if (!$request->select_month) {
+            $dataDb = EmployeeAttendance::where('employee_id', $user->id)->whereMonth('period', $request->current_month)->with('attendance_detail')->get();
+        } elseif ($request->select_month) {
+            $dataDb = EmployeeAttendance::where('employee_id', $user->id)->whereMonth('period', $request->select_month)->with('attendance_detail')->get();
+        }
 
         return DataTables::of($dataDb)
             ->addColumn(

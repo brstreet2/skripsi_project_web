@@ -11,7 +11,7 @@
                     <div class="col-2">
                         <div class="dropdown">
                             <select class="form-control" type="button" id="monthDropdown">
-                                <option value="">Select Month ...</option>
+                                <option value="0">Select Month ...</option>
                                 <option value="1">Januari</option>
                                 <option value="2">Februari</option>
                                 <option value="3">Maret</option>
@@ -77,8 +77,10 @@
                             .attr('content')
                     },
                     url: '{!! route('attendance.ajax.presence.datatables') !!}',
-                    data: {
-                        'user_id': {{ request()->route()->parameters['id'] }},
+                    data: function(d) {
+                        d.user_id = {{ request()->route()->parameters['id'] }},
+                            d.current_month = {{ Carbon\Carbon::now()->format('m') }},
+                            d.select_month = $('#monthDropdown').val();
                     },
                     dataType: 'json',
                     type: 'POST'
@@ -116,6 +118,10 @@
                 select: {
                     style: 'multi'
                 },
+            });
+
+            $('#monthDropdown').change(function() {
+                table.draw();
             });
 
             $('#deleteBulk').click(function() {
