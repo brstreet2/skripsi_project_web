@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApiAttendanceController;
 use App\Http\Controllers\API\ApiAuthController;
+use App\Http\Controllers\API\ApiDocumentController;
 use App\Http\Controllers\API\ApiPayrollController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,6 @@ Route::post('/post-attendance', [ApiAttendanceController::class, 'post'])->name(
 
 // Api Payroll
 Route::get('/get-payroll', [ApiPayrollController::class, 'get'])->name('api.get.payroll');
+
+// Api Document
+Route::get('/get-documents', [ApiDocumentController::class, 'get'])->name('api.get.document');

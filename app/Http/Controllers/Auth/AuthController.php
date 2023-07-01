@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\loginRequest;
 use App\Http\Requests\Auth\registerRequest;
 use App\Mail\activationEmail;
+use App\Models\Auth\User;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
@@ -50,6 +51,12 @@ class AuthController extends Controller
             'email'     => $request->email,
             'password'  => $request->password
         ];
+
+        $find = User::where("email", $request->email)->first();
+        if ($find) {
+            session()->flash("error", "Email telah terdaftar.");
+            return back();
+        }
 
         $user       = Sentinel::register($credentials);
         $activation = Activation::create($user);
