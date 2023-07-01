@@ -41,7 +41,11 @@ class AuthController extends Controller
 
     public function registerForm()
     {
-        return view('auth.register');
+        if (!Sentinel::getUser()) {
+            return view('auth.register');
+        } else {
+            return redirect()->route('dashboard.index');
+        }
     }
 
     public function register(registerRequest $request)
