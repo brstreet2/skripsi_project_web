@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auth\User;
 use App\Models\CompanyEmployees;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -46,7 +47,9 @@ class EmployeesController extends Controller
         $request->validate([
             'name'      => 'required|regex:/^(?:[^"\'\<>\ㅤ\⠀])+$/i',
             'email'     => 'required|email|regex:/^(?:[^"\'\<>\ㅤ\⠀+])+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i',
-            'password'  => 'required|min:8'
+            'password'  => 'required|min:8',
+            'phone'     => 'required',
+            'job_title' => 'required'
         ]);
 
         DB::beginTransaction();
@@ -62,8 +65,13 @@ class EmployeesController extends Controller
             $userEmployeeDb                 = new CompanyEmployees();
             $userEmployeeDb->user_id        = $user->id;
             $userEmployeeDb->company_id     = $senUser->company->id;
+            $userEmployeeDb->job_title      = $request->job_title;
             $userEmployeeDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
             $userEmployeeDb->save();
+
+            $userDb      = User::find($user->id);
+            $user->phone = $request->phone;
+            $user->save();
 
             toastr()->success('Employee has been added.', 'Success');
             DB::commit();

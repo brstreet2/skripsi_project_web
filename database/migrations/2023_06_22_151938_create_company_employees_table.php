@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('company_employees', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('company_id')->unsigned();
-            $table->string('rank')->default('');
             $table->string('job_title')->default('');
             $table->nullableTimestamps();
 

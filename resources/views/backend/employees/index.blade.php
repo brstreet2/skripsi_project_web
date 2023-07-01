@@ -52,14 +52,9 @@
                                     name="phone" placeholder="No. Telephone Karyawan">
                             </div>
                             <div class="form-group mb-2">
-                                <label for="emailKaryawan">Jabatan <span class="text-danger">*</span></label></label>
-                                <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
-                                    name="phone" placeholder="(ex: Staff)">
-                            </div>
-                            <div class="form-group mb-2">
                                 <label for="emailKaryawan">Pekerjaan <span class="text-danger">*</span></label></label>
                                 <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
-                                    name="phone" placeholder="(ex: Sales)">
+                                    name="job_title" placeholder="(ex: Sales)">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="emailKaryawan">Email <span class="text-danger">*</span></label></label>
