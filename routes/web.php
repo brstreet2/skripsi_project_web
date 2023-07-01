@@ -101,6 +101,7 @@ Route::group([
     Route::get('/ajax/datatables', [AttendanceController::class, 'datatables'])->name('ajax.datatables');
     Route::get('presence/{id}', [AttendanceController::class, 'presence'])->name('presence');
     Route::post('/presence/datatables', [AttendanceController::class, 'presenceDatatables'])->name('ajax.presence.datatables');
+    Route::post('/presence/approve', [AttendanceController::class, 'attendanceApprove'])->name('approve');
 });
 
 // Document

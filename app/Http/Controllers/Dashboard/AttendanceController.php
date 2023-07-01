@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
 use App\Models\CompanyEmployees;
 use App\Models\EmployeeAttendance;
+use App\Models\EmployeeAttendanceDetail;
 use App\Models\EmployeePayroll;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class AttendanceController extends Controller
@@ -37,7 +39,6 @@ class AttendanceController extends Controller
     public function presence($id)
     {
         $user = Sentinel::getUser();
-        $dataDb = EmployeeAttendance::where('employee_id', $user->id)->with('attendance_detail')->first();
         return view('backend.attendance.view', compact('user'));
     }
 
@@ -46,9 +47,9 @@ class AttendanceController extends Controller
         $user = User::find($request->user_id);
 
         if (!$request->select_month) {
-            $dataDb = EmployeeAttendance::where('employee_id', $user->id)->whereMonth('period', $request->current_month)->with('attendance_detail')->get();
+            $dataDb = EmployeeAttendance::where('employee_id', $user->id)->whereMonth('period', $request->current_month)->with('attendance_detail', 'user')->get();
         } elseif ($request->select_month) {
-            $dataDb = EmployeeAttendance::where('employee_id', $user->id)->whereMonth('period', $request->select_month)->with('attendance_detail')->get();
+            $dataDb = EmployeeAttendance::where('employee_id', $user->id)->whereMonth('period', $request->select_month)->with('attendance_detail', 'user')->get();
         }
 
         return DataTables::of($dataDb)
@@ -71,9 +72,27 @@ class AttendanceController extends Controller
                 }
             )
             ->addColumn(
+                'status',
+                function ($dataDb) {
+                    if ($dataDb->attendance_detail[0]->status == 0) {
+                        return 'Menunggu persetujuan';
+                    } elseif ($dataDb->attendance_detail[0]->status == 1) {
+                        return '<p class="text-success">Telah disetujui</p>';
+                    } else {
+                        return '<p class="text-danger">Ditolak</p>';
+                    }
+                }
+            )
+            ->addColumn(
                 'action',
                 function ($dataDb) {
-                    return '<a href="' . route('attendance.presence', $dataDb->id) . '" id="tooltip" title="Lihat Kehadiran"><button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF" >Lihat</button></a>';
+                    if ($dataDb->attendance_detail[0]->status == 0) {
+                        return '<button class="btn btn-success btn-md text-center" data-bs-toggle="tooltip" id="approveBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Terima kehadiran ' . $dataDb->user->name . '?"><i class="fa-solid fa-check fa-sm"></i></button>
+                        <button class="btn btn-danger" btn-md text-center data-bs-toggle="tooltip" id="rejectBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Tolak kehadiran ' . $dataDb->user->name . '?"><i class="fa-sharp fa-solid fa-x fa-sm"></i></button>';
+                    } elseif ($dataDb->attendance_detail[0]->status == 1) {
+                        return '<button class="btn btn-warning btn-md text-center" data-bs-toggle="tooltip"data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Edit"><i class="fa-sharp fa-solid fa-pen-to-square fa-sm"></i></button>';
+                    } else {
+                    }
                 }
             )
             ->addColumn(
@@ -87,7 +106,7 @@ class AttendanceController extends Controller
                     $instance->whereMonth('period', $request->get('month'));
                 }
             })
-            ->rawColumns(array('checkbox', 'action', 'mmonth'))
+            ->rawColumns(array('checkbox', 'action', 'mmonth', 'status'))
             ->make(true);
     }
 
@@ -178,5 +197,31 @@ class AttendanceController extends Controller
             )
             ->rawColumns(array('checkbox', 'action', 'user_name'))
             ->make(true);
+    }
+
+    public function attendanceApprove(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataDb                = EmployeeAttendanceDetail::where('id', $request->id)->first();
+            $dataDb->status        = 1;
+            $dataDb->status_string = 'Di-terima';
+            $dataDb->save();
+            DB::commit();
+            return response()->json([
+                'error'     => false,
+                'message'   => 'Data approved!',
+                'data'      => $dataDb,
+                'status'    => 200
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 401
+            ], 401);
+        }
     }
 }

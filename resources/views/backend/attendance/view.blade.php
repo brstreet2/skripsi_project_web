@@ -31,20 +31,23 @@
 
                 </div>
                 <div class="row">
-                    <table id="presence_table" class="table table-bordered">
+                    <table id="presence_table" class="table table-bordered text-center">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
-                                <th>
+                                <th class="text-center">&nbsp;</th>
+                                <th class="text-center">
                                     Hari / Tanggal
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Jam Masuk
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Jam Keluar
                                 </th>
-                                <th>
+                                <th class="text-center">
+                                    Status
+                                </th>
+                                <th class="text-center">
                                     Approval
                                 </th>
                             </tr>
@@ -110,6 +113,10 @@
                     {
                         data: 'clock_out',
                         name: 'clock_out'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'action',
@@ -191,62 +198,34 @@
                 });
             });
 
-            $(document).on('click', '#deleteButton', function() {
-                var thisData = $('#deleteButton');
-                Swal.fire({
-                    title: 'Remove ' + thisData.data('name') + '?',
-                    text: 'This data will be permanently removed from our system.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    width: '28em',
-                    customClass: {
-                        confirmButton: 'px-5 btn btn-sm',
-                        cancelButton: 'px-5 btn btn-sm'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var url = "{{ route('document.destroy', ':id') }}";
-                        url = url.replace(':id', thisData.data('id'));
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
-                                    .attr('content')
-                            },
-                            method: 'DELETE',
-                            url: url,
-                            success: function(data) {
-                                table.ajax.reload();
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: 'Data successfully deleted!',
-                                    showConfirmButton: false,
-                                    timer: 15004,
-                                    width: '28em',
-                                })
-                            },
-                            error: function(data) {
-                                console.log("Error Status: ", data.status);
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'There was an error!',
-                                    footer: '<a>Try again later ...</a>',
-                                    width: '28em'
-                                })
-                            }
-                        });
-                    } else {
+            $(document).on('click', '#approveBtn', function() {
+                var guyName = $(this).data('name');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                            .attr('content')
+                    },
+                    method: "POST",
+                    url: "{{ route('attendance.approve') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'id': $(this).data('id'),
+                    },
+                    success: function(data) {
+                        Swal.fire(
+                            'Data berhasil di-simpan',
+                            'success'
+                        )
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log("Error Status: ", data.status);
                         Swal.fire({
-                            position: 'center',
                             icon: 'error',
-                            title: 'Cancelled',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            width: '28em',
+                            title: 'Oops...',
+                            text: 'There was an error!',
+                            footer: '<a>Try again later ...</a>',
+                            width: '28em'
                         })
                     }
                 });
