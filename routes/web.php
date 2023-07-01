@@ -115,6 +115,8 @@ Route::group([
     Route::delete('delete/{id}', [DocumentController::class, 'destroy'])->name('destroy');
 });
 
+// Announcement
+
 //Error
 Route::get('/404', function () {
     return view('errors.error');
