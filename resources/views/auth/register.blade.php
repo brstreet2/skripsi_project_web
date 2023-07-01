@@ -152,7 +152,7 @@
         }
 
         function password_confirmation_show_hide() {
-            var x = document.getElementById("inputPassword");
+            var x = document.getElementById("password_confirmation");
             var show_eye = document.getElementById("show_eye2");
             var hide_eye = document.getElementById("hide_eye2");
             hide_eye.classList.remove("d-none");

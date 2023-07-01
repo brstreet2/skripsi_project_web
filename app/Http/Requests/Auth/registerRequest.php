@@ -24,9 +24,10 @@ class registerRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|regex:/^(?:[^"\'\<>\ㅤ\⠀])+$/i',
-            'email'       => 'required|email|regex:/^(?:[^"\'\<>\ㅤ\⠀+])+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i',
-            'password'    => 'required|min:8'
+            'name'                      => 'required|regex:/^(?:[^"\'\<>\ㅤ\⠀])+$/i',
+            'email'                     => 'required|email|regex:/^(?:[^"\'\<>\ㅤ\⠀+])+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i',
+            'password'                  => 'required|confirmed|min:8',
+            'password_confirmation'     => "required|min:8"
 
         ];
     }
