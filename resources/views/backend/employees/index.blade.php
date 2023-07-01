@@ -20,8 +20,8 @@
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
                             <th class="text-center font-mp">Nama Karyawan</th>
-                            <th class="text-center font-mp">Jabatan</th>
                             <th class="text-center font-mp">Pekerjaan</th>
+                            <th class="text-center font-mp">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,10 +130,8 @@
                         name: 'job_title'
                     },
                     {
-                        data: 'rank',
-                        name: 'rank',
-                        orderable: false,
-                        searchable: false
+                        data: 'action',
+                        name: 'action'
                     }
                 ],
                 select: {

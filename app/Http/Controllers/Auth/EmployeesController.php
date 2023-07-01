@@ -155,7 +155,13 @@ class EmployeesController extends Controller
                     return $dataDb->id;
                 }
             )
-            ->rawColumns(array('checkbox', 'description', 'user_name'))
+            ->addColumn(
+                'action',
+                function ($dataDb) {
+                    return '';
+                }
+            )
+            ->rawColumns(array('checkbox', 'description', 'user_name', 'action'))
             ->make(true);
     }
 }
