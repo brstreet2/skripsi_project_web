@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb mb-3 text-color-primary">
-            <strong>Attendance</strong>
+            <strong>Kehadiran - {{ $user->name }}</strong>
         </h5>
 
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
@@ -11,7 +11,8 @@
                     <div class="col-2">
                         <div class="dropdown">
                             <select class="form-control" type="button" id="monthDropdown">
-                                <option value="0">Select Month ...</option>
+                                <option value="{{ Carbon\Carbon::now()->format('m') }}" selected disabled readonly>
+                                    {{ Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('F') }}</option>
                                 <option value="1">Januari</option>
                                 <option value="2">Februari</option>
                                 <option value="3">Maret</option>
