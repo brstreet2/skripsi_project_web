@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('', [AuthController::class, 'home'])->name('home');
 
 // Auth
 Route::group([

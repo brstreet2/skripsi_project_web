@@ -22,9 +22,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function home()
     {
-        return view('welcome');
+        return view('auth.dashboard');
     }
 
     /**
@@ -67,7 +67,11 @@ class AuthController extends Controller
 
     public function loginForm()
     {
-        return view('auth.login');
+        if (!Sentinel::getUser()) {
+            return view('auth.login');
+        } else {
+            return redirect()->route('dashboard.index');
+        }
     }
 
     public function login(loginRequest $request)
