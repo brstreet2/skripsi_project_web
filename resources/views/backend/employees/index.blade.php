@@ -43,32 +43,59 @@
                             {{ csrf_field() }}
                             <div class="form-group mb-2">
                                 <label for="namaKaryawan">Nama <span class="text-danger">*</span></label></label>
-                                <input type="text" class="form-control" id="namaKaryawan" aria-describedby="namaHelp"
-                                    name="name" placeholder="Nama Karyawan">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="namaKaryawan" aria-describedby="namaHelp" name="name"
+                                    placeholder="Nama Karyawan">
                             </div>
+                            @error('name')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-group mb-2">
                                 <label for="emailKaryawan">Nomor Telepon <span class="text-danger">*</span></label></label>
-                                <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
-                                    name="phone" placeholder="No. Telephone Karyawan">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                    id="no_telp" aria-describedby="emailHelp" name="phone"
+                                    placeholder="No. Telephone Karyawan">
                             </div>
+                            @error('phone')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-group mb-2">
                                 <label for="emailKaryawan">Pekerjaan <span class="text-danger">*</span></label></label>
-                                <input type="text" class="form-control" id="no_telp" aria-describedby="emailHelp"
-                                    name="job_title" placeholder="(ex: Sales)">
+                                <input type="text" class="form-control @error('job_title') is-invalid @enderror"
+                                    id="no_telp" aria-describedby="emailHelp" name="job_title" placeholder="(ex: Sales)">
                             </div>
+                            @error('job_title')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-group mb-2">
                                 <label for="emailKaryawan">Email <span class="text-danger">*</span></label></label>
-                                <input type="email" class="form-control" id="emailKaryawan" aria-describedby="emailHelp"
-                                    name="email" placeholder="Email Karyawan">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                    id="emailKaryawan" aria-describedby="emailHelp" name="email"
+                                    placeholder="Email Karyawan">
                                 <small class="text-danger">* Digunakan untuk masuk ke aplikasi mobile TimKerjaKu.</small>
                             </div>
-
+                            @error('email')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <div class="form-group">
                                 <label for="passwordKaryawan">Password <span class="text-danger">*</span></label></label>
-                                <input type="password" class="form-control" id="passwordKaryawan" name="password"
-                                    placeholder="Password Karyawan">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    id="passwordKaryawan" name="password" placeholder="Password Karyawan">
                                 <small class="text-danger">* Digunakan untuk masuk ke aplikasi mobile TimKerjaKu.</small>
                             </div>
+                            @error('password')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
 
                         </div>
 
