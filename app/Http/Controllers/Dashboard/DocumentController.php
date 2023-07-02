@@ -64,13 +64,13 @@ class DocumentController extends Controller
             $timestamp = Carbon::now();
             $hash      = hash('md2', $timestamp);
             $pdf = Pdf::loadHTML($request->content)->setPaper('a4', 'portrait')->setWarnings(false);
-            $filenamePath  = 'documents/'.$hash.'_'.$documentTemplate->slug.'.pdf';
+            $filenamePath  = 'documents/' . $hash . '_' . $documentTemplate->slug . '.pdf';
             try {
                 $s3     = Storage::disk('s3')->put($filenamePath, $pdf->output(), 'public');
                 $url    = Storage::disk('s3')->url($filenamePath);
             } catch (\Exception $e) {
                 report($e);
-                toastr()->error('Something went wrong ...', 'Error');
+                toastr()->error('Terjadi kesalahan ...', 'Error');
                 return back();
             }
             $documentTemplate->url              = $url;
@@ -78,7 +78,7 @@ class DocumentController extends Controller
             $documentTemplate->save();
 
             DB::commit();
-            toastr()->success('Data has been saved successfully!', 'Success');
+            toastr()->success('Data berhasil disimpan!', 'Success');
             return redirect()->route('document.index');
         } catch (\Exception $e) {
             DB::rollback();
@@ -105,7 +105,7 @@ class DocumentController extends Controller
      */
     public function edit($slug)
     {
-        return view('backend.document.edit',['documentDb' => DocumentTemplate::where('slug',$slug)->first()]);
+        return view('backend.document.edit', ['documentDb' => DocumentTemplate::where('slug', $slug)->first()]);
     }
 
     /**
@@ -133,30 +133,29 @@ class DocumentController extends Controller
         DB::beginTransaction();
 
         try {
-            if($documentDb) {
+            if ($documentDb) {
                 $trim = Str::after($documentDb->url, 'https://s3-id-jkt-1.kilatstorage.id/skripsi-hr/');
-                if(Storage::disk('s3')->exists($trim)) {
+                if (Storage::disk('s3')->exists($trim)) {
                     try {
                         Storage::disk('s3')->delete($trim);
                     } catch (\Throwable $th) {
                         return response()->json(['status' => '404', 'data' => null, 'message: Data not found.']);
                     }
-                $documentDb->deleted_at = Carbon::now();
-                $documentDb->deleted_by = Sentinel::getUser()->name;
-                $documentDb->save();
+                    $documentDb->deleted_at = Carbon::now();
+                    $documentDb->deleted_by = Sentinel::getUser()->name;
+                    $documentDb->save();
 
-                DB::commit();
-                return response()->json(['STATUS' => 'OK']);
+                    DB::commit();
+                    return response()->json(['STATUS' => 'OK']);
                 }
             }
         } catch (\Exception $e) {
             DB::rollback();
             report($e);
         }
-
     }
 
-    public function destroyBulk (Request $request)
+    public function destroyBulk(Request $request)
     {
         $data = DocumentTemplate::whereIn('id', $request->id)->get();
         return response()->json([
@@ -174,29 +173,28 @@ class DocumentController extends Controller
         $dataDb = DocumentTemplate::select($select);
 
         return DataTables::eloquent($dataDb)
-        ->addColumn(
-            'action',
-            function ($dataDb) {
-                return '
-                <a href="'.$dataDb->url.'" target="_blank" class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></a>
-                <a href="'.route('document.edit', $dataDb->slug).'"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Document" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>
-                <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="'.$dataDb->id.'" data-name="'.$dataDb->name.'" type="button" data-bs-placement="bottom" title="Delete '.$dataDb->name.'?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
-                <a href="'.route('document.show', $dataDb->slug).'"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Document" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
-                // <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
-                // <button class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></button>';
-                // return '<a href="' . route('banner.show', $dataDb->id) . '" id="tooltip" title="' . trans('global.show') . '"><span class="label label-primary label-sm"><i class="fa fa-arrows-alt"></i></span></a>
-                //     <a href="'.route('banner.edit', [$dataDb->id]).'" id="tooltip" title="'.trans('global.update').'"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
-                //     <a href="#" data-message="'.trans('auth.delete_confirmation', ['name' => $dataDb->title]).'" data-href="'.route('banner.destroy', [$dataDb->id]).'" id="tooltip" data-method="DELETE" data-title="'.trans('global.delete').'" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
-            }
-        )
-        ->addColumn(
-            'checkbox',
-            function ($dataDb) {
-                return $dataDb->id;
-            }
-        )
-        ->rawColumns(array('action','checkbox', 'description'))
-        ->make(true);
+            ->addColumn(
+                'action',
+                function ($dataDb) {
+                    return '
+                <a href="' . $dataDb->url . '" target="_blank" class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></a>
+                <a href="' . route('document.edit', $dataDb->slug) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Document" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>
+                <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="' . $dataDb->id . '" data-name="' . $dataDb->name . '" type="button" data-bs-placement="bottom" title="Delete ' . $dataDb->name . '?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
+                <a href="' . route('document.show', $dataDb->slug) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Document" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
+                    // <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
+                    // <button class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></button>';
+                    // return '<a href="' . route('banner.show', $dataDb->id) . '" id="tooltip" title="' . trans('global.show') . '"><span class="label label-primary label-sm"><i class="fa fa-arrows-alt"></i></span></a>
+                    //     <a href="'.route('banner.edit', [$dataDb->id]).'" id="tooltip" title="'.trans('global.update').'"><span class="label label-warning label-sm"><i class="fa fa-edit"></i></span></a>
+                    //     <a href="#" data-message="'.trans('auth.delete_confirmation', ['name' => $dataDb->title]).'" data-href="'.route('banner.destroy', [$dataDb->id]).'" id="tooltip" data-method="DELETE" data-title="'.trans('global.delete').'" data-toggle="modal" data-target="#delete"><span class="label label-danger label-sm"><i class="fa fa-trash-o"></i></span></a>';
+                }
+            )
+            ->addColumn(
+                'checkbox',
+                function ($dataDb) {
+                    return $dataDb->id;
+                }
+            )
+            ->rawColumns(array('action', 'checkbox', 'description'))
+            ->make(true);
     }
-
 }

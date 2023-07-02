@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\EmployeesController;
+use App\Http\Controllers\Dashboard\AnnouncementController;
 use App\Http\Controllers\Dashboard\AttendanceController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -123,6 +124,13 @@ Route::group([
 });
 
 // Announcement
+Route::group([
+    'as'            => "announcement.",
+    'prefix'        => "announcement",
+    'middleware'    => ["auth.middleware"],
+], function () {
+    Route::post('', [AnnouncementController::class, 'store'])->name('store');
+});
 
 //Error
 Route::get('/404', function () {
