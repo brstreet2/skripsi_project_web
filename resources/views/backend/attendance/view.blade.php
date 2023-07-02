@@ -257,7 +257,101 @@
                         })
                     }
                 });
-            })
+            });
+
+            $(document).on('click', '#editBtn', function() {
+                Swal.fire({
+                    title: 'Ubah status',
+                    input: 'select',
+                    inputOptions: {
+                        1: "Diterima",
+                        2: "Ditolak"
+                    },
+                    inputPlaceholder: 'Pilih status',
+                    showCancelButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        if (result.value === "1") {
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                                        .attr('content')
+                                },
+                                method: "POST",
+                                url: "{{ route('attendance.approve') }}",
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                    'id': $(this).data('id'),
+                                },
+                                success: function(data) {
+                                    Swal.fire('Data berhasil disimpan', '', 'success')
+                                    table.draw();
+                                },
+                                error: function(data) {
+                                    console.log("Error Status: ", data.status);
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'There was an error!',
+                                        footer: '<a>Try again later ...</a>',
+                                        width: '28em'
+                                    })
+                                }
+                            });
+                        } else if (result.value === "2") {
+                            Swal.fire({
+                                input: 'textarea',
+                                inputLabel: 'Message',
+                                inputPlaceholder: 'Type your message here...',
+                                inputAttributes: {
+                                    'aria-label': 'Type your message here'
+                                },
+                                showCancelButton: true
+                            }).then((result) => {
+                                if (result.value) {
+                                    $.ajax({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $(
+                                                    'meta[name="csrf-token"]')
+                                                .attr('content')
+                                        },
+                                        method: "POST",
+                                        url: "{{ route('attendance.reject') }}",
+                                        data: {
+                                            "_token": "{{ csrf_token() }}",
+                                            'id': $(this).data('id'),
+                                            'status_string': result.value,
+                                        },
+                                        success: function(data) {
+                                            Swal.fire('Data berhasil disimpan',
+                                                '',
+                                                'success')
+                                            table.draw();
+                                        },
+                                        error: function(data) {
+                                            console.log("Error Status: ", data
+                                                .status);
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: 'Terjadi kesalahan ...!',
+                                                width: '28em'
+                                            })
+                                        }
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Input penolakan tidak boleh kosong.',
+                                        width: '28em'
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+            });
         });
     </script>
 @endpush
