@@ -10,10 +10,10 @@
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" style="background-color: #444EFF">Add
+                    <a href="/employee/add">
+                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF">Add
                         New</button>
-
+                    </a>
                 </div>
                 <table id="employee_table" class="table table-borderless text-center" style="width: 100%">
                     <thead>

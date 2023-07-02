@@ -184,3 +184,10 @@ Route::get('/home', function () {
 Route::get('/announcement', function () {
     return view('backend.announcement.index');
 });
+
+//announcement
+Route::get('/employee/edit', function () {
+    return view('backend.employees.edit');
+});
+
+
