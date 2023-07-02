@@ -67,7 +67,7 @@ class CompanyController extends Controller
             $companyDb->save();
 
             DB::commit();
-            toastr()->success('You have successfully updated your company!', 'Success');
+            toastr()->success('Anda telah berhasil membuat perusahaan!', 'Success');
             return back();
         } catch (\Exception $e) {
             Log::error("----------------------------------------------------");

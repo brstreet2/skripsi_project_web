@@ -18,7 +18,7 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Sentinel::getUser()) {
-            toastr()->error('You are not authorized!', 'Error');
+            toastr()->error('Anda tidak bisa masuk!', 'Error');
             return redirect()->route('auth.login.form');
         }
 

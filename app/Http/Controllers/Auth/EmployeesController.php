@@ -52,7 +52,7 @@ class EmployeesController extends Controller
             $user->phone = $request->phone;
             $user->save();
 
-            toastr()->success('Employee has been added.', 'Success');
+            toastr()->success('Karyawan berhasil ditambahkan.', 'Success');
             DB::commit();
             return back();
         } catch (\Exception $e) {
@@ -67,7 +67,7 @@ class EmployeesController extends Controller
             Log::error("Rollback Success!");
             Log::error("Redirecting back ...");
             Log::error("----------------------------------------------------");
-            toastr()->error('Something went wrong ...', 'Error');
+            toastr()->error('Terjadi kesalahan ...', 'Error');
             return back();
         }
     }

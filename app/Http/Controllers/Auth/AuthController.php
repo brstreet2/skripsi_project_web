@@ -48,7 +48,7 @@ class AuthController extends Controller
         $user       = Sentinel::register($credentials);
         $activation = Activation::create($user);
         Mail::to($user->email)->send(new activationEmail($user, $activation->code));
-        toastr()->success('Registration completed, check your inbox to activate your account!', 'Success');
+        toastr()->success('Registrasi berhasil! Periksa inbox email anda untuk aktivasi akun.', 'Success');
         return back();
     }
 
@@ -72,21 +72,21 @@ class AuthController extends Controller
 
         try {
             if (Sentinel::authenticate($credentials, $remember)) {
-                toastr()->success('Welcome back ' . Sentinel::getUser()->name . '!', 'Success');
+                toastr()->success('Selamat datang, ' . Sentinel::getUser()->name . '!', 'Success');
                 if ($request->rto !== null) {
                     return redirect()->to($request->rto);
                 } else {
                     return redirect()->route('dashboard.index');
                 }
             } else {
-                toastr()->error('Invalid email or password!', 'Error');
+                toastr()->error('Email atau Password salah!', 'Error');
                 return redirect()->route('auth.login.form');
             }
         } catch (ThrottlingException $ex) {
-            toastr()->error('Something went wrong ...', 'Error');
+            toastr()->error('Terjadi kesalahan ...', 'Error');
             return redirect()->route('auth.login.form');
         } catch (NotActivatedException $ex) {
-            toastr()->error('You need to activate the account!', 'Error');
+            toastr()->error('Akun perlu di aktivasi!', 'Error');
             return redirect()->route('auth.login.form');
         }
     }
@@ -94,7 +94,7 @@ class AuthController extends Controller
     public function logout()
     {
         Sentinel::logout();
-        toastr()->info('Successfully logged out.', 'Info');
+        toastr()->info('Berhasil keluar.', 'Info');
         return redirect()->route('auth.login.form');
     }
 
@@ -116,15 +116,15 @@ class AuthController extends Controller
                     $userDb->save();
                 } else {
                     // session()->flash('Your account has been activated');
-                    toastr()->info('Your account has been activated.', 'Info');
+                    toastr()->info('Akun anda telah di aktivasi.', 'Info');
                     return redirect()->route('auth.login.form');
                 }
             } else {
-                toastr()->error('Invalid Link!', 'Error');
+                toastr()->error('Link tidak sah!', 'Error');
                 return redirect()->route('auth.login.form');
             }
             DB::commit();
-            toastr()->info('Your have successfully activate your account!', 'Success');
+            toastr()->info('Akun anda berhasil di aktivasi!', 'Success');
             return redirect()->route('auth.login.form');
         } catch (\Throwable $th) {
             dd($th->getMessage());

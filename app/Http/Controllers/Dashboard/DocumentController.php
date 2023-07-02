@@ -50,7 +50,7 @@ class DocumentController extends Controller
         $check  = DocumentTemplate::where('slug', Str::slug($request->document_name, '-'))->first();
 
         if ($check) {
-            toastr()->error('Please choose a different name for the document.', 'Error');
+            toastr()->error('Tolong cari nama lain.', 'Error');
             return back();
         }
 
@@ -172,9 +172,9 @@ class DocumentController extends Controller
                 function ($dataDb) {
                     return '
                 <a href="' . $dataDb->url . '" target="_blank" class="btn"><i class="fa-solid fa-download fa-lg" style="color: #6893df;"></i></a>
-                <a href="' . route('document.edit', $dataDb->slug) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Document" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>
+                <a href="' . route('document.edit', $dataDb->slug) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Dokumen" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>
                 <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="' . $dataDb->id . '" data-name="' . $dataDb->name . '" type="button" data-bs-placement="bottom" title="Delete ' . $dataDb->name . '?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
-                <a href="' . route('document.show', $dataDb->slug) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Document" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
+                <a href="' . route('document.show', $dataDb->slug) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Dokumen" class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></a>';
                     // <button class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></button>
                     // <button class="btn"><i class="fa-solid fa-eye fa-lg" style="color: #6893df;"></i></button>';
                     // return '<a href="' . route('banner.show', $dataDb->id) . '" id="tooltip" title="' . trans('global.show') . '"><span class="label label-primary label-sm"><i class="fa fa-arrows-alt"></i></span></a>
