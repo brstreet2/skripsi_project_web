@@ -44,6 +44,8 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [ReportController::class, 'index'])->name('index');
+    Route::post('ajax/datatables/present', [ReportController::class, 'datatables'])->name('ajax.datatables.present');
+    Route::post('ajax/datatables/timeoff', [ReportController::class, 'secondDatatables'])->name('ajax.datatables.timeoff');
 });
 
 // Dashboard
