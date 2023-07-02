@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentController;
 use App\Http\Controllers\Dashboard\PayrollController;
 use App\Http\Controllers\Dashboard\PricingController;
+use App\Http\Controllers\Dashboard\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,15 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
     Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// Report
+Route::group([
+    'as'            => "report.",
+    'prefix'        => 'report',
+    'middleware'    => ["auth.middleware"],
+], function () {
+    Route::get('', [ReportController::class, 'index'])->name('index');
 });
 
 // Dashboard
@@ -156,11 +166,6 @@ Route::get('/company/edit', function () {
 //edit tax company
 Route::get('/company/tax', function () {
     return view('backend.company.taxcompany');
-});
-
-//generate report
-Route::get('/report', function () {
-    return view('backend.report.index');
 });
 
 //generate report
