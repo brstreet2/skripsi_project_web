@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use App\Models\Company;
+use App\Models\CompanyEmployees;
 use App\Models\EmployeeAttendance;
 use App\Models\EmployeeTimeOff;
 use App\Models\UserCompany;

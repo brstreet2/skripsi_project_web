@@ -5,6 +5,7 @@ use App\Http\Controllers\API\ApiAttendanceController;
 use App\Http\Controllers\API\ApiAuthController;
 use App\Http\Controllers\API\ApiDocumentController;
 use App\Http\Controllers\API\ApiPayrollController;
+use App\Http\Controllers\API\ApiTimeOffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,7 @@ Route::get('/get-documents', [ApiDocumentController::class, 'get'])->name('api.g
 
 // Api Announcement
 Route::get('/get-announcement', [ApiAnnouncementController::class, 'get'])->name('api.get.announcement');
+
+// Api Timeoff
+Route::get('/get-timeoff', [ApiTimeOffController::class, 'get'])->name('api.get.timeoff');
+Route::post('/post-timeoff', [ApiTimeOffController::class, 'post'])->name('api.post.timeoff');

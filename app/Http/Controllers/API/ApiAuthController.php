@@ -300,6 +300,14 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                 $user = User::find($userId);
                 $user->updated_by = $user->name;
                 $user->save();
+                $job_title = null;
+                if (isset($user->company_employees->job_title)) {
+                    if ($user->company_employees->job_title != "") {
+                        $job_title = $user->company_employees->job_title;
+                    } else {
+                        $job_title = null;
+                    }
+                }
 
                 $status = 200;
 
@@ -313,11 +321,8 @@ class ApiAuthController extends \Laravel\Passport\Http\Controllers\AccessTokenCo
                         'name'   => $user->name,
                         'email'  => $user->email,
                         'phone'  => $user->phone,
-                        'limit'  => $user->limit,
-                        'total_share' => $user->total_share,
                         'created_at'  => $user->created_at,
-                        'bank_name'   => $user->bank_name,
-                        'bank_number' => $user->bank_number
+                        'job_title'   => $job_title
                     ],
                     'status' => $status
                 ], $status);
