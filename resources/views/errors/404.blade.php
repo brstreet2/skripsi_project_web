@@ -3,4 +3,4 @@
 @section('code', '404')
 @section('title', __('Forbidden'))
 
-@section('message', __($exception->getMessage() ?: 'Not Found.'))
+@section('message', __($exception->getMessage() ?: 'Halaman tidak ditemukan.'))

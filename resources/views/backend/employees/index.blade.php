@@ -10,10 +10,9 @@
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <div class="d-flex justify-content-end">
-                    <a href="/employee/add">
-                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF">Add
+                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" style="background-color: #444EFF">Add
                         New</button>
-                    </a>
                 </div>
                 <table id="employee_table" class="table table-borderless text-center" style="width: 100%">
                     <thead>
@@ -66,7 +65,8 @@
                             <div class="form-group mb-2">
                                 <label for="emailKaryawan">Pekerjaan <span class="text-danger">*</span></label></label>
                                 <input type="text" class="form-control @error('job_title') is-invalid @enderror"
-                                    id="no_telp" aria-describedby="emailHelp" name="job_title" placeholder="(contoh: kasir)">
+                                    id="no_telp" aria-describedby="emailHelp" name="job_title"
+                                    placeholder="(contoh: kasir)">
                             </div>
                             @error('job_title')
                                 <div class="alert alert-danger">

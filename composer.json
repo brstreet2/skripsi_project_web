@@ -17,10 +17,13 @@
         "mews/purifier": "^3.4",
         "opcodesio/log-viewer": "^2.3",
         "tymon/jwt-auth": "^2.0",
+        "xendit/xendit-php": "^2.19",
         "yajra/laravel-datatables": "^9.0",
         "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
+        "andyabih/laravel-to-uml": "^1.0",
+        "beyondcode/laravel-er-diagram-generator": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",

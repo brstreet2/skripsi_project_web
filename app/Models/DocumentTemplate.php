@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,11 @@ class DocumentTemplate extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'document_template';
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'id', 'company_id');
+    }
 
     public function getCreatedAtAttribute($value)
     {

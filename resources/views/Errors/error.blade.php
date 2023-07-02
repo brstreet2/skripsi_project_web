@@ -47,7 +47,7 @@
                                 <p class="errortext" style="font-size:1rem;color:#fcfcfc">@yield('message')</p>
                                 <a href="{{ route('home') }}">
                                     <button type="submit" id="backBtn" class="btn btn-block btnprimary rounded-pill"
-                                        style="font-weight: 700; height: 3rem;">Homepage</button>
+                                        style="font-weight: 700; height: 3rem;">Landing Page</button>
                                 </a>
                             </div>
                         </div>

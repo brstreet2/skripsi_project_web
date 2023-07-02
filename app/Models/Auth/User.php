@@ -5,8 +5,9 @@ namespace App\Models\Auth;
 use App\Models\Company;
 use App\Models\CompanyEmployees;
 use App\Models\EmployeeAttendance;
+use App\Models\EmployeePayroll;
 use App\Models\EmployeeTimeOff;
-use App\Models\UserCompany;
+use App\Models\Transaction;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Authenticatable;
@@ -83,6 +84,16 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
         return $this->hasMany(EmployeeAttendance::class, 'employee_id', 'id');
     }
 
+    public function payroll()
+    {
+        return $this->hasMany(EmployeePayroll::class, 'employee_id', 'id');
+    }
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
+
     public function time_off()
     {
         return $this->hasMany(EmployeeTimeOff::class, 'employee_id', 'id');
@@ -130,24 +141,6 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
             return '';
         } else {
             return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
-        }
-    }
-
-    public function getOtpExpiredAttribute($value)
-    {
-        if ($value == null) {
-            return '';
-        } else {
-            return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
-        }
-    }
-
-    public function getTokenAttribute($value)
-    {
-        if ($value == null) {
-            return '';
-        } else {
-            return $value;
         }
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Auth\User;
 use Carbon\Carbon;
+use App\Models\CompanyEmployees;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

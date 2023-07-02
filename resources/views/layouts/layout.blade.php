@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>TimKerjaKu</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -54,7 +54,7 @@
                     @if (!Sentinel::getUser())
                         <a class="nav-item nav-link" href="{{ route('auth.login.form') }}"><button type="button"
                                 class="btn px-4 rounded-pill"
-                                style="background-color: #FBF8FF; font-weight:700; width:7rem;">Login</button></a>
+                                style="background-color: #FBF8FF; font-weight:700; width:7rem;">Masuk</button></a>
                     @else
                         <a class="nav-item nav-link" href="{{ route('dashboard.index') }}"><button type="button"
                                 class="btn px-4 rounded-pill"

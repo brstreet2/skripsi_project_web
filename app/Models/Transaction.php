@@ -6,14 +6,12 @@ use App\Models\Auth\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeePayroll extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'employee_payroll';
-
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'employee_id');
+        return $this->belongsTo(User::class, 'id', 'user_id');
     }
 }
