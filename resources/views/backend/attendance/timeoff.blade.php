@@ -1,40 +1,261 @@
 @extends('backend.layout.layout')
 @section('content')
     <div class="row">
-        <h5 class="font-mpb mb-2 text-color-primary">
-            <strong>Absensi - {{ $user->name }}</strong>
+        <h5 class="font-mpb mb-3 text-color-primary">
+            <strong>Absensi Cuti / Izin - {{ $user->name }}</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">Check Employee Attendance</p>
+
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
-                <table id="documentTable" class="table table-borderless text-center">
-                    <thead>
-                        <tr>
-                            <th class="text-center font-mp">Dates</th>
-                            <th class="text-center font-mp">Time-Off</th>
-                            <th class="text-center font-mp">Approve</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center font-mp">dd/mm/yy</td>
-                            <td class="text-center font-mp">Sick</td>
-                            <td class="text-center font-mp">
-                                <a href="/attendance/timeoff">
-                                    <button class="btn btn-danger fw-bolder mb-4 px-4 rounded-pill"
-                                        href="">Decline</button>
-                                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" href=""
-                                        style="background-color: #444EFF">Approve</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row mb-4">
+                    <div class="col-2">
+                        <div class="dropdown">
+                            <select class="form-control" type="button" id="monthDropdown">
+                                <option value="{{ Carbon\Carbon::now()->format('m') }}" selected disabled readonly>
+                                    {{ Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('F') }}</option>
+                                <option value="1">Januari</option>
+                                <option value="2">Februari</option>
+                                <option value="3">Maret</option>
+                                <option value="4">April</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Juni</option>
+                                <option value="7">Juli</option>
+                                <option value="8">Agustus</option>
+                                <option value="9">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <table id="timeoff_table" class="table table-borderless text-center" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center">&nbsp;</th>
+                                <th class="text-center">
+                                    Tipe
+                                </th>
+                                <th class="text-center">
+                                    Tanggal Mulai
+                                </th>
+                                <th class="text-center">
+                                    Tanggal Akhir
+                                </th>
+                                <th class="text-center">
+                                    Status
+                                </th>
+                                <th class="text-center">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
-
-    </div>
-
-
     </div>
 @endsection
+@push('css')
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="{{ asset('plugins/jquery-datatables-checkboxes/css/dataTables.checkboxes.css') }}">
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ asset('plugins/jquery-datatables-checkboxes/js/dataTables.checkboxes.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            var table = $('#timeoff_table').DataTable({
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                            .attr('content')
+                    },
+                    url: '{!! route('attendance.ajax.absent.datatables') !!}',
+                    data: function(d) {
+                        d.user_id = {{ request()->route()->parameters['id'] }},
+                            d.current_month = {{ Carbon\Carbon::now()->format('m') }},
+                            d.select_month = $('#monthDropdown').val();
+                    },
+                    dataType: 'json',
+                    type: 'POST'
+                },
+                serverSide: true,
+                order: [0, 0],
+                columnDefs: [{
+                    targets: 0,
+                    checkboxes: {
+                        selectRow: true
+                    }
+                }],
+                columns: [{
+                        data: 'id',
+                        name: 'id',
+                        visible: true
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
+                        data: 'start_date',
+                        name: 'start_date'
+                    },
+                    {
+                        data: 'end_date',
+                        name: 'end_date'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
+                    }
+                ],
+                select: {
+                    style: 'multi'
+                },
+            });
+
+            $('#monthDropdown').change(function() {
+                table.draw();
+            });
+
+            $(document).on('click', '#approveBtn', function() {
+                var guyName = $(this).data('name');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                            .attr('content')
+                    },
+                    method: "POST",
+                    url: "{{ route('attendance.absent.approve') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'id': $(this).data('id'),
+                    },
+                    success: function(data) {
+                        Swal.fire('Data berhasil disimpan', '', 'success')
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log("Error Status: ", data.status);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'There was an error!',
+                            footer: '<a>Try again later ...</a>',
+                            width: '28em'
+                        })
+                    }
+                });
+            });
+
+            $(document).on('click', '#rejectBtn', function() {
+                var guyName = $(this).data('name');
+                Swal.fire({
+                    title: 'Tolak presensi ' + guyName + ' ?',
+                    text: "Tolong berikan alasan penolakan.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Kembali',
+                    confirmButtonText: 'Ya',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            input: 'textarea',
+                            inputLabel: 'Message',
+                            inputPlaceholder: 'Type your message here...',
+                            inputAttributes: {
+                                'aria-label': 'Type your message here'
+                            },
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.value) {
+                                $.ajax({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                                            .attr('content')
+                                    },
+                                    method: "POST",
+                                    url: "{{ route('attendance.absent.reject') }}",
+                                    data: {
+                                        "_token": "{{ csrf_token() }}",
+                                        'id': $(this).data('id'),
+                                        'status_string': result.value,
+                                    },
+                                    success: function(data) {
+                                        Swal.fire('Data berhasil disimpan', '',
+                                            'success')
+                                        table.draw();
+                                    },
+                                    error: function(data) {
+                                        console.log("Error Status: ", data
+                                            .status);
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: 'Terjadi kesalahan ...!',
+                                            width: '28em'
+                                        })
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Input penolakan tidak boleh kosong.',
+                                    width: '28em'
+                                })
+                            }
+                        })
+                    }
+                })
+
+            });
+
+            $(document).on('click', '#showBtn', function() {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                            .attr('content')
+                    },
+                    method: "POST",
+                    url: "{{ route('attendance.absent.reason') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'id': $(this).data('id'),
+                    },
+                    success: function(data) {
+                        Swal.fire(
+                            'Alasan Penolakan:',
+                            '' + data.data,
+                            'info'
+                        )
+                    },
+                    error: function(data) {
+                        console.log("Error Status: ", data
+                            .status);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan ...!',
+                            width: '28em'
+                        })
+                    }
+                });
+            })
+        });
+    </script>
+@endpush

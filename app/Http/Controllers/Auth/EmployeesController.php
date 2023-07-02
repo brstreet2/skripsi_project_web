@@ -158,7 +158,7 @@ class EmployeesController extends Controller
             ->addColumn(
                 'action',
                 function ($dataDb) {
-                    return '';
+                    return '<a href="' . route('employee.edit', $dataDb->user_id) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Karyawan" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>';
                 }
             )
             ->rawColumns(array('checkbox', 'description', 'user_name', 'action'))

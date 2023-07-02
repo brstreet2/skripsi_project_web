@@ -89,6 +89,7 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [EmployeesController::class, 'index'])->name('index');
+    Route::get('/edit/{id}', [EmployeesController::class, 'edit'])->name('edit');
     Route::post('/store', [EmployeesController::class, 'store'])->name('store');
     Route::get('/ajax/datatables', [EmployeesController::class, 'datatables'])->name('ajax.datatables');
 });
@@ -118,6 +119,10 @@ Route::group([
     Route::post('/presence/approve', [AttendanceController::class, 'attendanceApprove'])->name('approve');
     Route::post('/presence/reject', [AttendanceController::class, 'attendanceReject'])->name('reject');
     Route::post('/presence/reason', [AttendanceController::class, 'attendanceReason'])->name('reason');
+    Route::post('/absent/datatables', [AttendanceController::class, 'absentDatatables'])->name('ajax.absent.datatables');
+    Route::post('/absent/approve', [AttendanceController::class, 'absentApprove'])->name('absent.approve');
+    Route::post('/absent/reject', [AttendanceController::class, 'absentReject'])->name('absent.reject');
+    Route::post('absent/reason', [AttendanceController::class, 'absentReason'])->name('absent.reason');
 });
 
 // Document

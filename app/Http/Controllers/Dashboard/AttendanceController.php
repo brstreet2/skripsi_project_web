@@ -8,6 +8,7 @@ use App\Models\CompanyEmployees;
 use App\Models\EmployeeAttendance;
 use App\Models\EmployeeAttendanceDetail;
 use App\Models\EmployeePayroll;
+use App\Models\EmployeeTimeOff;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -16,24 +17,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('backend.attendance.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     public function presence($id)
@@ -96,7 +82,7 @@ class AttendanceController extends Controller
 
                     $date->settings(['formatFunction' => 'translatedFormat']);
 
-                    return $date->format('l, j F Y');;
+                    return $date->format('l, j F Y');
                 }
             )
             ->addColumn(
@@ -117,64 +103,8 @@ class AttendanceController extends Controller
                     $instance->whereMonth('period', $request->get('month'));
                 }
             })
-            ->rawColumns(array('checkbox', 'action', 'mmonth', 'status'))
+            ->rawColumns(array('checkbox', 'action', 'month', 'status'))
             ->make(true);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function datatables(Request $request)
@@ -267,6 +197,162 @@ class AttendanceController extends Controller
         DB::beginTransaction();
         try {
             $dataDb                = EmployeeAttendanceDetail::where('id', $request->id)->first();
+            DB::commit();
+            return response()->json([
+                'error'     => false,
+                'message'   => 'DATA_FOUND',
+                'data'      => $dataDb->status_string,
+                'status'    => 200
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 401
+            ], 401);
+        }
+    }
+
+    public function absentDatatables(Request $request)
+    {
+        $user = User::find($request->user_id);
+
+        if (!$request->select_month) {
+            $dataDb = EmployeeTimeOff::where('employee_id', $user->id)->whereMonth('start_date', $request->current_month)->with('user')->get();
+        } elseif ($request->select_month) {
+            $dataDb = EmployeeTimeOff::where('employee_id', $user->id)->whereMonth('start_date', $request->select_month)->with('user')->get();
+        }
+
+        return DataTables::of($dataDb)
+            ->addColumn(
+                'checkbox',
+                function ($dataDb) {
+                    return $dataDb->id;
+                }
+            )
+            ->addColumn(
+                'type',
+                function ($dataDb) {
+                    if ($dataDb->type == 0) {
+                        return 'Cuti';
+                    } elseif ($dataDb->type == 1) {
+                        return 'Izin';
+                    }
+                }
+            )
+            ->addColumn(
+                'start_date',
+                function ($dataDb) {
+                    $date = Carbon::parse($dataDb->start_date)->locale('id');
+
+                    $date->settings(['formatFunction' => 'translatedFormat']);
+
+                    return $date->format('l, j F Y');
+                }
+            )
+            ->addColumn(
+                'end_date',
+                function ($dataDb) {
+                    $date = Carbon::parse($dataDb->end_date)->locale('id');
+
+                    $date->settings(['formatFunction' => 'translatedFormat']);
+
+                    return $date->format('l, j F Y');
+                }
+            )
+            ->addColumn(
+                'status',
+                function ($dataDb) {
+                    if ($dataDb->status == 0) {
+                        return 'Menunggu persetujuan';
+                    } elseif ($dataDb->status == 1) {
+                        return '<p class="text-success fw-bold">Telah disetujui</p>';
+                    } else {
+                        return '<p class="text-danger fw-bold">Ditolak</p>';
+                    }
+                }
+            )
+            ->addColumn(
+                'action',
+                function ($dataDb) {
+                    if ($dataDb->status == 0) {
+                        return '<button class="btn btn-md text-center" data-bs-toggle="tooltip" id="approveBtn" data-id="' . $dataDb->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Terima izin / cuti ' . $dataDb->user->name . '?"><i class="fa-solid fa-check fa-md" style="color: #6893df;"></i></button>
+                        <button class="btn" btn-md text-center data-bs-toggle="tooltip" id="rejectBtn" data-id="' . $dataDb->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Tolak izin / cuti ' . $dataDb->user->name . '?"><i class="fa-sharp fa-solid fa-x fa-md" style="color: #6893df;"></i></button>';
+                    } elseif ($dataDb->status == 1) {
+                        return '<button class="btn btn-md text-center" data-bs-toggle="tooltip"data-id="' . $dataDb->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Edit"><i class="fa-sharp fa-solid fa-pen-to-square fa-md" style="color: #6893df;"></i></button>';
+                    } else {
+                        return '<button class="btn btn-md text-center" data-bs-toggle="tooltip" id="showBtn" data-id="' . $dataDb->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Lihat alasan penolakan"><i class="fa-solid fa-eye fa-md" style="color: #6893df;"></i></button>';
+                    }
+                }
+            )
+            ->filter(function ($instance) use ($request) {
+                if ($request->get('month') == '0' || $request->get('month') == '1') {
+                    $instance->whereMonth('period', $request->get('month'));
+                }
+            })
+            ->rawColumns(array('checkbox', 'action', 'start_date', 'end_date', 'type', 'status'))
+            ->make(true);
+    }
+
+    public function absentApprove(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataDb                = EmployeeTimeOff::where('id', $request->id)->first();
+            $dataDb->status        = 1;
+            $dataDb->status_string = 'Diterima';
+            $dataDb->save();
+            DB::commit();
+            return response()->json([
+                'error'     => false,
+                'message'   => 'Data approved!',
+                'data'      => $dataDb,
+                'status'    => 200
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 401
+            ], 401);
+        }
+    }
+
+    public function absentReject(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataDb                = EmployeeTimeOff::where('id', $request->id)->first();
+            $dataDb->status        = 2;
+            $dataDb->status_string = $request->status_string;
+            $dataDb->save();
+            DB::commit();
+            return response()->json([
+                'error'     => false,
+                'message'   => 'Data telah ditolak!',
+                'data'      => $dataDb,
+                'status'    => 200
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 401
+            ], 401);
+        }
+    }
+
+    public function absentReason(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataDb                = EmployeeTimeOff::where('id', $request->id)->first();
             DB::commit();
             return response()->json([
                 'error'     => false,
