@@ -31,7 +31,7 @@
 
                 </div>
                 <div class="row">
-                    <table id="presence_table" class="table table-bordered text-center">
+                    <table id="presence_table" class="table table-borderless text-center" style="width: 100%">
                         <thead>
                             <tr>
                                 <th class="text-center">&nbsp;</th>
@@ -48,7 +48,7 @@
                                     Status
                                 </th>
                                 <th class="text-center">
-                                    Approval
+                                    Action
                                 </th>
                             </tr>
                         </thead>
@@ -212,10 +212,7 @@
                         'id': $(this).data('id'),
                     },
                     success: function(data) {
-                        Swal.fire(
-                            'Data berhasil di-simpan',
-                            'success'
-                        )
+                        Swal.fire('Data berhasil disimpan', '', 'success')
                         table.draw();
                     },
                     error: function(data) {
@@ -230,6 +227,103 @@
                     }
                 });
             });
+
+            $(document).on('click', '#rejectBtn', function() {
+                var guyName = $(this).data('name');
+                Swal.fire({
+                    title: 'Tolak absensi ' + guyName + ' ?',
+                    text: "Tolong berikan alasan penolakan.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Kembali',
+                    confirmButtonText: 'Ya',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            input: 'textarea',
+                            inputLabel: 'Message',
+                            inputPlaceholder: 'Type your message here...',
+                            inputAttributes: {
+                                'aria-label': 'Type your message here'
+                            },
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.value) {
+                                $.ajax({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                                            .attr('content')
+                                    },
+                                    method: "POST",
+                                    url: "{{ route('attendance.reject') }}",
+                                    data: {
+                                        "_token": "{{ csrf_token() }}",
+                                        'id': $(this).data('id'),
+                                        'status_string': result.value,
+                                    },
+                                    success: function(data) {
+                                        Swal.fire('Data berhasil disimpan', '',
+                                            'success')
+                                        table.draw();
+                                    },
+                                    error: function(data) {
+                                        console.log("Error Status: ", data
+                                            .status);
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: 'Terjadi kesalahan ...!',
+                                            width: '28em'
+                                        })
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Input penolakan tidak boleh kosong.',
+                                    width: '28em'
+                                })
+                            }
+                        })
+                    }
+                })
+
+            });
+
+            $(document).on('click', '#showBtn', function() {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                            .attr('content')
+                    },
+                    method: "POST",
+                    url: "{{ route('attendance.reason') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'id': $(this).data('id'),
+                    },
+                    success: function(data) {
+                        Swal.fire(
+                            'Alasan Penolakan:',
+                            '' + data.data,
+                            'info'
+                        )
+                    },
+                    error: function(data) {
+                        console.log("Error Status: ", data
+                            .status);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan ...!',
+                            width: '28em'
+                        })
+                    }
+                });
+            })
         });
     </script>
 @endpush

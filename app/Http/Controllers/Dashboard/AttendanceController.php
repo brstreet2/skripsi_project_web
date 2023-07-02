@@ -77,21 +77,32 @@ class AttendanceController extends Controller
                     if ($dataDb->attendance_detail[0]->status == 0) {
                         return 'Menunggu persetujuan';
                     } elseif ($dataDb->attendance_detail[0]->status == 1) {
-                        return '<p class="text-success">Telah disetujui</p>';
+                        return '<p class="text-success fw-bold">Telah disetujui</p>';
                     } else {
-                        return '<p class="text-danger">Ditolak</p>';
+                        return '<p class="text-danger fw-bold">Ditolak</p>';
                     }
+                }
+            )
+            ->addColumn(
+                'period',
+                function ($dataDb) {
+                    $date = Carbon::parse($dataDb->period)->locale('id');
+
+                    $date->settings(['formatFunction' => 'translatedFormat']);
+
+                    return $date->format('l, j F Y');;
                 }
             )
             ->addColumn(
                 'action',
                 function ($dataDb) {
                     if ($dataDb->attendance_detail[0]->status == 0) {
-                        return '<button class="btn btn-success btn-md text-center" data-bs-toggle="tooltip" id="approveBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Terima kehadiran ' . $dataDb->user->name . '?"><i class="fa-solid fa-check fa-sm"></i></button>
-                        <button class="btn btn-danger" btn-md text-center data-bs-toggle="tooltip" id="rejectBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Tolak kehadiran ' . $dataDb->user->name . '?"><i class="fa-sharp fa-solid fa-x fa-sm"></i></button>';
+                        return '<button class="btn btn-success btn-md text-center" data-bs-toggle="tooltip" id="approveBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Terima kehadiran ' . $dataDb->user->name . '?"><i class="fa-solid fa-check fa-md" style="color: #6893df;"></i></button>
+                        <button class="btn" btn-md text-center data-bs-toggle="tooltip" id="rejectBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Tolak kehadiran ' . $dataDb->user->name . '?"><i class="fa-sharp fa-solid fa-x fa-md" style="color: #6893df;"></i></button>';
                     } elseif ($dataDb->attendance_detail[0]->status == 1) {
-                        return '<button class="btn btn-warning btn-md text-center" data-bs-toggle="tooltip"data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Edit"><i class="fa-sharp fa-solid fa-pen-to-square fa-sm"></i></button>';
+                        return '<button class="btn btn-md text-center" data-bs-toggle="tooltip"data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Edit"><i class="fa-sharp fa-solid fa-pen-to-square fa-md" style="color: #6893df;"></i></button>';
                     } else {
+                        return '<button class="btn btn-md text-center" data-bs-toggle="tooltip" id="showBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Lihat alasan penolakan"><i class="fa-solid fa-eye fa-md" style="color: #6893df;"></i></button>';
                     }
                 }
             )
@@ -205,13 +216,62 @@ class AttendanceController extends Controller
         try {
             $dataDb                = EmployeeAttendanceDetail::where('id', $request->id)->first();
             $dataDb->status        = 1;
-            $dataDb->status_string = 'Di-terima';
+            $dataDb->status_string = 'Diterima';
             $dataDb->save();
             DB::commit();
             return response()->json([
                 'error'     => false,
                 'message'   => 'Data approved!',
                 'data'      => $dataDb,
+                'status'    => 200
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 401
+            ], 401);
+        }
+    }
+
+    public function attendanceReject(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataDb                = EmployeeAttendanceDetail::where('id', $request->id)->first();
+            $dataDb->status        = 2;
+            $dataDb->status_string = $request->status_string;
+            $dataDb->save();
+            DB::commit();
+            return response()->json([
+                'error'     => false,
+                'message'   => 'Data telah ditolak!',
+                'data'      => $dataDb,
+                'status'    => 200
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 401
+            ], 401);
+        }
+    }
+
+    public function attendanceReason(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataDb                = EmployeeAttendanceDetail::where('id', $request->id)->first();
+            DB::commit();
+            return response()->json([
+                'error'     => false,
+                'message'   => 'DATA_FOUND',
+                'data'      => $dataDb->status_string,
                 'status'    => 200
             ], 200);
         } catch (\Exception $e) {
