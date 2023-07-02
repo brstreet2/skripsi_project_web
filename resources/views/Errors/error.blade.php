@@ -12,7 +12,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     {{-- CSS --}}
-    <link rel="stylesheet" href="error.css">
+    <link rel="stylesheet" href="{{ asset('error.css') }}">
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

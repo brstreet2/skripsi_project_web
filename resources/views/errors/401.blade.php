@@ -1,4 +1,4 @@
-@extends('errors::error')
+@extends('errors.error')
 
 @section('code', '401')
 @section('title', __('Unauthorized'))
