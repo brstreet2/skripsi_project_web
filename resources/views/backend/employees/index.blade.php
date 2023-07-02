@@ -66,7 +66,7 @@
                             <div class="form-group mb-2">
                                 <label for="emailKaryawan">Pekerjaan <span class="text-danger">*</span></label></label>
                                 <input type="text" class="form-control @error('job_title') is-invalid @enderror"
-                                    id="no_telp" aria-describedby="emailHelp" name="job_title" placeholder="(ex: Sales)">
+                                    id="no_telp" aria-describedby="emailHelp" name="job_title" placeholder="(contoh: kasir)">
                             </div>
                             @error('job_title')
                                 <div class="alert alert-danger">
@@ -88,7 +88,7 @@
                             <div class="form-group">
                                 <label for="passwordKaryawan">Password <span class="text-danger">*</span></label></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="passwordKaryawan" name="password" placeholder="Password Karyawan">
+                                    id="passwordKaryawan" name="password" placeholder="Password minimal 8 karakter">
                                 <small class="text-danger">* Digunakan untuk masuk ke aplikasi mobile TimKerjaKu.</small>
                             </div>
                             @error('password')
