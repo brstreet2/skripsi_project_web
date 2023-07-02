@@ -2,9 +2,9 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb mb-2 text-color-primary">
-            <strong>Kehadiran</strong>
+            <strong>Persetujuan</strong>
         </h5>
-        <p class="mb-3" style="font-size: 16px">Cek Data Kehadiran Karyawan</p>
+        {{-- <p class="mb-3" style="font-size: 16px">Cek Data Kehadiran Karyawan</p> --}}
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <table id="attendance_table" class="table table-borderless text-center">
@@ -12,8 +12,8 @@
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
                             <th class="text-center font-mp">Nama Karyawan</th>
-                            <th class="text-center font-mp">Presensi</th>
-                            <th class="text-center font-mp">Absensi</th>
+                            <th class="text-center font-mp">Kehadiran</th>
+                            <th class="text-center font-mp">Ketidakhadiran</th>
                         </tr>
                     </thead>
                 </table>
