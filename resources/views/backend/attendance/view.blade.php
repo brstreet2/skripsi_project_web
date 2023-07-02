@@ -165,7 +165,7 @@
             $(document).on('click', '#rejectBtn', function() {
                 var guyName = $(this).data('name');
                 Swal.fire({
-                    title: 'Tolak absensi ' + guyName + ' ?',
+                    title: 'Tolak presensi ' + guyName + ' ?',
                     text: "Tolong berikan alasan penolakan.",
                     icon: 'warning',
                     showCancelButton: true,

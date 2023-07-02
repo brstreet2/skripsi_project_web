@@ -38,8 +38,14 @@ class AttendanceController extends Controller
 
     public function presence($id)
     {
-        $user = Sentinel::getUser();
+        $user = User::find($id);
         return view('backend.attendance.view', compact('user'));
+    }
+
+    public function absent($id)
+    {
+        $user = User::find($id);
+        return view('backend.attendance.timeoff', compact('user'));
     }
 
     public function presenceDatatables(Request $request)
@@ -97,19 +103,13 @@ class AttendanceController extends Controller
                 'action',
                 function ($dataDb) {
                     if ($dataDb->attendance_detail[0]->status == 0) {
-                        return '<button class="btn btn-success btn-md text-center" data-bs-toggle="tooltip" id="approveBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Terima kehadiran ' . $dataDb->user->name . '?"><i class="fa-solid fa-check fa-md" style="color: #6893df;"></i></button>
+                        return '<button class="btn btn-md text-center" data-bs-toggle="tooltip" id="approveBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Terima kehadiran ' . $dataDb->user->name . '?"><i class="fa-solid fa-check fa-md" style="color: #6893df;"></i></button>
                         <button class="btn" btn-md text-center data-bs-toggle="tooltip" id="rejectBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Tolak kehadiran ' . $dataDb->user->name . '?"><i class="fa-sharp fa-solid fa-x fa-md" style="color: #6893df;"></i></button>';
                     } elseif ($dataDb->attendance_detail[0]->status == 1) {
                         return '<button class="btn btn-md text-center" data-bs-toggle="tooltip"data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Edit"><i class="fa-sharp fa-solid fa-pen-to-square fa-md" style="color: #6893df;"></i></button>';
                     } else {
                         return '<button class="btn btn-md text-center" data-bs-toggle="tooltip" id="showBtn" data-id="' . $dataDb->attendance_detail[0]->id . '" data-name="' . $dataDb->user->name . '" type="button" data-bs-placement="bottom" title="Lihat alasan penolakan"><i class="fa-solid fa-eye fa-md" style="color: #6893df;"></i></button>';
                     }
-                }
-            )
-            ->addColumn(
-                'second_action',
-                function ($dataDb) {
-                    return $dataDb->id;
                 }
             )
             ->filter(function ($instance) use ($request) {
@@ -197,16 +197,16 @@ class AttendanceController extends Controller
             ->addColumn(
                 'action',
                 function ($dataDb) {
-                    return '<a href="' . route('attendance.presence', $dataDb->user_id) . '" id="tooltip" title="Lihat Kehadiran"><button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF" >Lihat</button></a>';
+                    return '<a href="' . route('attendance.presence', $dataDb->user_id) . '" id="tooltip" title="Lihat Kehadiran"><button class="btn btn-primary fw-bolder rounded-pill" style="background-color: #444EFF" ><i class="fa-sharp fa-solid fa-business-time"></i> Lihat</button></a>';
                 }
             )
             ->addColumn(
                 'second_action',
                 function ($dataDb) {
-                    return;
+                    return '<a href="' . route('attendance.absent', $dataDb->user_id) . '" id="tooltip" title="Lihat Kehadiran"><button class="btn btn-primary fw-bolder rounded-pill" style="background-color: #444EFF" ><i class="fa-sharp fa-regular fa-calendar-days"></i> Lihat</button></a>';
                 }
             )
-            ->rawColumns(array('checkbox', 'action', 'user_name'))
+            ->rawColumns(array('checkbox', 'action', 'user_name', 'second_action'))
             ->make(true);
     }
 

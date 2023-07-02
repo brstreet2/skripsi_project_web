@@ -11,9 +11,9 @@
                     <thead>
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
-                            <th class="text-center font-mp">Nama Karyawn</th>
-                            <th class="text-center font-mp">Kehadiran</th>
-                            <th class="text-center font-mp">Absen</th>
+                            <th class="text-center font-mp">Nama Karyawan</th>
+                            <th class="text-center font-mp">Presensi</th>
+                            <th class="text-center font-mp">Absensi</th>
                         </tr>
                     </thead>
                 </table>
