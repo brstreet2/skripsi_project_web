@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiAnnouncementController;
 use App\Http\Controllers\API\ApiAttendanceController;
 use App\Http\Controllers\API\ApiAuthController;
 use App\Http\Controllers\API\ApiDocumentController;
@@ -37,3 +38,6 @@ Route::get('/get-payroll', [ApiPayrollController::class, 'get'])->name('api.get.
 
 // Api Document
 Route::get('/get-documents', [ApiDocumentController::class, 'get'])->name('api.get.document');
+
+// Api Announcement
+Route::get('/get-announcement', [ApiAnnouncementController::class, 'get'])->name('api.get.announcement');

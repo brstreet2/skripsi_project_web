@@ -50,7 +50,7 @@ class AnnouncementController extends Controller
             $announcementDb                   = new Announcement();
             $announcementDb->name             = $request->name;
             $announcementDb->date             = $request->date;
-            $announcementDb->content          = $request->content;
+            $announcementDb->content          = strip_tags($request->content);
             $announcementDb->save();
 
             DB::commit();
