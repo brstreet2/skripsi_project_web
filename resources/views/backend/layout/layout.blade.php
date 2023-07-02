@@ -49,8 +49,8 @@
                         <a href="{{ route('company.index') }}"
                             class="nav_link {{ request()->route()->named('company.*')? 'active-nav': '' }}"> <i
                                 class='bx bx-buildings nav-icon'></i> <span class="nav_name">Profil Bisnis</span> </a>
-                        <a href="/report" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                                class="nav_name">Laporan</span> </a>
+                        <a href="{{ route('report.index') }}" class="nav_link"> <i class='bx bx-user nav_icon'></i>
+                            <span class="nav_name">Laporan</span> </a>
                         <a href="{{ route('employee.index') }}"
                             class="nav_link {{ request()->route()->named('employee.*')? 'active-nav': '' }}"> <i
                                 class='bx bx-user nav_icon'></i> <span class="nav_name">Karyawan</span> </a>
