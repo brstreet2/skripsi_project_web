@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('transaction_id')->default('');
             $table->date('date')->nullable();
             $table->double('nominal')->nullable();
+            $table->integer('status')->nullable();
+            $table->string('status_string')->default('');
             $table->string('notes')->default('');
             $table->string('created_by')->default('');
             $table->string('updated_by')->default('');
