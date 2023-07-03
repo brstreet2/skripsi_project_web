@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb mb-3 text-color-primary">
-            <strong>Absensi Cuti / Izin - {{ $user->name }}</strong>
+            <strong>Ketidakhadiran - {{ $user->name }}</strong>
         </h5>
 
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">

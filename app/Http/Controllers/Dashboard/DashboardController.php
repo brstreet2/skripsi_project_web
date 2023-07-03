@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Announcement;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 
@@ -27,11 +28,19 @@ class DashboardController extends Controller
             $count = 0;
         }
 
+        $announcementDb = Announcement::orderBy('created_at', 'DESC')->first();
+
+        if (isset($announcementDb)) {
+            $announcement = $announcementDb;
+        } else {
+            $announcement = null;
+        }
+
         if (!Sentinel::getUser()) {
             toastr()->error('Anda tidak bisa masuk!', 'Error');
             return redirect()->route('auth.login.form');
         } else {
-            return view('backend.dashboard.dashboard', compact('count'));
+            return view('backend.dashboard.dashboard', compact('count', 'announcement'));
         }
     }
 }
