@@ -30,5 +30,13 @@ class RoleSeeder extends Seeder
             'created_by'  => 'Root',
             'updated_by'  => 'Root',
         ]);
+
+        Sentinel::getRoleRepository()->createModel()->create([
+            'name'        => 'Employee',
+            'permissions' => [],
+            'slug'        => 'employee',
+            'created_by'  => 'Root',
+            'updated_by'  => 'Root',
+        ]);
     }
 }

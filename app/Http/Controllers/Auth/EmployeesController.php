@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
 use App\Models\CompanyEmployees;
+use App\Traits\Users\AttachRoleTrait;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class EmployeesController extends Controller
 {
+    use AttachRoleTrait;
+
     public function index()
     {
         return view('backend.employees.index');
@@ -50,6 +53,8 @@ class EmployeesController extends Controller
 
             $userDb      = User::find($user->id);
             $user->phone = $request->phone;
+            $this->attach($userDb, 'Employee');
+
             $user->save();
 
             toastr()->success('Karyawan berhasil ditambahkan.', 'Success');
