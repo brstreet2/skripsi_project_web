@@ -144,6 +144,24 @@ class User extends EloquentUser implements AuthenticatableUserContract, Authenti
         }
     }
 
+    public function getOtpExpiredAttribute($value)
+    {
+        if ($value == null) {
+            return '';
+        } else {
+            return (new Carbon($value))->timezone('Asia/Jakarta')->toDateTimeString();
+        }
+    }
+
+    public function getTokenAttribute($value)
+    {
+        if ($value == null) {
+            return '';
+        } else {
+            return $value;
+        }
+    }
+
     public function getPermissionsAttribute($value)
     {
         if ($value == null) {
