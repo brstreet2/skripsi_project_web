@@ -9,7 +9,8 @@
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <a href="{{ route('document.create') }}">
-                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF">Tambah Dokumen</button>
+                    <button class="btn btn-primary fw-bolder mb-4 px-4 rounded-pill" style="background-color: #444EFF">Tambah
+                        Dokumen</button>
                 </a>
                 <a href="#">
                     <button class="btn btn-danger fw-bolder mb-4 px-4 rounded-pill" style="background-color:#E80015"
@@ -20,7 +21,7 @@
                         <tr>
                             <th class="text-center font-mp">&nbsp;</th>
                             <th class="text-center font-mp">Nama Dokumen</th>
-                            <th class="text-center font-mp">Kategori Dokumen</th>
+                            <th class="text-center font-mp">Deskripsi Dokumen</th>
                             <th class="text-center font-mp">Action</th>
                         </tr>
                     </thead>
