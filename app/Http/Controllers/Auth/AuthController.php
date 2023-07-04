@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\loginRequest;
 use App\Http\Requests\Auth\registerRequest;
 use App\Mail\activationEmail;
+use App\Models\Auth\Role;
 use App\Models\Auth\User;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
@@ -33,10 +34,12 @@ class AuthController extends Controller
 
     public function register(registerRequest $request)
     {
+        $upperCaseName = ucwords($request->name);
         $credentials = [
-            'name'      => $request->name,
+            'name'      => $upperCaseName,
             'email'     => $request->email,
-            'password'  => $request->password
+            'password'  => $request->password,
+            'token'     => ''
         ];
 
         $find = User::where("email", $request->email)->first();
@@ -47,6 +50,9 @@ class AuthController extends Controller
 
         $user       = Sentinel::register($credentials);
         $activation = Activation::create($user);
+        $role       = Role::where('slug', 'admin')->first();
+        $role       = Sentinel::findRoleById($role->id);
+        $role->users()->attach($user);
         Mail::to($user->email)->send(new activationEmail($user, $activation->code));
         toastr()->success('Registrasi berhasil! Periksa inbox email anda untuk aktivasi akun.', 'Success');
         return back();
