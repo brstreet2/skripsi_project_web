@@ -54,7 +54,7 @@
                                                 <p align="center"
                                                     style="color:#767e81;font-family:'Plus Jakarta Sans', sans-serif;;font-size:16px;font-weight:400;line-height:1.6;margin:0;padding:0">
                                                     <a href="{{ route('auth.activate', [$code]) }}"
-                                                        style="display:inline-block;background-color:#0eadff;border-radius:32px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;;font-weight:700;letter-spacing:1px;margin:0;padding:12px 56px;text-decoration:none"><span
+                                                        style="display:inline-block;background-color:#444eff;border-radius:32px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;;font-weight:700;letter-spacing:1px;margin:0;padding:12px 56px;text-decoration:none"><span
                                                             class="il">Verify</span> Email</a>
                                                 </p>
                                                 <p class="contenttext-text-block contenttextstyle-scope" align="center"
