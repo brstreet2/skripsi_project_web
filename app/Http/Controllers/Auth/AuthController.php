@@ -105,7 +105,7 @@ class AuthController extends Controller
             $activation = Activation::where('code', $code)->first();
             if ($activation) {
                 if ($activation->completed == 0) {
-                    $userDb = Sentinel::findById($activation->user_id);
+                    $userDb = User::findById($activation->user_id);
 
                     $activation->completed    = 1;
                     $activation->completed_at = date('Y-m-d H:i:s');
