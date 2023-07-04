@@ -127,7 +127,7 @@ class AuthController extends Controller
             toastr()->info('Akun anda berhasil di aktivasi!', 'Success');
             return redirect()->route('auth.login.form');
         } catch (\Throwable $th) {
-            dd(User::find(7));
+            dd($th);
         }
     }
 }
