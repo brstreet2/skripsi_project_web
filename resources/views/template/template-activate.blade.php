@@ -19,7 +19,7 @@
                                         <td class="contentalignmentContainer"
                                             style="word-break:break-word;font-size:0px;padding:0px;text-align:center">
                                             {{-- image logo --}}
-                                            <img src="{{ asset('assets/logo2_nobg.png') }}" class="img-fluid"
+                                            <img src="{{ asset('assets/logo2_nobg.png') }}" class="img-thumbnail"
                                                 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px">
                                         </td>
                                     </tr>
