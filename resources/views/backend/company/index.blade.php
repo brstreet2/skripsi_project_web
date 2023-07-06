@@ -37,12 +37,10 @@
                 <div class="row mt-5">
                     <div class="col-5">
                         <h4>informasi Bisnis</h4>
-                        <small class="mb-3" style="color: red">Anda belum membuat profil bisnis, mohon mengisi form di
-                            bawah</small>
+                        <small class="mb-3" style="color: red">Anda belum membuat profil bisnis, mohon mengisi form informasi bisnis</small>
                     </div>
-                    <div class="col-1 d-flex justify-content-end">
-                        <a href="{{ route('company.create') }}"><button class="btn"><i
-                                    class="fa-sharp fa-regular fa-pen-to-square fa-lg"></i></button></a>
+                    <div class="col-2 d-flex justify-content-end">
+                        <a href="{{ route('company.create') }}"><button type="button" class="btn btn-primary" style=" background-color: #444EFF; border-radius: 10px"><span class="fa-sharp fa-regular fa-pen-to-square fa-lg" style="margin-right: 10px;"></span>&nbsp;EDIT</button></a>
                     </div>
                 </div>
                 <div class="row mt-4">

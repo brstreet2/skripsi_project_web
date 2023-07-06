@@ -190,4 +190,14 @@ Route::get('/employee/edit', function () {
     return view('backend.employees.edit');
 });
 
+//profile
+Route::get('/profile', function () {
+    return view('backend.profile.index');
+});
+
+//edit profile
+Route::get('/profile/security', function () {
+    return view('backend.profile.security');
+});
+
 
