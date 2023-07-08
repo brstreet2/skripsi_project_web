@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-2 d-flex justify-content-end">
                         <a
-                            href="{{ $user->company ? route('company.edit', [$user->company->id]) : route('company.store') }}"><button
+                            href="{{ $user->company ? route('company.edit', [$user->company->id]) : route('company.create') }}"><button
                                 type="button" class="btn btn-primary"
                                 style=" background-color: #444EFF; border-radius: 10px"><span
                                     class="fa-sharp fa-regular fa-pen-to-square fa-lg"
