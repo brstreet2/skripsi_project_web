@@ -32,6 +32,8 @@ class companyRequest extends FormRequest
             'company_city'          => 'required',
             'company_industry'      => 'required',
             'company_size'          => 'required',
+            'longitude'            => 'required',
+            'latitude'              => 'required'
 
 
         ];
@@ -45,14 +47,16 @@ class companyRequest extends FormRequest
     public function messages()
     {
         return [
-            'company_name.required'         => 'Please provide a name for your company.',
-            'company_phnone.required'       => 'Please provide a phone number for your company.',
-            'company_spv.required'          => 'Please provide an email.',
-            'company_address.required'      => 'Please provide an address for your company.',
-            'company_province.required'     => 'Please select a province for your company.',
-            'company_city.required'         => 'Please select a city for your company.',
-            'company_industry.required'     => 'Please select an industry of your company.',
-            'company_size.required'         => 'Please state how many people are working in your company.',
+            'company_name.required'         => 'Mohon isi nama bisnis anda.',
+            'company_phone.required'       => 'Mohon isi nomor telepon bisnis anda.',
+            'company_spv.required'          => 'Mohon isi email supervisor / penanggung jawab.',
+            'company_address.required'      => 'Mohon isi alamat bisnis anda.',
+            'company_province.required'     => 'Mohon pilih provinsi asal bisnis anda.',
+            'company_city.required'         => 'Mohon pilih kota asal bisnis anda.',
+            'company_industry.required'     => 'Mohon pilih industri bisnis anda.',
+            'company_size.required'         => 'Mohon isi jumlah karyawan yang anda miliki.',
+            'longitude.required'           => 'Mohon pilih lokasi absen',
+            'latitude.required'             => 'Mohon pilih lokasi absen',
         ];
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <h5 class="font-mpb text-color-primary">
-            <strong>EDIT PROFIL BISNIS</strong>
+            <strong>EDIT PROFIL BISNIS - {{ $company->name ? $company->name : '-' }}</strong>
         </h5>
         <p class="mb-3" style="font-size: 16px">Mohon isi seluruh form di bawah ini</p>
         <form action="{{ route('company.store') }}" method="POST">
@@ -24,7 +24,8 @@
                                         class="form-control @error('company_name')
                                         is-invalid
                                     @enderror"
-                                        id="companyNameInput" name="company_name" placeholder="(example: PT. XYZ)">
+                                        value="{{ $company->name ? $company->name : '-' }}" id="companyNameInput"
+                                        name="company_name" placeholder="(example: PT. XYZ)">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -51,8 +52,8 @@
                                         class="form-control @error('company_phone')
                                         is-invalid
                                     @enderror"
-                                        id="companyNumberInput" name="company_phone"
-                                        placeholder="(example: 08XX-XXXX-XXXX)">
+                                        id="companyNumberInput" name="company_phone" placeholder="(example: 08XX-XXXX-XXXX)"
+                                        value="{{ $company->phone ? $company->phone : '-' }}">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -80,7 +81,8 @@
                                         is-invalid
                                     @enderror"
                                         id="companyEmailInput" name="company_spv"
-                                        placeholder="(example: yourname@email.com)">
+                                        placeholder="(example: yourname@email.com)"
+                                        value="{{ $company->pic_email ? $company->pic_email : '-' }}">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -108,7 +110,7 @@
                                         is-invalid
                                     @enderror"
                                         id="companyAddressInput" name="company_address"
-                                        placeholder="(example: Jl. Alamat No. 45)">
+                                        placeholder="(example: Jl. Alamat No. 45)" value="{!! $company->address ? $company->address : '-' !!}">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -136,9 +138,9 @@
                                         is-invalid
                                     @enderror"
                                         id="provinceInput" name="company_province" placeholder="(example: DKI Jakarta)">
-                                        <option disabled selected="Selected" value="null">Pilih
-                                            Provinsi
-                                            ...</option>
+                                        <option disabled selected="Selected" value="null">
+                                            {{ $company->province_string ? $company->province_string : 'Pilih Asal Provinsi ...' }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-4"></div>
@@ -167,9 +169,9 @@
                                         is-invalid
                                     @enderror"
                                         id="cityInput" name="company_city" placeholder="(example: DKI Jakarta)">
-                                        <option disabled selected="Selected" value="null">Pilih
-                                            Kota / Kabupaten
-                                            ...</option>
+                                        <option disabled selected="Selected" value="null">
+                                            {{ $company->city_string ? $company->city_string : 'Pilih Asal Kota ...' }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-4"></div>
@@ -198,9 +200,9 @@
                                         is-invalid
                                     @enderror"
                                         id="industryInput" name="company_industry">
-                                        <option disabled selected="Selected" value="null">Pilih
-                                            Industri
-                                            ...</option>
+                                        <option disabled selected="Selected" value="null">
+                                            {{ $company->industry_string ? $company->industry_string : 'Pilih Industri ...' }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-4"></div>
@@ -229,9 +231,9 @@
                                         is-invalid
                                     @enderror"
                                         id="sizeInput" name="company_size">
-                                        <option disabled selected="Selected" value="null">Pilih
-                                            Jumlah Karyawan
-                                            ...</option>
+                                        <option disabled selected="Selected" value="null">
+                                            {{ $company->company_size_string ? $company->company_size_string : 'Pilih jumlah karyawan ...' }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-4"></div>
@@ -259,7 +261,8 @@
                                         class="form-control @error('latitude')
                                         is-invalid
                                     @enderror"
-                                        id="lat" name="latitude">
+                                        id="lat" name="latitude"
+                                        value="{{ $company->latitude ? $company->latitude : '-' }}">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -286,7 +289,8 @@
                                         class="form-control @error('longitude')
                                         is-invalid
                                     @enderror"
-                                        id="lng" name="longitude">
+                                        id="lng" name="longitude"
+                                        value="{{ $company->longitude ? $company->longitude : '-' }}">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -478,8 +482,8 @@
 
                 $('#us2').locationpicker({
                     location: {
-                        latitude: -6.2297465,
-                        longitude: 106.829518
+                        latitude: $('#lat').val(),
+                        longitude: $('#lng').val()
                     },
                     radius: 0,
                     inputBinding: {

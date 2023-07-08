@@ -36,11 +36,17 @@
 
                 <div class="row mt-5">
                     <div class="col-5">
-                        <h4>informasi Bisnis</h4>
-                        <small class="mb-3" style="color: red">Anda belum membuat profil bisnis, mohon mengisi form informasi bisnis</small>
+                        <h4>Informasi Bisnis</h4>
+                        <small class="mb-3" style="color: red">Anda belum membuat profil bisnis, mohon mengisi form
+                            <strong>Informasi Bisnis</strong></small>
                     </div>
                     <div class="col-2 d-flex justify-content-end">
-                        <a href="{{ route('company.create') }}"><button type="button" class="btn btn-primary" style=" background-color: #444EFF; border-radius: 10px"><span class="fa-sharp fa-regular fa-pen-to-square fa-lg" style="margin-right: 10px;"></span>&nbsp;EDIT</button></a>
+                        <a
+                            href="{{ $user->company ? route('company.edit', [$user->company->id]) : route('company.store') }}"><button
+                                type="button" class="btn btn-primary"
+                                style=" background-color: #444EFF; border-radius: 10px"><span
+                                    class="fa-sharp fa-regular fa-pen-to-square fa-lg"
+                                    style="margin-right: 10px;"></span>&nbsp;EDIT</button></a>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -49,7 +55,7 @@
                             <p>Nama Bisnis</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->name : '-' }}
                         </div>
                     </div>
 
@@ -58,7 +64,7 @@
                             <p>No. Telephone</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->phone : '-' }}
                         </div>
                     </div>
 
@@ -67,7 +73,7 @@
                             <p>Email Supervisor</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->pic_email : '-' }}
                         </div>
                     </div>
 
@@ -76,7 +82,7 @@
                             <p>Alamat</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->address : '-' }}
                         </div>
                     </div>
 
@@ -85,7 +91,7 @@
                             <p>Provinsi</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->province_string : '-' }}
                         </div>
                     </div>
 
@@ -94,7 +100,7 @@
                             <p>Kota</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->city_string : '-' }}
                         </div>
                     </div>
 
@@ -103,7 +109,7 @@
                             <p>Industri Bisnis</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->industry_string : '-' }}
                         </div>
                         <div class="col-md-4"></div>
                     </div>
@@ -113,7 +119,7 @@
                             <p>Jumlah Pegawai</p>
                         </div>
                         <div class="col-md-6">
-                            -
+                            {{ $user->company ? $user->company->company_size_string : '-' }}
                         </div>
                     </div>
                 </div>
@@ -132,17 +138,13 @@
         </script>
     @endsection
 
-    @push('css')
-        <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css" rel="stylesheet">
-        <link href="{{ asset('plugins/jquery-datatables-checkboxes/css/dataTables.checkboxes.css') }}">
-    @endpush
-
     @push('scripts')
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-        <script src="{{ asset('plugins/jquery-datatables-checkboxes/js/dataTables.checkboxes.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1PP2kJkFxzX-L8Tbbr7FRR4kNfg8qaPI&callback=Function.prototype">
+        </script>
+        <script type="text/javascript"
+            src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 
         <script>
             $(document).ready(function() {
@@ -182,6 +184,29 @@
                     select: {
                         style: 'multi'
                     },
+                });
+
+                $(function() {
+
+                    $('#us2').locationpicker({
+                        location: {
+                            latitude: -6.2297465,
+                            longitude: 106.829518
+                        },
+                        radius: 0,
+                        inputBinding: {
+                            latitudeInput: $('#lat'),
+                            longitudeInput: $('#lng'),
+                        },
+                        enableAutocomplete: true,
+                        onchanged: function(currentLocation, radius, isMarkerDropped) {
+                            console.log("Location changed. New location (" + currentLocation
+                                .latitude +
+                                ", " + currentLocation.longitude + ")");
+                        }
+                    });
+
+
                 });
 
                 $('#deleteBulk').click(function() {

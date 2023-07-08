@@ -16,6 +16,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CompanyController extends Controller
 {
     /**
@@ -25,7 +27,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('backend.company.index');
+        $user = Sentinel::getUser();
+
+        return view('backend.company.index', compact('user'));
     }
 
     /**
@@ -64,11 +68,13 @@ class CompanyController extends Controller
             $companyDb->owner_id            = Sentinel::getUser()->id;
             $companyDb->created_by          = Sentinel::getUser()->name;
             $companyDb->created_at          = Carbon::now();
+            $companyDb->longitude           = $request->longitude;
+            $companyDb->latitude            = $request->latitude;
             $companyDb->save();
 
             DB::commit();
             toastr()->success('Anda telah berhasil membuat perusahaan!', 'Success');
-            return back();
+            return redirect()->route('company.index');
         } catch (\Exception $e) {
             Log::error("----------------------------------------------------");
             Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
@@ -88,7 +94,7 @@ class CompanyController extends Controller
 
     public function edit($id)
     {
-        //
+        return view('backend.company.edit', ['company' => Company::find($id)]);
     }
     public function update(Request $request, $id)
     {

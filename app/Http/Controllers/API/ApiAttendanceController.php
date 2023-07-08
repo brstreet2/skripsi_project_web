@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Passport\Token;
 use Lcobucci\JWT\Parser;
 
+
 class ApiAttendanceController extends Controller
 {
     public function post(Request $request)
@@ -36,6 +37,15 @@ class ApiAttendanceController extends Controller
             $tokenId    = app(Parser::class)->parse($bearerToken)->claims()->get('jti');
             $revoked    = Token::find($tokenId)->revoked;
 
+            if (!$request->latitude && !$request->longitude) {
+                return response()->json([
+                    'error'     => true,
+                    'message'   => 'Cannot detect Location',
+                    'data'      => '',
+                    'status'    => 401
+                ], 401);
+            }
+
             if ($revoked) {
                 DB::rollBack();
 
@@ -50,63 +60,81 @@ class ApiAttendanceController extends Controller
 
                 $user       = User::find($userId);
 
-                // $validator  = Validator::make($request->all(), [
-                //     'date'      => 'required',
-                // ]);
+                $lat        = (float) $request->latitude;
+                $long       = (float) $request->longitude;
+                $company    = $user->company_employees->company;
+                $comp_lat   = (float) $company->latitude;
+                $comp_long  = (float) $company->longitude;
+                $earthRadius = 6378137;
 
-                // if ($validator->fails()) {
-                //     return response()->json([
-                //         'error'     => true,
-                //         'message'   => 'Invalid Input',
-                //         'data'      => '',
-                //         'status'    => 403
-                //     ], 403);
-                // }
 
-                $employee_attendance_id     = $request->attendance_id;
-                $employee_attendance_date   = $request->date;
-                $employee_clock_in          = $request->clock_in;
-                $employee_clock_out         = $request->clock_out;
+                $latFrom = deg2rad($lat);
+                $lonFrom = deg2rad($long);
+                $latTo = deg2rad($comp_lat);
+                $lonTo = deg2rad($comp_long);
 
-                $employeeAttendanceDb               = EmployeeAttendance::where('employee_id', $user->id)->where('period', $request->date)->first();
+                $lonDelta   = $lonTo - $lonFrom;
+                $a          = pow(cos($latTo) * sin($lonDelta), 2) +
+                    pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
+                $b          = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
 
-                if ($employeeAttendanceDb) {
-                    $employeeAttendanceDetailDb             = EmployeeAttendanceDetail::where('attendance_id', $employeeAttendanceDb->id)->first();
-                    $employeeAttendanceDetailDb->clock_out  = $employee_clock_out;
-                    $employeeAttendanceDetailDb->save();
+                $angle = atan2(sqrt($a), $b);
 
-                    DB::commit();
-                    return response()->json([
-                        'error'     => false,
-                        'message'   => 'Attendance Recorded.',
-                        'data'      => $employeeAttendanceDetailDb,
-                        'status'    => 201
-                    ], 201);
-                } else {
-                    $employeeAttendanceDb               = new EmployeeAttendance();
-                    $employeeAttendanceDb->employee_id  = $user->id;
-                    $employeeAttendanceDb->period       = $request->date;
-                    $employeeAttendanceDb->save();
+                $result = $angle * $earthRadius;
 
-                    $employeeAttendanceDetailDb                 = new EmployeeAttendanceDetail();
-                    $employeeAttendanceDetailDb->attendance_id  = $employeeAttendanceDb->id;
-                    $employeeAttendanceDetailDb->date           = $request->date;
-                    $employeeAttendanceDetailDb->clock_in       = $employee_clock_in;
-                    if ($request->has('clock_out')) {
-                        $employeeAttendanceDetailDb->clock_out      = $employee_clock_out;
+                if ($result <= 200) {
+                    $employee_attendance_id     = $request->attendance_id;
+                    $employee_attendance_date   = $request->date;
+                    $employee_clock_in          = $request->clock_in;
+                    $employee_clock_out         = $request->clock_out;
+
+                    $employeeAttendanceDb               = EmployeeAttendance::where('employee_id', $user->id)->where('period', $request->date)->first();
+
+                    if ($employeeAttendanceDb) {
+                        $employeeAttendanceDetailDb             = EmployeeAttendanceDetail::where('attendance_id', $employeeAttendanceDb->id)->first();
+                        $employeeAttendanceDetailDb->clock_out  = $employee_clock_out;
+                        $employeeAttendanceDetailDb->save();
+
+                        DB::commit();
+                        return response()->json([
+                            'error'     => false,
+                            'message'   => 'Attendance Recorded.',
+                            'data'      => $employeeAttendanceDetailDb,
+                            'status'    => 201
+                        ], 201);
+                    } else {
+                        $employeeAttendanceDb               = new EmployeeAttendance();
+                        $employeeAttendanceDb->employee_id  = $user->id;
+                        $employeeAttendanceDb->period       = $request->date;
+                        $employeeAttendanceDb->save();
+
+                        $employeeAttendanceDetailDb                 = new EmployeeAttendanceDetail();
+                        $employeeAttendanceDetailDb->attendance_id  = $employeeAttendanceDb->id;
+                        $employeeAttendanceDetailDb->date           = $request->date;
+                        $employeeAttendanceDetailDb->clock_in       = $employee_clock_in;
+                        if ($request->has('clock_out')) {
+                            $employeeAttendanceDetailDb->clock_out      = $employee_clock_out;
+                        }
+                        $employeeAttendanceDetailDb->status         = 0;
+                        $employeeAttendanceDetailDb->status_string  = 'Waiting for Approval';
+                        $employeeAttendanceDetailDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
+                        $employeeAttendanceDetailDb->save();
+
+                        DB::commit();
+                        return response()->json([
+                            'error'     => false,
+                            'message'   => 'Attendance Recorded.',
+                            'data'      => $employeeAttendanceDetailDb,
+                            'status'    => 201
+                        ], 201);
                     }
-                    $employeeAttendanceDetailDb->status         = 0;
-                    $employeeAttendanceDetailDb->status_string  = 'Waiting for Approval';
-                    $employeeAttendanceDetailDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
-                    $employeeAttendanceDetailDb->save();
-
-                    DB::commit();
+                } else {
                     return response()->json([
-                        'error'     => false,
-                        'message'   => 'Attendance Recorded.',
-                        'data'      => $employeeAttendanceDetailDb,
-                        'status'    => 201
-                    ], 201);
+                        'error'         => false,
+                        'message'       => 'Too far away',
+                        'data'          => null,
+                        'status'        => 403
+                    ], 403);
                 }
             }
         } catch (\Exception $e) {

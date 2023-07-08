@@ -35,14 +35,15 @@
 <body id="body-pd" style="background-color: #f2f3ff ">
     <header class="header" id="header" style="background-color: #fcfcfc">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="header_img"><a href="/profile"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </a></div>
+        <div class="header_img"><a href="/profile"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </a>
+        </div>
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav_side">
             <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
                         class="nav_logo-name">TimKerjaKu</span> </a>
                 <div class="nav_list">
-                    @if (Sentinel::getUser()->company != null)
+                    @if (isset(Sentinel::getUser()->company) && !Sentinel::getUser()->company->company_employees->isEmpty())
                         <a href="{{ route('dashboard.index') }}"
                             class="nav_link {{ request()->route()->named('dashboard.*')? 'active-nav': '' }}"> <i
                                 class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Beranda</span></a>
@@ -68,7 +69,17 @@
                         <a href="{{ route('pricing.index') }}"
                             class="nav_link {{ request()->route()->named('pricing.*')? 'active-nav': '' }}"> <i
                                 class='bx bx-dollar-circle nav_icon'></i> <span class="nav_name">Upgrade</span> </a>
-                    @else
+                    @elseif (isset(Sentinel::getUser()->company) && Sentinel::getUser()->company->company_employees->isEmpty())
+                        <a href="{{ route('dashboard.index') }}"
+                            class="nav_link {{ request()->route()->named('dashboard.*')? 'active-nav': '' }}"> <i
+                                class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Beranda</span></a>
+                        <a href="{{ route('company.index') }}"
+                            class="nav_link {{ request()->route()->named('company.*')? 'active-nav': '' }}"> <i
+                                class='bx bx-buildings nav-icon'></i> <span class="nav_name">Profil Bisnis</span> </a>
+                        <a href="{{ route('employee.index') }}"
+                            class="nav_link {{ request()->route()->named('employee.*')? 'active-nav': '' }}"> <i
+                                class='bx bx-user nav_icon'></i> <span class="nav_name">Karyawan</span> </a>
+                    @elseif (!isset(Sentinel::getUser()->company) && !isset(Sentinel::getUser()->company->company_employees))
                         <a href="{{ route('dashboard.index') }}"
                             class="nav_link {{ request()->route()->named('dashboard.*')? 'active-nav': '' }}"> <i
                                 class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Beranda</span></a>

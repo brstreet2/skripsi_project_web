@@ -39,7 +39,8 @@ class EmployeesController extends Controller
             $data = [
                 'name'      => $request->name,
                 'email'     => $request->email,
-                'password'  => $request->password
+                'password'  => $request->password,
+                'phone'     => $request->phone
             ];
 
             $user   = Sentinel::registerAndActivate($data);
@@ -52,7 +53,6 @@ class EmployeesController extends Controller
             $userEmployeeDb->save();
 
             $userDb      = User::find($user->id);
-            $user->phone = $request->phone;
             $this->attach($userDb, 'Employee');
 
             $user->save();
