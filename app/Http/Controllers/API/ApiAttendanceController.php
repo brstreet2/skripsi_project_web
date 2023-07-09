@@ -9,6 +9,7 @@ use App\Models\EmployeeAttendanceDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Token;
 use Lcobucci\JWT\Parser;
 
@@ -81,6 +82,11 @@ class ApiAttendanceController extends Controller
                 $angle = atan2(sqrt($a), $b);
 
                 $result = $angle * $earthRadius;
+
+                Log::info("User: " . $user->name . " hit the API (post-attendance)");
+                Log::info("From: " . $lat . ", " . $long);
+                Log::info("To: " . $comp_lat . ", " . $comp_long);
+                Log::info("Radius: " . $result);
 
                 if ($result <= 200) {
                     $employee_attendance_id     = $request->attendance_id;
