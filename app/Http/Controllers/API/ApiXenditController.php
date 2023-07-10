@@ -15,7 +15,7 @@ class ApiXenditController extends Controller
 {
     public function va_created(Request $request)
     {
-        Xendit::setApiKey('xnd_development_jo4hshZNW3xKXPcJsBJFauH75tT0NucIGIj9uHWlHxJpVGOTAIPVCXZ');
+        Xendit::setApiKey('xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo');
 
         $id                  = $request->id;
         $external_id         = $request->external_id;
@@ -45,7 +45,7 @@ class ApiXenditController extends Controller
 
     public function va_paid(Request $request)
     {
-        Xendit::setApiKey('xnd_development_jo4hshZNW3xKXPcJsBJFauH75tT0NucIGIj9uHWlHxJpVGOTAIPVCXZ');
+        Xendit::setApiKey('xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo');
 
         $external_id         = $request->external_id;
         $bank_code           = $request->bank_code;

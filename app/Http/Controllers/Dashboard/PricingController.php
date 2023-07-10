@@ -70,7 +70,7 @@ class PricingController extends Controller
                 $transactionDb->created_by                     = $user->name;
                 $transactionDb->save();
 
-                Xendit::setApiKey('xnd_development_YFJm4CcsCZlhBkMiAHGs0buS0s613B5jBTHL5GzApXCcshsHTJkhPhfFeOBXUU');
+                Xendit::setApiKey('xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo');
 
                 $params = [
                     'external_id'           => $transactionDb->transaction_code,
@@ -126,7 +126,7 @@ class PricingController extends Controller
                 $transactionDb->created_by                      = $user->name;
                 $transactionDb->save();
 
-                Xendit::setApiKey('xnd_development_YFJm4CcsCZlhBkMiAHGs0buS0s613B5jBTHL5GzApXCcshsHTJkhPhfFeOBXUU');
+                Xendit::setApiKey('xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo');
 
                 $params = [
                     'external_id'           => $transactionDb->transaction_code,
@@ -183,7 +183,7 @@ class PricingController extends Controller
                 $transactionDb->created_by              = $user->name;
                 $transactionDb->save();
 
-                Xendit::setApiKey('xnd_development_YFJm4CcsCZlhBkMiAHGs0buS0s613B5jBTHL5GzApXCcshsHTJkhPhfFeOBXUU');
+                Xendit::setApiKey('xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo');
 
                 $params = [
                     'external_id'           => $transactionDb->transaction_code,
@@ -240,7 +240,7 @@ class PricingController extends Controller
                 $transactionDb->created_by              = $user->name;
                 $transactionDb->save();
 
-                Xendit::setApiKey('xnd_development_YFJm4CcsCZlhBkMiAHGs0buS0s613B5jBTHL5GzApXCcshsHTJkhPhfFeOBXUU');
+                Xendit::setApiKey('xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo');
 
                 $params = [
                     'external_id'           => $transactionDb->transaction_code,
