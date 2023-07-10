@@ -6,6 +6,7 @@ use App\Http\Controllers\API\ApiAuthController;
 use App\Http\Controllers\API\ApiDocumentController;
 use App\Http\Controllers\API\ApiPayrollController;
 use App\Http\Controllers\API\ApiTimeOffController;
+use App\Http\Controllers\API\ApiXenditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,7 @@ Route::get('/get-announcement', [ApiAnnouncementController::class, 'get'])->name
 // Api Timeoff
 Route::get('/get-timeoff', [ApiTimeOffController::class, 'get'])->name('api.get.timeoff');
 Route::post('/post-timeoff', [ApiTimeOffController::class, 'post'])->name('api.post.timeoff');
+
+// Xendit
+Route::post('/xendit/fva-created', [ApiXenditController::class, "va_created"])->name('payment.xendit.fva_created');
+Route::post('/xendit/fva-paid', [ApiXenditController::class, "va_paid"])->name('payment.xendit.fva_paid');
