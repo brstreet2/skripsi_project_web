@@ -42,7 +42,8 @@ class EmployeesController extends Controller
                 'name'      => $upperCaseName,
                 'email'     => $request->email,
                 'password'  => $request->password,
-                'phone'     => $request->phone
+                'phone'     => $request->phone,
+                'user_type' => 0
             ];
 
             $user   = Sentinel::registerAndActivate($data);

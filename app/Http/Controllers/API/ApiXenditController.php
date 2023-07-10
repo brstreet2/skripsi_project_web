@@ -69,7 +69,7 @@ class ApiXenditController extends Controller
 
 
             $user             = User::where('id', $transactionDb->user_id)->first();
-            $user->user_type  = 1;
+            $user->user_type  = 2;
             $user->updated_by = $user->name;
             $user->save();
             return 'PAID';

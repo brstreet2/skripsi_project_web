@@ -39,7 +39,8 @@ class AuthController extends Controller
             'name'      => $upperCaseName,
             'email'     => $request->email,
             'password'  => $request->password,
-            'token'     => ''
+            'token'     => '',
+            'user_type' => 1
         ];
 
         $find = User::where("email", $request->email)->first();
