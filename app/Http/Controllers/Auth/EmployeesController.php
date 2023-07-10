@@ -34,10 +34,12 @@ class EmployeesController extends Controller
             'job_title' => 'required'
         ]);
 
+        $upperCaseName = ucwords($request->name);
+
         DB::beginTransaction();
         try {
             $data = [
-                'name'      => $request->name,
+                'name'      => $upperCaseName,
                 'email'     => $request->email,
                 'password'  => $request->password,
                 'phone'     => $request->phone

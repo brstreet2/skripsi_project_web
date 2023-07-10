@@ -64,6 +64,10 @@ Route::group([
     'middleware'    => ["auth.middleware"],
 ], function () {
     Route::get('', [PricingController::class, 'index'])->name('index');
+    Route::post('proccess-payment-premium', [PricingController::class, 'storePremium'])->name('store.premium');
+    Route::post('process-payment-pro', [PricingController::class, 'storePro']);
+    Route::get('buy/premium', [PricingController::class, 'createPremium'])->name('create.premium');
+    Route::get('buy/pro', [PricingController::class, 'createPro'])->name('create.pro');
 });
 
 // Company

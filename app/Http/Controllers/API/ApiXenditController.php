@@ -32,12 +32,11 @@ class ApiXenditController extends Controller
                 $failure_code = '';
             }
 
-            $deposit = Transaction::where('transaction_id', $id)->first();
+            $transaction = Transaction::where('transaction_id', $id)->first();
 
-            if ($deposit) {
-                $deposit->transaction_status = $status;
-                $deposit->payment_method     = $bank_code . '_VA';
-                $deposit->save();
+            if ($transaction) {
+                $transaction->status_string      = $status;
+                $transaction->save();
             }
         }
 
@@ -58,25 +57,21 @@ class ApiXenditController extends Controller
         Log::info("VA_PAID DATA", [$external_id, $bank_code, $account_number, $amount, $payment_id, $paid_at]);
         Log::info("VA_PAID DATA #2: ", [$request]);
 
-        $depositDb          = Transaction::where('deposit_code', $external_id)->first();
-        Log::info("VA_DEPOSIT DATA", [$depositDb]);
+        $transactionDb       = Transaction::where('transaction_code', $external_id)->first();
+        Log::info("VA_DEPOSIT DATA", [$transactionDb]);
 
-        if ($depositDb) {
-            $depositDb->transaction_status      = 'PAID';
-            $depositDb->paid_at                 = $paid_at;
-            $depositDb->payment_id              = $payment_id;
-            $depositDb->save();
-            Log::info("DEPOSITDB #1", [$depositDb]);
-            $user       = Sentinel::findById($depositDb->user_id);
-            $logDepositDb = 'Deposit Code: ' . $external_id . ' has been completed by: ' . $user->name . ' (ID: ' . $depositDb->user_id . ')';
+        if ($transactionDb) {
+            $transactionDb->status_string           = 'PAID';
+            $transactionDb->paid_at                 = $paid_at;
+            $transactionDb->save();
+            Log::info("DEPOSITDB #1", [$transactionDb]);
+            $user       = Sentinel::findById($transactionDb->user_id);
 
-            $user = User::where('id', $depositDb->user_id)->first();
-            $user->saldo      = Transaction::where('user_id', $depositDb->user_id)->whereNotNull('paid_at')->sum('nominal');
+
+            $user             = User::where('id', $transactionDb->user_id)->first();
+            $user->user_type  = 1;
             $user->updated_by = $user->name;
             $user->save();
-
-            $logSaldo   = "User: " . $user->name . " (ID: " . $user->id . "), successfully added: " . $depositDb->nominal . ", current saldo: " . $user->saldo;
-
             return 'PAID';
         }
     }
