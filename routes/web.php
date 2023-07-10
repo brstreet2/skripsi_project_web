@@ -205,6 +205,11 @@ Route::get('/profile/security', function () {
     return view('backend.profile.security');
 });
 
+//change password
+Route::get('/profile/changepassword', function () {
+    return view('backend.profile.changepassword');
+});
+
 //forget password
 Route::get('/resetpassword', function () {
     return view('auth.forgot');

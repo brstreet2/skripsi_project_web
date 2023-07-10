@@ -69,15 +69,19 @@
                                             </div>
                                         @enderror
 
-                                        <div class="row mb-3 text-end">
-                                            <a href="/resetpassword"><small style="text-decoration: underline">Lupa Password</small></a>
+                                        <div class="row mb-5 text-end">
+                                            <div class="col-5">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                                    <small class="form-check-label" for="exampleCheck1"
+                                                        style="font-style: italic">Ingat Akun Saya</small>
+                                                </div>
+                                            </div>
+                                            <div class="col text-end">
+                                                <a href="/resetpassword"><small style="text-decoration: underline">Lupa Password</small></a>
+                                            </div>
                                         </div>
-
-                                        <div class="form-check mb-5">
-                                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                                            <small class="form-check-label" for="exampleCheck1"
-                                                style="font-style: italic">Ingat Akun Saya</small>
-                                        </div>
+                                        
 
                                         <div class="row mb-5">
                                             <div class="col-2"></div>

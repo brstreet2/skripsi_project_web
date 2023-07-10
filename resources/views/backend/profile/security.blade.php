@@ -42,15 +42,10 @@
     
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <a href=""><button type="button" class="btn btn-primary" style=" background-color: #444EFF; border-radius: 10px"><span class="fa-sharp fa-regular fa-pen-to-square fa-lg" style="margin-right: 10px;"></span>&nbsp;Ganti Password</button></a>
+                                <a href="/profile/changepassword"><button type="button" class="btn btn-primary" style=" background-color: #444EFF; border-radius: 10px"><span class="fa-sharp fa-regular fa-pen-to-square fa-lg" style="margin-right: 10px;"></span>&nbsp;Ganti Password</button></a>
                             </div>
                         </div>
-    
-                        <div class="row">
-                            <div class="col-md-4">
-                                <a href=""><button type="button" class="btn btn-primary" style=" background-color: #444EFF; border-radius: 10px"><span class="fa-sharp fa-regular fa-pen-to-square fa-lg" style="margin-right: 10px;"></span>&nbsp;Lupa Password</button></a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
         </div>
