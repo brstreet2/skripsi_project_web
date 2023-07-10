@@ -200,3 +200,8 @@ Route::get('/profile', function () {
 Route::get('/profile/security', function () {
     return view('backend.profile.security');
 });
+
+//forget password
+Route::get('/resetpassword', function () {
+    return view('auth.forgot');
+});
