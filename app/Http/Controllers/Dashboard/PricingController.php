@@ -42,7 +42,7 @@ class PricingController extends Controller
     {
         $user = Sentinel::getUser();
         $code = $request->payment_method;
-        if ($code == 'bca') {
+        if ($code == 'BCA') {
             try {
                 $user = Sentinel::getUser();
                 $date = date('ymd');
@@ -98,7 +98,7 @@ class PricingController extends Controller
             }
         }
 
-        if ($code == 'bni') {
+        if ($code == 'BNI') {
             try {
                 $user = Sentinel::getUser();
                 $date = date('ymd');
@@ -154,7 +154,7 @@ class PricingController extends Controller
             }
         }
 
-        if ($code == 'bri') {
+        if ($code == 'BRI') {
             try {
                 $user = Sentinel::getUser();
                 $date = date('ymd');
@@ -211,7 +211,7 @@ class PricingController extends Controller
             }
         }
 
-        if ($code == 'mandiri') {
+        if ($code == 'MANDIRI') {
             try {
                 $user = Sentinel::getUser();
                 $date = date('ymd');

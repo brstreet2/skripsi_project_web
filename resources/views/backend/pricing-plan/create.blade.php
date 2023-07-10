@@ -58,7 +58,7 @@
                                                 <div class="accordion-body">
                                                     <label for="radio-card-1" class="radio-card">
                                                         <input type="radio" name="payment_method" id="radio-card-1"
-                                                            value="bca" />
+                                                            value="BCA" />
                                                         <div class="card-content-wrapper">
                                                             <span class="check-icon"></span>
                                                             <div class="card-content text-center">
@@ -71,7 +71,7 @@
                                                     <!-- /.radio-card -->
                                                     <label for="radio-card-2" class="radio-card">
                                                         <input type="radio" name="payment_method" id="radio-card-2"
-                                                            value="mandiri" />
+                                                            value="MANDIRI" />
                                                         <div class="card-content-wrapper">
                                                             <span class="check-icon"></span>
                                                             <div class="card-content text-center">
@@ -84,7 +84,7 @@
                                                     <!-- /.radio-card -->
                                                     <label for="radio-card-3" class="radio-card">
                                                         <input type="radio" name="payment_method" id="radio-card-3"
-                                                            value="bri" />
+                                                            value="BRI" />
                                                         <div class="card-content-wrapper">
                                                             <span class="check-icon"></span>
                                                             <div class="card-content text-center">
@@ -97,7 +97,7 @@
                                                     <!-- /.radio-card -->
                                                     <label for="radio-card-4" class="radio-card">
                                                         <input type="radio" name="payment_method" id="radio-card-4"
-                                                            value="bni" />
+                                                            value="BNI" />
                                                         <div class="card-content-wrapper">
                                                             <span class="check-icon"></span>
                                                             <div class="card-content text-center">
