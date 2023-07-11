@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 
@@ -34,23 +35,36 @@ class PayrollController extends Controller
                 $employeeSlug   = Str::slug($employee->name, '-');
                 try {
                     $filePayroll                    = $request->file('fileToUpload');
-                    $destinationPath                = 'employee-payroll/' . $employeeSlug . '/' . Carbon::now()->format('Y-m') . '/';
+                    $hash                           = hash('md2', Sentinel::getUser()->company->id);
+                    $destinationPath                = 'company/' . $hash . '/employee-payroll/' . $employeeSlug . '/' . Carbon::now()->format('Y-m');
                     $originalFile                   = $filePayroll->getClientOriginalName();
                     $filenamePayroll                = strtotime(date('Y-m-d-H:isa')) . $originalFile;
-                    $filePayroll->move($destinationPath, $filenamePayroll);
-                    $payrollDb                  = new EmployeePayroll();
-                    $payrollDb->employee_id     = $request->user_id;
-                    $payrollDb->url             = 'http://skripsi_project_web.test/' . $destinationPath . $filenamePayroll;
-                    $payrollDb->date            = Carbon::now()->format('Y-m-d H:i:s');
-                    $payrollDb->save();
+                    try {
+                        $s3     = Storage::disk('s3')->put($destinationPath, $filePayroll, 'public');
+                        $url    = Storage::disk('s3')->url($s3);
 
-                    DB::commit();
-                    return response()->json([
-                        'error'   => false,
-                        'message' => 'OK',
-                        'data'    => $payrollDb,
-                        'status'  => 200
-                    ], 200);
+                        $payrollDb                  = new EmployeePayroll();
+                        $payrollDb->employee_id     = $request->user_id;
+                        $payrollDb->url             = $url;
+                        $payrollDb->date            = Carbon::now()->format('Y-m-d H:i:s');
+                        $payrollDb->save();
+
+                        DB::commit();
+                        return response()->json([
+                            'error'   => false,
+                            'message' => 'OK',
+                            'data'    => $payrollDb,
+                            'status'  => 200
+                        ], 200);
+                    } catch (\Exception $e) {
+                        report($e);
+                        return response()->json([
+                            'error'     => true,
+                            'message'   => $e->getMessage(),
+                            'data'      => [],
+                            'status'    => 500
+                        ], 500);
+                    }
                 } catch (\Exception $e) {
                     DB::rollBack();
                     return response()->json([
