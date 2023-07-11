@@ -67,7 +67,7 @@ class DocumentController extends Controller
             $filenamePath  = 'documents/' . $hash . '_' . $documentTemplate->slug . '.pdf';
             try {
                 $s3     = Storage::disk('s3')->put($filenamePath, $pdf->output(), 'public');
-                $url    = Storage::disk('s3')->url($filenamePath);
+                $url    = Storage::disk('s3')->url($s3);
             } catch (\Exception $e) {
                 report($e);
                 toastr()->error('Terjadi kesalahan ...', 'Error');
@@ -75,6 +75,7 @@ class DocumentController extends Controller
             }
             $documentTemplate->url              = $url;
             $documentTemplate->created_by       = $user->name;
+            $documentTemplate->company_id       = $user->company->id;
             $documentTemplate->save();
 
             DB::commit();
@@ -160,12 +161,9 @@ class DocumentController extends Controller
 
     public function datatables(Request $request)
     {
-        $select = [
-            'document_template.*'
-        ];
+        $user = Sentinel::getUser();
 
-        $dataDb = DocumentTemplate::select($select);
-
+        $dataDb = DocumentTemplate::where('company_id', $user->company->id);
         return DataTables::eloquent($dataDb)
             ->addColumn(
                 'action',

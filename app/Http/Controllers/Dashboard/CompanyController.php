@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Storage;
 use function PHPUnit\Framework\isEmpty;
 
 class CompanyController extends Controller
@@ -194,6 +194,49 @@ class CompanyController extends Controller
         } catch (\Exception $exception) {
             // dd($exception->getMessage());
             return $exception->getCode();
+        }
+    }
+
+    public function submitPhoto(Request $request)
+    {
+        $user = Sentinel::getUser();
+        DB::beginTransaction();
+        if ($request->hasFile('company_image')) {
+            $timestamp = Carbon::now();
+            $hash      = hash('md2', $timestamp);
+            $extension = $request->company_image->getClientOriginalExtension();
+            $filenamePath  = 'company_avatar/' . $hash . '_' . $user->company->id;
+            try {
+                $s3     = Storage::disk('s3')->put($filenamePath, $request->company_image, 'public');
+                $url    = Storage::disk('s3')->url($s3);
+
+                $companyDb              = Company::find($user->company->id);
+                $companyDb->ava_url     = $url;
+                $companyDb->save();
+
+                DB::commit();
+                return response()->json([
+                    'error'     => false,
+                    'message'   => 'success',
+                    'data'      => $request->company_image->getClientOriginalName(),
+                    'status'    => 200
+                ], 200);
+            } catch (\Exception $e) {
+                report($e);
+                return response()->json([
+                    'error'     => true,
+                    'message'   => $e->getMessage(),
+                    'data'      => [],
+                    'status'    => 500
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                'error'     => true,
+                'message'   => "NO INPUT!",
+                'data'      => [],
+                'status'    => 500
+            ], 500);
         }
     }
 }

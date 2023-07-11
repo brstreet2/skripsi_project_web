@@ -23,12 +23,18 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <div class="input-group mb-3">
-                                    <input type="file" id="imgInput" class="form-control" accept="image/png, image/jpeg"
-                                        style="border-radius: 2rem 0rem 0rem 2rem">
-                                    <button class="btn btn-primary" type="button" id="button-addon2"
-                                        style="background-color: #444EFF; border-radius: 0rem 2rem 2rem 0rem">Submit</button>
-                                </div>
+                                <form action="{{ route('company.submit.photo') }}" method="POST"
+                                    enctype="multipart/form-data" id="submitPhotoForm">
+                                    {{ csrf_field() }}
+                                    <div class="input-group mb-3">
+                                        <input type="file" id="imgInput" name="company_image" class="form-control"
+                                            accept="image/png, image/jpeg" style="border-radius: 2rem 0rem 0rem 2rem">
+                                        <button class="btn btn-primary" {{ Sentinel::getUser()->company ? '' : 'disabled' }}
+                                            type="submit" id="button-addon2"
+                                            style="background-color: #444EFF; border-radius: 0rem 2rem 2rem 0rem">Submit
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -127,15 +133,6 @@
         </div>
         {{-- @elseif (Sentinel::getUser()->company != null) --}}
         {{-- @endif --}}
-
-        <script>
-            imgInput.onchange = evt => {
-                const [file] = imgInput.files
-                if (file) {
-                    companyImage.src = URL.createObjectURL(file)
-                }
-            }
-        </script>
     @endsection
 
     @push('scripts')
@@ -148,44 +145,6 @@
 
         <script>
             $(document).ready(function() {
-                var table = $('#documentTable').DataTable({
-                    ajax: {
-                        url: '{!! route('document.ajax.datatables') !!}',
-                        dataType: 'json'
-                    },
-                    serverSide: true,
-                    order: [0, 0],
-                    columnDefs: [{
-                        targets: 0,
-                        checkboxes: {
-                            selectRow: true
-                        }
-                    }],
-                    columns: [{
-                            data: 'id',
-                            name: 'id',
-                            visible: true
-                        },
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {
-                            data: 'description',
-                            name: 'description'
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        }
-                    ],
-                    select: {
-                        style: 'multi'
-                    },
-                });
-
                 $(function() {
 
                     $('#us2').locationpicker({
@@ -209,132 +168,78 @@
 
                 });
 
-                $('#deleteBulk').click(function() {
-                    let form = $('#invisibleBulk');
-                    var rowSelected = table.column(0).checkboxes.selected();
-                    Swal.fire({
-                        title: 'Delete Confirmation',
-                        text: "Data will be removed permanently",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes',
-                        width: '28em',
-                        customClass: {
-                            confirmButton: 'px-5 btn btn-sm',
-                            cancelButton: 'px-5 btn btn-sm'
+                imgInput.onchange = evt => {
+                    const [file] = imgInput.files
+                    if (file) {
+                        companyImage.src = URL.createObjectURL(file)
+                    }
+                }
+
+                if ($('#imgInput').val() === "") {
+                    $('#button-addon2').prop("disabled", true);
+                }
+
+                $('#imgInput').change(function() {
+                    $('#button-addon2').prop("disabled", false);
+                    if ($(this).val() === "") {
+                        $('#button-addon2').prop("disabled", true);
+                    }
+                });
+
+                $('#submitPhotoForm').submit(function(e) {
+                    e.preventDefault();
+
+                    var form = $(this);
+                    var actionUrl = form.attr('action');
+                    var submitBtn = $('#button-addon2');
+                    var formData = new FormData($("#submitPhotoForm")[0]);
+                    BtnLoading(submitBtn);
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.each(rowSelected, function(index, rowId) {
-                                let id = [rowId];
-                                $.ajax({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
-                                            .attr('content')
-                                    },
-                                    method: "POST",
-                                    url: "{{ route('document.destroy.bulk') }}",
-                                    data: {
-                                        "_token": "{{ csrf_token() }}",
-                                        'id': id,
-                                    },
-                                    success: function(data) {
-                                        Swal.fire({
-                                            position: 'center',
-                                            icon: 'success',
-                                            title: 'Data successfully deleted!',
-                                            showConfirmButton: false,
-                                            timer: 15004,
-                                            width: '28em',
-                                        })
-                                    },
-                                    error: function(data) {
-                                        console.log("Error Status: ", data.status);
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: 'There was an error!',
-                                            footer: '<a>Try again later ...</a>',
-                                            width: '28em'
-                                        })
-                                    }
-                                });
-                            });
-                        } else {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'error',
-                                title: 'Cancelled',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                width: '28em',
-                            })
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: actionUrl,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            BtnReset(submitBtn);
+                            console.log(data);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            BtnReset(submitBtn);
+                            console.log(errorThrown);
                         }
                     });
                 });
 
-                $(document).on('click', '#deleteButton', function() {
-                    var thisData = $('#deleteButton');
-                    Swal.fire({
-                        title: 'Remove ' + thisData.data('name') + '?',
-                        text: 'This data will be permanently removed from our system.',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes',
-                        width: '28em',
-                        customClass: {
-                            confirmButton: 'px-5 btn btn-sm',
-                            cancelButton: 'px-5 btn btn-sm'
+                function BtnLoading(elem) {
+                    $(elem).attr("data-original-text", $(elem).html());
+                    $(elem).prop("disabled", true);
+                    $(elem).html('<i class="spinner-border spinner-border-sm"></i>');
+                }
+
+                function BtnReset(elem) {
+                    $(elem).prop("disabled", false);
+                    $(elem).html($(elem).attr("data-original-text"));
+                }
+
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('#imgInput').css('background-image', 'url(' + e.target.result + ')');
+                            $('#imgInput').hide();
+                            $('#imgInput').fadeIn(650);
                         }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            var url = "{{ route('document.destroy', ':id') }}";
-                            url = url.replace(':id', thisData.data('id'));
-                            $.ajax({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
-                                        .attr('content')
-                                },
-                                method: 'DELETE',
-                                url: url,
-                                success: function(data) {
-                                    table.ajax.reload();
-                                    Swal.fire({
-                                        position: 'center',
-                                        icon: 'success',
-                                        title: 'Data successfully deleted!',
-                                        showConfirmButton: false,
-                                        timer: 15004,
-                                        width: '28em',
-                                    })
-                                },
-                                error: function(data) {
-                                    console.log("Error Status: ", data.status);
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'There was an error!',
-                                        footer: '<a>Try again later ...</a>',
-                                        width: '28em'
-                                    })
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'error',
-                                title: 'Cancelled',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                width: '28em',
-                            })
-                        }
-                    });
-                });
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
             });
         </script>
     @endpush

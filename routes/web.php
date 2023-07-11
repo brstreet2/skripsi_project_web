@@ -84,6 +84,7 @@ Route::group([
     Route::post('/ajax/regencies', [CompanyController::class, 'getRegencies'])->name('ajax.regencies');
     Route::get('/ajax/industries', [CompanyController::class, 'getIndustries'])->name('ajax.industries');
     Route::get('/ajax/company/size', [CompanyController::class, 'getCompanySizes'])->name('ajax.sizes');
+    Route::post('submit/photo', [CompanyController::class, 'submitPhoto'])->name('submit.photo');
 });
 
 
