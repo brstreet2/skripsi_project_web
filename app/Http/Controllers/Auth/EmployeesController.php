@@ -57,49 +57,55 @@ class EmployeesController extends Controller
             return back();
         }
 
-        $upperCaseName = ucwords($request->name);
-
-        DB::beginTransaction();
-        try {
-            $data = [
-                'name'      => $upperCaseName,
-                'email'     => $request->email,
-                'password'  => $request->password,
-                'phone'     => $request->phone,
-                'user_type' => 0
-            ];
-
-            $user   = Sentinel::registerAndActivate($data);
-
-            $userEmployeeDb                 = new CompanyEmployees();
-            $userEmployeeDb->user_id        = $user->id;
-            $userEmployeeDb->company_id     = $senUser->company->id;
-            $userEmployeeDb->job_title      = $request->job_title;
-            $userEmployeeDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
-            $userEmployeeDb->save();
-
-            $userDb      = User::find($user->id);
-            $this->attach($userDb, 'Employee');
-
-            $user->save();
-
-            toastr()->success('Karyawan berhasil ditambahkan.', 'Success');
-            DB::commit();
+        $find = User::where("email", $request->email)->first();
+        if ($find) {
+            toastr()->error('Email telah terdaftar!', 'Error');
             return back();
-        } catch (\Exception $e) {
-            Log::error("----------------------------------------------------");
-            Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
-            Log::error("Error Exception Code: " . $e->getCode());
-            Log::error("Error at controller: EmployeesController");
-            Log::error("Error at function / method: store");
-            Log::error("Error Message: " . $e->getMessage());
-            Log::error("Rolling Back Process ...");
-            DB::rollback();
-            Log::error("Rollback Success!");
-            Log::error("Redirecting back ...");
-            Log::error("----------------------------------------------------");
-            toastr()->error('Terjadi kesalahan ...', 'Error');
-            return back();
+        } else {
+            $upperCaseName = ucwords($request->name);
+
+            DB::beginTransaction();
+            try {
+                $data = [
+                    'name'      => $upperCaseName,
+                    'email'     => $request->email,
+                    'password'  => $request->password,
+                    'phone'     => $request->phone,
+                    'user_type' => 0
+                ];
+
+                $user   = Sentinel::registerAndActivate($data);
+
+                $userEmployeeDb                 = new CompanyEmployees();
+                $userEmployeeDb->user_id        = $user->id;
+                $userEmployeeDb->company_id     = $senUser->company->id;
+                $userEmployeeDb->job_title      = $request->job_title;
+                $userEmployeeDb->created_at     = Carbon::now()->format('Y-m-d H:i:s');
+                $userEmployeeDb->save();
+
+                $userDb      = User::find($user->id);
+                $this->attach($userDb, 'Employee');
+
+                $user->save();
+
+                toastr()->success('Karyawan berhasil ditambahkan.', 'Success');
+                DB::commit();
+                return back();
+            } catch (\Exception $e) {
+                Log::error("----------------------------------------------------");
+                Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
+                Log::error("Error Exception Code: " . $e->getCode());
+                Log::error("Error at controller: EmployeesController");
+                Log::error("Error at function / method: store");
+                Log::error("Error Message: " . $e->getMessage());
+                Log::error("Rolling Back Process ...");
+                DB::rollback();
+                Log::error("Rollback Success!");
+                Log::error("Redirecting back ...");
+                Log::error("----------------------------------------------------");
+                toastr()->error('Terjadi kesalahan ...', 'Error');
+                return back();
+            }
         }
     }
 
