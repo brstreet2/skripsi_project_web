@@ -35,8 +35,14 @@
 <body id="body-pd" style="background-color: #f2f3ff ">
     <header class="header" id="header" style="background-color: #fcfcfc">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="header_img"><a href="{{ route('profile.index') }}"> <img src="https://i.imgur.com/hczKIze.jpg"
-                    alt=""> </a>
+        <div class="header_img"><a href="{{ route('profile.index') }}">
+                @if (Sentinel::getUser()->avatar != null)
+                    <img src="{{ Sentinel::getUser()->avatar }}" alt="">
+                @else
+                    <img
+                        src="https://s3-id-jkt-1.kilatstorage.id/timkerjaku/428-4287240_no-avatar-user-circle-icon-png.png" />
+                @endif
+            </a>
         </div>
     </header>
     <div class="l-navbar" id="nav-bar">

@@ -8,6 +8,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -42,10 +43,30 @@ class ProfileController extends Controller
 
         DB::beginTransaction();
         try {
-            $user->name     = $request->name;
-            $user->email    = $request->email;
-            $user->phone    = $request->phone;
-            $user->save();
+
+            if ($request->hasFile('file_avatar')) {
+                $timestamp = Carbon::now();
+                $hash      = hash('md2', $timestamp);
+                $extension = $request->file_avatar->getClientOriginalExtension();
+                $filenamePath  = 'users/' . $hash . '_' . $user->id;
+                try {
+                    $s3     = Storage::disk('s3')->put($filenamePath, $request->file_avatar, 'public');
+                    $url    = Storage::disk('s3')->url($s3);
+                    $user->name     = $request->name;
+                    $user->email    = $request->email;
+                    $user->phone    = $request->phone;
+                    $user->avatar   = $url;
+                    $user->save();
+                } catch (\Exception $e) {
+                    toastr()->error('Terjadi kesalahan ...', 'Error');
+                    return back();
+                }
+            } else {
+                $user->name     = $request->name;
+                $user->email    = $request->email;
+                $user->phone    = $request->phone;
+                $user->save();
+            }
 
             DB::commit();
             toastr()->success('Profil berhasil disimpan!', 'Success');

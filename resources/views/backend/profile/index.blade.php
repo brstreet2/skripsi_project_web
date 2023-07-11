@@ -14,8 +14,14 @@
                         <div class="col"></div>
                         <div class="col-md-8 mt-4">
                             <div class="card" style="border-style: none;">
-                                <img class="card-img-top" id="profileImg" src="..." alt="No Logo Yet :("
-                                    onerror="this.onerror=null; this.src='{{ asset('assets/no-image.png') }}'";>
+                                @if (Sentinel::getUser()->avatar == null)
+                                    <img class="card-img-top" id="profileImg"
+                                        src="https://s3-id-jkt-1.kilatstorage.id/timkerjaku/428-4287240_no-avatar-user-circle-icon-png.png" />
+                                @else
+                                    <div class="avatar-wrapper">
+                                        <img class="profile-pic" src="{{ Sentinel::getUser()->avatar }}" />
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="col"></div>

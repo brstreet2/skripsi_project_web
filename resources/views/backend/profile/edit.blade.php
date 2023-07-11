@@ -7,22 +7,39 @@
                 {{ Sentinel::getUser()->name }}
             </h4>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col col-md-4 col-sm-12">
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col-md-8 mt-4">
-                            <div class="card" style="border-style: none;">
-                                <img class="card-img-top" id="profileImg" src="..." alt="No Logo Yet :("
-                                    onerror="this.onerror=null; this.src='{{ asset('assets/no-image.png') }}'";>
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-md-4 col-sm-12">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-md-8 mt-4">
+                                <div class="card" style="border-style: none;">
+                                    @if (Sentinel::getUser()->avatar == null)
+                                        <div class="avatar-wrapper">
+                                            <img class="profile-pic" src="" />
+                                            <div class="upload-button">
+                                                <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="file-upload" name="file_avatar" type="file" accept="image/*" />
+                                        </div>
+                                    @else
+                                        <div class="avatar-wrapper">
+                                            <img class="profile-pic" src="{{ Sentinel::getUser()->avatar }}" />
+                                            <div class="upload-button">
+                                                <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="file-upload" name="file_avatar" type="file" accept="image/*" />
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
+                            <div class="col"></div>
                         </div>
-                        <div class="col"></div>
                     </div>
-                </div>
-                <form action="{{ route('profile.update') }}" method="POST">
-                    {{ csrf_field() }}
+
+
                     <div class="col col-md-6 col-sm-12">
                         <div class="row mt-4">
                             <div class="row">
@@ -74,8 +91,34 @@
                                     class="fa-sharp fa-regular fa-pen-to-square fa-lg"
                                     style="margin-right: 10px;"></span>&nbsp;SIMPAN</button></a>
                     </div>
-                </form>
-            </div>
-        </div>
+        </form>
+    </div>
+    </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+
+            var readURL = function(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('.profile-pic').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $(".file-upload").on('change', function() {
+                readURL(this);
+            });
+
+            $(".upload-button").on('click', function() {
+                $(".file-upload").click();
+            });
+        });
+    </script>
+@endpush
