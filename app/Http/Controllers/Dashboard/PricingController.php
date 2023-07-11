@@ -130,7 +130,7 @@ class PricingController extends Controller
 
                 DB::commit();
                 return back();
-            } catch (\Exception $exception) {
+            } catch (\Exception $e) {
                 Log::error("----------------------------------------------------");
                 Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
                 Log::error("Error Exception Code: " . $e->getCode());
@@ -196,7 +196,7 @@ class PricingController extends Controller
 
                 DB::commit();
                 return back();
-            } catch (\Exception $exception) {
+            } catch (\Exception $e) {
                 Log::error("----------------------------------------------------");
                 Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
                 Log::error("Error Exception Code: " . $e->getCode());
@@ -263,7 +263,7 @@ class PricingController extends Controller
 
                 DB::commit();
                 return back();
-            } catch (\Exception $exception) {
+            } catch (\Exception $e) {
                 Log::error("----------------------------------------------------");
                 Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
                 Log::error("Error Exception Code: " . $e->getCode());
@@ -330,7 +330,7 @@ class PricingController extends Controller
 
                 DB::commit();
                 return back();
-            } catch (\Exception $exception) {
+            } catch (\Exception $e) {
                 Log::error("----------------------------------------------------");
                 Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
                 Log::error("Error Exception Code: " . $e->getCode());
@@ -468,7 +468,7 @@ class PricingController extends Controller
 
                 DB::commit();
                 return back();
-            } catch (\Exception $exception) {
+            } catch (\Exception $e) {
                 Log::error("----------------------------------------------------");
                 Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
                 Log::error("Error Exception Code: " . $e->getCode());
@@ -535,7 +535,7 @@ class PricingController extends Controller
 
                 DB::commit();
                 return back();
-            } catch (\Exception $exception) {
+            } catch (\Exception $e) {
                 Log::error("----------------------------------------------------");
                 Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
                 Log::error("Error Exception Code: " . $e->getCode());
