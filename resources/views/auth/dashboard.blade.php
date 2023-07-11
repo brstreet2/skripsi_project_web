@@ -2,11 +2,8 @@
 
 @section('content')
     <link href="home.css" rel="stylesheet" />
-    <div class="home-container container-fluid">
-
-      <section class="home-hero">
-
-        <div class="home-main row">
+    <div class="container-fluid">
+        <div class="row mb-5">
           <div class="col-md-6 align-self-center">
             <div class="card" style="border: none; background-color: transparent">
               <div class="card-header" style="background-color: transparent">
@@ -20,7 +17,7 @@
               </div>
               <div class="card-footer" style="background-color: transparent; border-top: 2px solid white">
                 <a href="/register">
-                  <button class="btn btn-lg rounded-pill btn-light mt-4 fw-bold">
+                  <button class="btn btn-lg rounded-pill btn-light mt-4 fw-bold" style="color: #444EFF">
                       Registrasi Sekarang!
                   </button>
                 </a>
@@ -43,43 +40,41 @@
           </div>
         </div>
 
-          <div class="row mt-5 mb-5">
-            <div class="col-md-4 col-sm-12 mb-2">
-              <div class="card">
-                <div class="card-body text-center">
-                  <p class="home-text3">
-                    Kemudahan dalam mengelola Sumber Daya Manusia
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-12 mb-2">
-              <div class="card">
-                <div class="card-body text-center">
-                  <p class="home-text4">
-                    Interaksi cepat antar sistem via website dan mobile app
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-12 mb-2">
-              <div class="card">
-                <div class="card-body text-center">
-                  <p class="home-text5">Opsi pilihan penggunaan yang terjangkau</p>
-                </div>
+        <div class="row mt-5 mb-5">
+          <div class="col-md-4 col-sm-12 mb-2">
+            <div class="card" style="border: none; background-color: transparent">
+              <div class="card-body text-center">
+                <h5 class="text-light">
+                  Kemudahan dalam mengelola Sumber Daya Manusia
+                </h5>
               </div>
             </div>
           </div>
-
-      </section>
+          <div class="col-md-4 col-sm-12 mb-2">
+            <div class="card" style="border: none; background-color: transparent">
+              <div class="card-body text-center">
+                <h5 class="text-light">
+                  Interaksi cepat antar sistem via Website dan Mobile App
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 mb-2">
+            <div class="card" style="border: none; background-color: transparent">
+              <div class="card-body text-center">
+                <h5 class="text-light">Opsi pilihan penggunaan yang terjangkau</h5>
+              </div>
+            </div>
+          </div>
+        </div>
 
       <div class="row mb-5" id="tentangkami">
 
         <div class="col-md-6 align-self-center">
-          <div class="card">
+          <div class="card" style="border: none; background-color: transparent">
             <div class="card-body p-5">
-              <p>Solusi Kami</p>
-              <h2>
+              <h5 class="mb-3 text-light" style="text-decoration: underline">Solusi Kami</h5>
+              <h2 class="text-light">
                 Membantu anda mengelola Pegawai / Karyawan untuk meningkatkan
                 produktivitas bisnis anda
               </h2>
@@ -115,10 +110,10 @@
           </div>
         </div>
         <div class="col-md-6 align-self-center">
-          <div class="card p-5">
+          <div class="card p-5" style="border: none; background-color: transparent">
             <div class="card-body">
-              <p  id="produkkami">Produk Kami</p>
-              <h2>
+              <h5 id="produkkami" class="text-light" style="text-decoration: underline">Produk Kami</h5>
+              <h2 class="text-light">
                 Sistem Pengelolaan Sumber Daya Manusia berbasis Website dan Mobile
                 Apps Android
               </h2>
