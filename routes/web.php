@@ -36,6 +36,10 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
     Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/forgot-password', [AuthController::class, 'forgotPassForm'])->name('forgot');
+    Route::post('/forgot-password', [AuthController::class, 'forgotPass'])->name('forgot.post');
+    Route::get('/set-password/{token}', [AuthController::class, 'setPasswordForm'])->name('set.password');
+    Route::post('/set-password/{token}', [AuthController::class, 'setPassword'])->name('set.password.post');
 });
 
 // Profile
