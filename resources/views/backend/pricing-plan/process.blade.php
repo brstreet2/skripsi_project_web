@@ -9,7 +9,7 @@
         <div class="card" style="border-radius: .75rem; border: none; background-color: #fcfcfc;">
             <div class="card-body text-center" onload="_cntDown=setInterval('ShowTimes()',1000)">
                 <h3>Selesaikan Pembayaran Dalam</h3>
-                <h2 class="text-danger">23:59:59</h2>
+                <h2 class="text-danger" id="timerCountdown"></h2>
                 <div id="demo"></div>
                 <div class="row mt-3 mb-3">
                     <div class="col-md-2">
@@ -107,3 +107,14 @@
         }
     </script>
 @endsection
+@push('scripts')
+    <script src="{{ asset('plugins/jQuery-countdown/dist/jquery.countdown.js') }}"></script>
+
+    <script>
+        $('document').ready(function() {
+            $('#timerCountdown').countdown('{{ $transactionDb->expired_date }}', function(event) {
+                $(this).html(event.strftime('%d hari %H:%M:%S'));
+            });
+        });
+    </script>
+@endpush
