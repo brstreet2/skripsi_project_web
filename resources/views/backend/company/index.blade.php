@@ -158,28 +158,6 @@
 
         <script>
             $(document).ready(function() {
-                $(function() {
-
-                    $('#us2').locationpicker({
-                        location: {
-                            latitude: -6.2297465,
-                            longitude: 106.829518
-                        },
-                        radius: 0,
-                        inputBinding: {
-                            latitudeInput: $('#lat'),
-                            longitudeInput: $('#lng'),
-                        },
-                        enableAutocomplete: true,
-                        onchanged: function(currentLocation, radius, isMarkerDropped) {
-                            console.log("Location changed. New location (" + currentLocation
-                                .latitude +
-                                ", " + currentLocation.longitude + ")");
-                        }
-                    });
-
-
-                });
 
                 imgInput.onchange = evt => {
                     const [file] = imgInput.files
