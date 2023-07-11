@@ -19,6 +19,7 @@ class EmployeesController extends Controller
 
     public function index()
     {
+        // dd(count(Sentinel::getUser()->company->company_employees));
         return view('backend.employees.index');
     }
 
@@ -33,6 +34,28 @@ class EmployeesController extends Controller
             'phone'     => 'required',
             'job_title' => 'required'
         ]);
+
+        $check      = count($senUser->company->company_employees);
+
+        if ($senUser->user_type == 1) {
+            $user_type = 'free';
+            $limit     = 4;
+        }
+
+        if ($senUser->user_type == 2) {
+            $user_type = 'premium';
+            $limit     = 25;
+        }
+
+        if ($senUser->user_type == 3) {
+            $user_type = 'pro';
+            $limit     = 100;
+        }
+
+        if ($check >= $limit) {
+            toastr()->error('Limit karyawan telah tercapai!', 'Error');
+            return back();
+        }
 
         $upperCaseName = ucwords($request->name);
 
