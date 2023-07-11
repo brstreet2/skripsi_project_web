@@ -11,7 +11,7 @@
                 <div class="container mt-2 mb-3">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="d-flex flex-row align-items-center">
-                            <img src="{{ asset('assets/logo2_nobg.png') }}" class="img-fluid" width="200px"/>
+                            <img src="{{ asset('assets/logo2_nobg.png') }}" class="img-fluid" width="200px" />
                         </div>
                     </div>
                     <div class="row">
@@ -58,12 +58,15 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-check mb-2">
-                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="flexRadioDefault" name="payment_method"
+                                                                    value="BCA" id="flexRadioDefault1">
                                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                                     <figure class="figure">
                                                                         <img src="https://www.bca.co.id/-/media/Feature/Header/Header-Logo/logo-bca.svg?"
-                                                                        class="img-fluid img-thumbnail" style="max-width: 150px" alt="BCA"/>
-                                                                    <figcaption class="figure-caption">BCA</figcaption>
+                                                                            class="img-fluid img-thumbnail"
+                                                                            style="max-width: 150px" alt="BCA" />
+                                                                        <figcaption class="figure-caption">BCA</figcaption>
                                                                     </figure>
 
                                                                 </label>
@@ -71,38 +74,48 @@
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-check mb-2">
-                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                                        <figure class="figure">
-                                                                            <img src="https://bankmandiri.co.id/image/layout_set_logo?img_id=31567&t=1678035789124"
-                                                                            class="img-fluid img-thumbnail" style="max-width: 150px" alt="Mandiri"/>
-                                                                        <figcaption class="figure-caption">Mandiri</figcaption>
-                                                                        </figure>
-                                                                    </label>
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="payment_method" value="MANDIRI"
+                                                                    id="flexRadioDefault2">
+                                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                                    <figure class="figure">
+                                                                        <img src="https://bankmandiri.co.id/image/layout_set_logo?img_id=31567&t=1678035789124"
+                                                                            class="img-fluid img-thumbnail"
+                                                                            style="max-width: 150px" alt="Mandiri" />
+                                                                        <figcaption class="figure-caption">Mandiri
+                                                                        </figcaption>
+                                                                    </figure>
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-check mb-2">
-                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="payment_method" value="BRI"
+                                                                    id="flexRadioDefault3">
                                                                 <label class="form-check-label" for="flexRadioDefault3">
                                                                     <figure class="figure">
                                                                         <img src="https://bri.co.id/o/bri-corporate-theme/images/bri-logo.png"
-                                                                        class="img-fluid img-thumbnail" style="max-width: 150px" alt="BRI"/>
-                                                                    <figcaption class="figure-caption">BRI</figcaption>
+                                                                            class="img-fluid img-thumbnail"
+                                                                            style="max-width: 150px" alt="BRI" />
+                                                                        <figcaption class="figure-caption">BRI</figcaption>
                                                                     </figure>
                                                                 </label>
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-check mb-2">
-                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="payment_method" value="BNI"
+                                                                    id="flexRadioDefault4">
                                                                 <label class="form-check-label" for="flexRadioDefault4">
                                                                     <figure class="figure">
                                                                         <img src="https://www.bni.co.id/Portals/1/bni-logo-id.png"
-                                                                    class="img-fluid img-thumbnail" style="max-width: 150px" alt="BNI"/>
-                                                                    <figcaption class="figure-caption">BNI</figcaption>
+                                                                            class="img-fluid img-thumbnail"
+                                                                            style="max-width: 150px" alt="BNI" />
+                                                                        <figcaption class="figure-caption">BNI</figcaption>
                                                                     </figure>
                                                                 </label>
                                                             </div>
@@ -116,7 +129,8 @@
 
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn btn-primary mt-2 rounded-pill" type="submit" style="background-color: #444eff">Lanjutkan Pembayaran</button>
+                                        <button class="btn btn-primary mt-2 rounded-pill" type="submit"
+                                            style="background-color: #444eff">Lanjutkan Pembayaran</button>
                                     </div>
 
                                 </div>
