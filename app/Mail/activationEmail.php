@@ -33,7 +33,7 @@ class activationEmail extends Mailable
         $user  = $this->user;
         $code  = $this->code;
 
-        return $this->subject('Instructions to activate your account.')
-                    ->view('template.template-activate', compact('user','code'));
+        return $this->subject('TimKerjaKu Verifikasi Email.')
+            ->view('template.template-activate', compact('user', 'code'));
     }
 }

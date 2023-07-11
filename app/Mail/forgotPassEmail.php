@@ -33,7 +33,7 @@ class forgotPassEmail extends Mailable
         $user  = $this->user;
         $code  = $this->code;
 
-        return $this->subject('Instructions for changing your account password.')
+        return $this->subject('TimKerjaKu Lupa Password.')
             ->view('template.forgot-password-mail', compact('user', 'code'));
     }
 }
