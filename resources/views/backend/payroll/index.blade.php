@@ -4,7 +4,9 @@
         <h5 class="font-mpb mb-2 text-color-primary">
             <strong>SLIP GAJI</strong>
         </h5>
-        {{-- <p class="mb-3" style="font-size: 16px">Upload Slip Gaji</p> --}}
+        <p class="mb-3" style="font-size: 16px">Slip Gaji Bulan:
+            <strong class="fw-bold">{{ Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('F') }}</strong>
+        </p>
         <div class="card" style="border: none; background-color: #fcfcfc; border-radius: .5rem">
             <div class="card-body">
                 <table id="employee_table" class="table table-borderless text-center" style="width: 100%">
