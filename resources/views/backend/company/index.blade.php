@@ -12,8 +12,9 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="card">
-                            <img class="card-img-top" id="companyImage" src="..." alt="No Logo Yet :("
-                                onerror="this.onerror=null; this.src='assets/no-image.png'";>
+                            <img class="card-img-top" id="companyImage"
+                                src="{{ Sentinel::getUser()->company ? Sentinel::getUser()->company->ava_url : '' }}"
+                                alt="No Logo Yet :(" onerror="this.onerror=null; this.src='assets/no-image.png'";>
                         </div>
                     </div>
 
