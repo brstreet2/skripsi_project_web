@@ -227,3 +227,8 @@ Route::get('/profile/changepassword', function () {
 Route::get('/resetpassword', function () {
     return view('auth.forgot');
 });
+
+//forget password
+Route::get('/pricing/process', function () {
+    return view('backend.pricing-plan.process');
+});
