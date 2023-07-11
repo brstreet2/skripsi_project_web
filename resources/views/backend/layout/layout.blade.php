@@ -35,7 +35,8 @@
 <body id="body-pd" style="background-color: #f2f3ff ">
     <header class="header" id="header" style="background-color: #fcfcfc">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="header_img"><a href="/profile"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </a>
+        <div class="header_img"><a href="{{ route('profile.index') }}"> <img src="https://i.imgur.com/hczKIze.jpg"
+                    alt=""> </a>
         </div>
     </header>
     <div class="l-navbar" id="nav-bar">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\EmployeesController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Dashboard\AnnouncementController;
 use App\Http\Controllers\Dashboard\AttendanceController;
 use App\Http\Controllers\Dashboard\CompanyController;
@@ -35,6 +36,17 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
     Route::get("/activate/{code}", [AuthController::class, "activateAccount"])->name('activate');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// Profile
+Route::group([
+    'as'        => "profile.",
+    'prefix'    => "profile",
+    'middleware'    => ["auth.middleware"],
+], function () {
+    Route::get('', [ProfileController::class, 'index'])->name('index');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+    Route::post('/update', [ProfileController::class, 'update'])->name('update');
 });
 
 // Report
@@ -194,11 +206,6 @@ Route::get('/announcement', function () {
 //announcement
 Route::get('/employee/edit', function () {
     return view('backend.employees.edit');
-});
-
-//profile
-Route::get('/profile', function () {
-    return view('backend.profile.index');
 });
 
 //edit profile
