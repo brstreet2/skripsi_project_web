@@ -176,7 +176,7 @@ class EmployeesController extends Controller
         return DataTables::of($dataDb)
             ->addColumn('user_name', function ($dataDb) {
                 $user = Sentinel::findById($dataDb->user_id);
-                return '<a href="' . route('employee.index') . '">' . $user->name . '</a=>';
+                return '<a href="' . route('employee.edit', $dataDb->user_id) . '">' . $user->name . '</a=>';
             })
             ->addColumn(
                 'checkbox',
