@@ -59,9 +59,8 @@
                                                         <div class="col">
                                                             <div class="form-check mb-2">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="flexRadioDefault" name="payment_method"
-                                                                    value="BCA" id="flexRadioDefault1">
-                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                    name="payment_method" value="BCA" id="">
+                                                                <label class="form-check-label" for="">
                                                                     <figure class="figure">
                                                                         <img src="https://www.bca.co.id/-/media/Feature/Header/Header-Logo/logo-bca.svg?"
                                                                             class="img-fluid img-thumbnail"
