@@ -113,7 +113,7 @@
     <script>
         $('document').ready(function() {
             $('#timerCountdown').countdown('{{ $transactionDb->expired_date }}', function(event) {
-                $(this).html(event.strftime('%d hari %H:%M:%S'));
+                $(this).html(event.strftime('%H:%M:%S'));
             });
         });
     </script>

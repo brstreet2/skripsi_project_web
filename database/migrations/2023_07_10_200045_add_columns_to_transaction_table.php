@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('transaction', function (Blueprint $table) {
             $table->string('virtual_account_bank')->default('');
             $table->string('virtual_account_number')->default('');
-            $table->date('expired_date')->nullable();
+            $table->datetime('expired_date')->nullable();
             $table->datetime('paid_at')->nullable();
         });
     }
