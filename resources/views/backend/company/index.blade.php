@@ -137,7 +137,7 @@
                             </div>
                             <div class="col-md-6">
                                 <iframe
-                                    src="https://maps.google.com/maps?q={{ Sentinel::getUser()->company->latitude }},{{ Sentinel::getUser()->company->longitude }}&hl=es;z=14&amp;output=embed"></iframe>
+                                    src="https://maps.google.com/maps?q={{ Sentinel::getUser()->company->latitude }},{{ Sentinel::getUser()->company->longitude }}&hl=es;z=50&amp;output=embed"></iframe>
                             </div>
                         </div>
                     @endif
