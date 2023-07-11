@@ -108,6 +108,7 @@ Route::group([
 ], function () {
     Route::get('', [EmployeesController::class, 'index'])->name('index');
     Route::get('/edit/{id}', [EmployeesController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [EmployeesController::class, 'update'])->name('update');
     Route::post('/store', [EmployeesController::class, 'store'])->name('store');
     Route::get('/ajax/datatables', [EmployeesController::class, 'datatables'])->name('ajax.datatables');
 });

@@ -93,7 +93,10 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.employees.edit', [
+            'employee'          => User::find($id),
+            'employeeDetail'    => CompanyEmployees::where('user_id', $id)->first()
+        ]);
     }
 
     /**
@@ -105,7 +108,52 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'name'                      => 'required|regex:/^(?:[^"\'\<>\ㅤ\⠀])+$/i',
+                'email'                     => 'required|email',
+                'phone'                     => 'required'
+            ],
+            [
+                'name.required'             => 'Mohon isi nama anda.',
+                'name.regex'                => 'Format nama belum sesuai!',
+                'email.email'               => 'Input harus berupa email!',
+                'phone.required'            => 'Mohon isi nomor telepon anda.',
+                'email.required'            => 'Mohon isi email anda.',
+            ]
+        );
+
+        $user = Sentinel::findById($id);
+
+        DB::beginTransaction();
+        try {
+            $user->name     = $request->name;
+            $user->email    = $request->email;
+            $user->phone    = $request->phone;
+            $user->save();
+            if ($request->has('job_title')) {
+                $employeeDetailDb               = CompanyEmployees::where('user_id', '=', $id)->first();
+                $employeeDetailDb->job_title    = $request->job_title;
+                $employeeDetailDb->save();
+            }
+            DB::commit();
+            toastr()->success('Data karyawan berhasil disimpan!', 'Success');
+            return back();
+        } catch (\Exception $e) {
+            Log::error("----------------------------------------------------");
+            Log::error("Error Log Date: " . Carbon::now()->format('Y-m-d H:i:s'));
+            Log::error("Error Exception Code: " . $e->getCode());
+            Log::error("Error at controller: EmployeesController");
+            Log::error("Error at function / method: update");
+            Log::error("Error Message: " . $e->getMessage());
+            Log::error("Rolling Back Process ...");
+            DB::rollback();
+            Log::error("Rollback Success!");
+            Log::error("Redirecting back ...");
+            Log::error("----------------------------------------------------");
+            toastr()->error('Terjadi kesalahan ...', 'Error');
+            return back();
+        }
     }
 
     /**
