@@ -56,8 +56,8 @@
                     <p class="my-2"> Share Dokumen </p>
                     <p class="my-2"> Share Pengumuman </p>
                     <p class="my-2 mb-5"> Generate Report </p>
-                    <button class="btn btn-md rounded-pill px-5 text-dark fw-bolder"
-                        style="background-color: #FFD700;">Beli</button>
+                    <a href="{{ route('pricing.create.pro') }}" class="btn btn-md rounded-pill px-5 text-dark fw-bolder"
+                        style="background-color: #FFD700;">Beli</a>
                 </div>
             </div>
         </div>

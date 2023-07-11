@@ -77,7 +77,7 @@ Route::group([
 ], function () {
     Route::get('', [PricingController::class, 'index'])->name('index');
     Route::post('proccess-payment-premium', [PricingController::class, 'storePremium'])->name('store.premium');
-    Route::post('process-payment-pro', [PricingController::class, 'storePro']);
+    Route::post('process-payment-pro', [PricingController::class, 'storePro'])->name('store.pro');
     Route::get('buy/premium', [PricingController::class, 'createPremium'])->name('create.premium');
     Route::get('buy/pro', [PricingController::class, 'createPro'])->name('create.pro');
 });
