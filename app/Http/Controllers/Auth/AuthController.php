@@ -151,7 +151,7 @@ class AuthController extends Controller
             'email' => "required|email"
         ], [
             'email.required'    => "Email tidak boleh kosong",
-            'email.email'       => "Fomat Email salah"
+            'email.email'       => "Format Email salah"
         ]);
 
         $checkUser = User::where('email', $request->email)->first();
