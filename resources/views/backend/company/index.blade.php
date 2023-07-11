@@ -129,6 +129,18 @@
                             {{ $user->company ? $user->company->company_size_string : '-' }}
                         </div>
                     </div>
+
+                    @if (Sentinel::getUser()->company)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>Lokasi Bisnis</p>
+                            </div>
+                            <div class="col-md-6">
+                                <iframe
+                                    src="https://maps.google.com/maps?q={{ Sentinel::getUser()->company->latitude }},{{ Sentinel::getUser()->company->longitude }}&hl=es;z=14&amp;output=embed"></iframe>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
