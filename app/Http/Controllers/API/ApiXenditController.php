@@ -67,11 +67,18 @@ class ApiXenditController extends Controller
             Log::info("DEPOSITDB #1", [$transactionDb]);
             $user       = Sentinel::findById($transactionDb->user_id);
 
-
-            $user             = User::where('id', $transactionDb->user_id)->first();
-            $user->user_type  = 2;
-            $user->updated_by = $user->name;
-            $user->save();
+            if ($transactionDb->notes == "Upgrade Akun Premium") {
+                $user             = User::where('id', $transactionDb->user_id)->first();
+                $user->user_type  = 2;
+                $user->updated_by = $user->name;
+                $user->save();
+            }
+            if ($transactionDb->notes == "Upgrade Akun Pro") {
+                $user             = User::where('id', $transactionDb->user_id)->first();
+                $user->user_type  = 3;
+                $user->updated_by = $user->name;
+                $user->save();
+            }
             return 'PAID';
         }
     }
