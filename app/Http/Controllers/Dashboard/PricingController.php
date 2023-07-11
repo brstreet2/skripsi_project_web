@@ -31,12 +31,42 @@ class PricingController extends Controller
      */
     public function createPremium()
     {
+        $user = Sentinel::getUser();
+
+        $transactionDb = Transaction::where('user_id', $user->id)
+            ->where('status_string', 'PENDING')
+            ->where('virtual_account_number', '!=', null)
+            ->where('paid_at', null)
+            ->orderBy('id', 'desc')->first();
+
+        if ($transactionDb) {
+            return redirect()->route('pricing.show', [$transactionDb->id]);
+        }
         return view('backend.pricing-plan.create-premium');
     }
 
     public function createPro()
     {
+        $user = Sentinel::getUser();
+
+        $transactionDb = Transaction::where('user_id', $user->id)
+            ->where('status_string', 'PENDING')
+            ->where('virtual_account_number', '!=', null)
+            ->where('paid_at', null)
+            ->orderBy('id', 'desc')->first();
+
+        if ($transactionDb) {
+            return redirect()->route('pricing.show', [$transactionDb->id]);
+        }
         return view('backend.pricing-plan.create-pro');
+    }
+
+    public function show($id)
+    {
+        return view('backend.pricing-plan.process', [
+            'transactionDb' => Transaction::find($id),
+
+        ]);
     }
 
     /**

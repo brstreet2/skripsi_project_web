@@ -84,6 +84,7 @@ Route::group([
     Route::post('process-payment-pro', [PricingController::class, 'storePro'])->name('store.pro');
     Route::get('buy/premium', [PricingController::class, 'createPremium'])->name('create.premium');
     Route::get('buy/pro', [PricingController::class, 'createPro'])->name('create.pro');
+    Route::get('payment-details/{id}', [PricingController::class, 'show'])->name('show');
 });
 
 // Company
