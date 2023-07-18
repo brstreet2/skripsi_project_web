@@ -89,8 +89,8 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="start()"
-                    style="background-color: #444EFF; border-radius: 10px">Konfirmasi Pembayaran</button>
+                <button class="btn btn-primary" style="background-color: #444EFF; border-radius: 10px">Konfirmasi
+                    Pembayaran</button>
             </div>
         </div>
     </div>
