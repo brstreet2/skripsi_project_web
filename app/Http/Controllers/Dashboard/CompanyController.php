@@ -215,6 +215,7 @@ class CompanyController extends Controller
                 $companyDb->save();
 
                 DB::commit();
+                toastr()->success('Foto berhasil diganti!', 'Success');
                 return response()->json([
                     'error'     => false,
                     'message'   => 'success',

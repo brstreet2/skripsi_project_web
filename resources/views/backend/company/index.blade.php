@@ -29,7 +29,8 @@
                                     {{ csrf_field() }}
                                     <div class="input-group mb-3">
                                         <input type="file" id="imgInput" name="company_image" class="form-control"
-                                            accept="image/png, image/jpeg" style="border-radius: 2rem 0rem 0rem 2rem">
+                                            accept="image/png, image/jpeg" style="border-radius: 2rem 0rem 0rem 2rem"
+                                            {{ Sentinel::getUser()->company ? '' : 'disabled' }}>
                                         <button class="btn btn-primary" {{ Sentinel::getUser()->company ? '' : 'disabled' }}
                                             type="submit" id="button-addon2"
                                             style="background-color: #444EFF; border-radius: 0rem 2rem 2rem 0rem">Submit

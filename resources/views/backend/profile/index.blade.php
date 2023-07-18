@@ -33,7 +33,7 @@
                             <a class="nav-link active" aria-current="page" href="/profile">Tentang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/profile/security">Keamanan</a>
+                            <a class="nav-link" href="{{ route('profile.security') }}">Keamanan</a>
                         </li>
                     </ul>
                     <div class="row mt-4">

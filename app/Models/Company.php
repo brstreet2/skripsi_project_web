@@ -25,6 +25,16 @@ class Company extends Model
         return $this->belongsTo(User::class, 'id', 'owner_id');
     }
 
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class, 'company_id', 'id');
+    }
+
+    public function latest_announcements()
+    {
+        return $this->announcements()->latest('date');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         if ($value == null) {

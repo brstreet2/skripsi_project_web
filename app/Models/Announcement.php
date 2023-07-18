@@ -10,4 +10,9 @@ class Announcement extends Model
     use HasFactory;
 
     protected $table = 'announcement';
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'id', 'company_id');
+    }
 }

@@ -121,14 +121,24 @@
                         <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                aria-selected="true">Announcement</button>
+                                aria-selected="true">Pengumuman</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
-                            accusantium ipsa facilis laudantium reprehenderit vitae eum tenetur animi, ex, consequatur
-                            dolore? Neque aut, aliquid a deserunt voluptate laborum perferendis ipsam?</div>
+                            aria-labelledby="nav-home-tab">
+                            @if (!Sentinel::getUser()->company->latest_announcements->isEmpty())
+                                <strong>Judul:</strong><br>
+                                {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('name'): '' }}<br>
+                                <strong>Tanggal:</strong><br>
+                                {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('date'): '' }}<br>
+                                <strong>Isi:</strong><br>
+                                {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('content'): '' }}
+                                <hr>
+                            @else
+                                Tidak ada pengumuman.
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

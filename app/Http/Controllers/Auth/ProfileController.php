@@ -22,6 +22,20 @@ class ProfileController extends Controller
         return view('backend.profile.edit');
     }
 
+    public function security()
+    {
+        return view('backend.profile.security');
+    }
+
+    public function securityForm()
+    {
+        return view('backend.profile.changepassword');
+    }
+
+    public function postSecurity(Request $request)
+    {
+    }
+
     public function update(Request $request)
     {
         $request->validate(

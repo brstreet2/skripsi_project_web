@@ -30,10 +30,10 @@
                 <div class="col col-md-6 col-sm-12">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/profile">Tentang</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('profile.index') }}">Tentang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/profile/security">Keamanan</a>
+                            <a class="nav-link active" href="{{ route('profile.security') }}">Keamanan</a>
                         </li>
                     </ul>
                     <div class="row mt-4">
@@ -48,7 +48,8 @@
 
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <a href="/profile/changepassword"><button type="button" class="btn btn-primary"
+                                <a href="{{ route('profile.security.form') }}"><button type="button"
+                                        class="btn btn-primary"
                                         style=" background-color: #444EFF; border-radius: 10px"><span
                                             class="fa-sharp fa-regular fa-pen-to-square fa-lg"
                                             style="margin-right: 10px;"></span>&nbsp;Ganti Password</button></a>

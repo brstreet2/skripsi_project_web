@@ -51,6 +51,9 @@ Route::group([
     Route::get('', [ProfileController::class, 'index'])->name('index');
     Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
     Route::post('/update', [ProfileController::class, 'update'])->name('update');
+    Route::get('/security', [ProfileController::class, 'security'])->name('security');
+    Route::get('/change-password', [ProfileController::class, 'securityForm'])->name('security.form');
+    Route::post('/post-security', [ProfileController::class, 'postSecurity'])->name('security.post');
 });
 
 // Report
@@ -214,15 +217,6 @@ Route::get('/employee/edit', function () {
     return view('backend.employees.edit');
 });
 
-//edit profile
-Route::get('/profile/security', function () {
-    return view('backend.profile.security');
-});
-
-//change password
-Route::get('/profile/changepassword', function () {
-    return view('backend.profile.changepassword');
-});
 
 //forget password
 Route::get('/resetpassword', function () {
