@@ -42,7 +42,7 @@
                                 <p>Nama</p>
                             </div>
                             <div class="col-md-6">
-                                {{ Sentinel::getUser()->name }}
+                                {{ Sentinel::getUser() ? Sentinel::getUser()->name : '' }}
                             </div>
                         </div>
 
@@ -51,7 +51,26 @@
                                 <p>Email</p>
                             </div>
                             <div class="col-md-6">
-                                {{ Sentinel::getUser()->email }}
+                                {{ Sentinel::getUser() ? Sentinel::getUser()->email : '' }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>Type Akun</p>
+                            </div>
+                            <div class="col-md-6">
+                                @if (Sentinel::getUser()->user_type == 0)
+                                    <span class="badge bg-secondary">Employee</span>
+                                @elseif (Sentinel::getUser()->user_type == 1)
+                                    <span class="badge bg-secondary">Basic</span>
+                                @elseif (Sentinel::getUser()->user_type == 2)
+                                    <span class="badge bg-success">Premium</span>
+                                @elseif (Sentinel::getUser()->user_type == 3)
+                                    <span class="badge bg-warning">PRO</span>
+                                @else
+                                    <span class="badge bg-secondary">Employee</span>
+                                @endif
                             </div>
                         </div>
 
@@ -60,7 +79,7 @@
                                 <p>No. Handphone</p>
                             </div>
                             <div class="col-md-6">
-                                {{ Sentinel::getUser()->phone }}
+                                {{ Sentinel::getUser() ? Sentinel::getUser()->phone : '' }}
                             </div>
                         </div>
                     </div>
