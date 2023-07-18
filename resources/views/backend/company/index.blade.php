@@ -45,8 +45,10 @@
                 <div class="row mt-5">
                     <div class="col-5">
                         <h4>Informasi Bisnis</h4>
-                        <small class="mb-3" style="color: red">Anda belum membuat profil bisnis, mohon mengisi form
-                            <strong>Informasi Bisnis</strong></small>
+                        {!! Sentinel::getUser()->company
+                            ? '<small class="mb-3" style="color: red">Anda telah membuat profil bisnis, berikut adalah <strong>Informasi Bisnis</strong> anda.</small>'
+                            : '<small class="mb-3" style="color: red">Anda belum membuat profil bisnis, mohon mengisi form <strong>Informasi Bisnis</strong></small>' !!}
+
                     </div>
                     <div class="col-2 d-flex justify-content-end">
                         <a
