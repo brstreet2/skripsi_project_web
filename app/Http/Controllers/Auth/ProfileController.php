@@ -71,7 +71,6 @@ class ProfileController extends Controller
                     $user->phone    = $request->phone;
                     $user->avatar   = $url;
                     $user->save();
-                    dd($url);
                 } catch (\Exception $e) {
                     toastr()->error('Terjadi kesalahan ...', 'Error');
                     return back();
