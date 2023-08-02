@@ -127,7 +127,9 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
                             aria-labelledby="nav-home-tab">
-                            @if (!Sentinel::getUser()->company->latest_announcements->isEmpty())
+                            @if (!isset(Sentinel::getUser()->company->latest_announcements))
+                                Tidak ada pengumuman.
+                            @elseif (!Sentinel::getUser()->company->latest_announcements->isEmpty())
                                 <strong>Judul:</strong><br>
                                 {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('name'): '' }}<br>
                                 <strong>Tanggal:</strong><br>
@@ -135,8 +137,6 @@
                                 <strong>Isi:</strong><br>
                                 {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('content'): '' }}
                                 <hr>
-                            @else
-                                Tidak ada pengumuman.
                             @endif
                         </div>
                     </div>
