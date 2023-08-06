@@ -4,6 +4,24 @@ body {
     background-image: linear-gradient(135deg,#457ef3 0,#444EFF 70%);
 }
 
+.headline{
+    background-image: linear-gradient(135deg,#457ef3 0,#444EFF 70%);
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 1rem;
+    box-shadow: #457ef3 0px 2px 8px 0px;
+  }
+
+.buttonregist{
+    transition: transform .5s ease;
+}
+
+.buttonregist:hover{
+    transform: scale(1.1);
+}
+
 .navigation{
     background-image: linear-gradient(to bottom, #444eff, transparent);   
 }
