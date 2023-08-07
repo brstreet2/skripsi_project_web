@@ -161,30 +161,30 @@
                 buttons: [{
                         extend: 'excelHtml5',
                         title: 'Laporan Kehadiran Bulan: ' + userDate,
-                        className: 'buttons-datatables',
+                        className: 'buttons-datatables-first',
                         filename: function() {
-                            return 'laporan_kehadiran' + userSlug + '_bulan_' + userDateLower;
+                            return 'laporan_kehadiran_' + userSlug + '_bulan_' + userDateLower;
                         }
                     },
                     {
                         extend: 'csvHtml5',
                         title: 'Laporan Kehadiran Bulan: ' + userDate,
-                        className: 'buttons-datatables',
+                        className: 'buttons-datatables-first',
                         filename: function() {
-                            return 'laporan_kehadiran' + userSlug + '_bulan_' + userDateLower;
+                            return 'laporan_kehadiran_' + userSlug + '_bulan_' + userDateLower;
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         title: 'Laporan Kehadiran Bulan: ' + userDate,
-                        className: 'buttons-datatables',
+                        className: 'buttons-datatables-first',
                         pageSize: 'LEGAL',
                         orientation: 'landscape',
                         customize: function(doc) {
                             doc.content[1].margin = [375, 0, 375, 0];
                         },
                         filename: function() {
-                            return 'laporan_kehadiran' + userSlug + '_bulan_' + userDateLower;
+                            return 'laporan_kehadiran_' + userSlug + '_bulan_' + userDateLower;
                         }
                     }
                 ],
@@ -192,9 +192,9 @@
                     var hasRows = this.api().rows({
                         filter: 'applied'
                     }).data().length > 0;
-                    $('.buttons-datatables')[0].style.visibility = hasRows ? 'visible' : 'hidden'
-                    $('.buttons-datatables')[1].style.visibility = hasRows ? 'visible' : 'hidden'
-                    $('.buttons-datatables')[2].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables-first')[0].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables-first')[1].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables-first')[2].style.visibility = hasRows ? 'visible' : 'hidden'
                 }
             });
 
