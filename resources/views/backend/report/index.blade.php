@@ -132,6 +132,7 @@
                         selectRow: true
                     },
                 }],
+                dom: 'Bfrtip',
                 columns: [{
                         data: 'id',
                         name: 'id',
