@@ -88,6 +88,7 @@ Route::group([
     Route::get('buy/premium', [PricingController::class, 'createPremium'])->name('create.premium');
     Route::get('buy/pro', [PricingController::class, 'createPro'])->name('create.pro');
     Route::get('payment-details/{id}', [PricingController::class, 'show'])->name('show');
+    Route::get("simulate-payment/{code}", [PricingController::class, 'simulate'])->name('simulate');
 });
 
 // Company

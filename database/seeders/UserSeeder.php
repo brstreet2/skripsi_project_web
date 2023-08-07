@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'password'   => "Password123",
             'phone'      => '08189890000',
             'token'      => $token,
+            'user_type'  => 1
         ];
 
         //Create a new user and activated that users

@@ -204,6 +204,7 @@
                         success: function(data) {
                             BtnReset(submitBtn);
                             console.log(data);
+                            window.location.reload();
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             BtnReset(submitBtn);

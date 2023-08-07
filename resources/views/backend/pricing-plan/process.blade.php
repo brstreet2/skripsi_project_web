@@ -91,6 +91,10 @@
 
                 <button class="btn btn-primary" style="background-color: #444EFF; border-radius: 10px">Konfirmasi
                     Pembayaran</button>
+                <a href="{{ route('pricing.simulate', $transactionDb->transaction_code) }}" class="btn btn-warning"
+                    style="border-radius: 10px">
+                    Simulasi Pembayaran
+                </a>
             </div>
         </div>
     </div>

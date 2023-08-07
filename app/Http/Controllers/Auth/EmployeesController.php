@@ -37,6 +37,11 @@ class EmployeesController extends Controller
 
         $check      = count($senUser->company->company_employees);
 
+        if ($senUser->user_type == 0) {
+            toastr()->error('Anda adalah karyawan!', 'Error');
+            return back();
+        }
+
         if ($senUser->user_type == 1) {
             $user_type = 'free';
             $limit     = 4;

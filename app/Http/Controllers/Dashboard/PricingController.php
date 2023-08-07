@@ -40,7 +40,7 @@ class PricingController extends Controller
             ->orderBy('id', 'desc')->first();
 
         if ($transactionDb) {
-            return redirect()->route('pricing.show', [$transactionDb->id]);
+            return redirect()->route('pricing.show', [$transactionDb->transaction_id]);
         }
         return view('backend.pricing-plan.create-premium');
     }
@@ -56,17 +56,27 @@ class PricingController extends Controller
             ->orderBy('id', 'desc')->first();
 
         if ($transactionDb) {
-            return redirect()->route('pricing.show', [$transactionDb->id]);
+            return redirect()->route('pricing.show', [$transactionDb->transaction_id]);
         }
         return view('backend.pricing-plan.create-pro');
     }
 
     public function show($id)
     {
-        return view('backend.pricing-plan.process', [
-            'transactionDb' => Transaction::find($id),
+        $transactionDb = Transaction::where('transaction_id', $id)
+            ->where('status_string', 'PENDING')
+            ->where('virtual_account_number', '!=', null)
+            ->where('paid_at', null)
+            ->orderBy('id', 'desc')->first();
 
-        ]);
+        if ($transactionDb) {
+            return view('backend.pricing-plan.process', [
+                'transactionDb' => Transaction::where('transaction_id', $id)->first(),
+            ]);
+        } else {
+            dd($transactionDb = Transaction::where('transaction_id', $id)->first());
+            // return view pembayaran berhasil
+        }
     }
 
     /**
@@ -616,6 +626,36 @@ class PricingController extends Controller
                 toastr()->error('Terjadi kesalahan ...', 'Error');
                 return back();
             }
+        }
+    }
+
+    public function simulate($code)
+    {
+        $transactionDb = Transaction::where('transaction_code', $code)->first();
+
+        try {
+            $payload = json_encode(array("amount" => $transactionDb->nominal));
+
+            $ch  = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://api.xendit.co/callback_virtual_accounts/external_id=' . $code . '/simulate_payment');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Authorization: Basic ' . base64_encode("xnd_development_vzMwjduoe6Auppur5ORS7xsm0tlpml50O1IW2kbchQoOZI2g3vArkVHFA8gIdo:")
+            ));
+            $response       = curl_exec($ch);
+            $json_convert   = json_decode($response);
+            curl_close($ch);
+
+            toastr()->success('Pembayaran berhasil di-lakukan', 'Success');
+            return back();
+        } catch (\Exception $e) {
+            toastr()->error('Terjadi kesalahan ...', 'Error');
+            return back();
+            Log::info("ERR : Simulate Payment Error");
+            Log::critical("Error Code: ");
         }
     }
 }
