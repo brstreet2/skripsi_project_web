@@ -31,42 +31,42 @@
                                                 <h5>Metode Pembayaran</h5>
                                                 @if ($transactionDb->virtual_account_bank == 'MANDIRI VIRTUAL ACCOUNT')
                                                     <h5>
-                                                        <strong>{{ $transactionDb->virtual_account_bank }}
-                                                            <img src="https://bankmandiri.co.id/image/layout_set_logo?img_id=31567&t=1678035789124"
-                                                                class="img-fluid img-thumbnail" style="max-width: 150px"
-                                                                alt="Mandiri" />
-                                                        </strong>
+                                                        <strong>{{ $transactionDb->virtual_account_bank }}</strong>
+                                                        <img src="https://bankmandiri.co.id/image/layout_set_logo?img_id=31567&t=1678035789124"
+                                                            class="img-fluid img-thumbnail" style="max-width: 150px"
+                                                            alt="Mandiri" />
                                                     </h5>
                                                 @elseif ($transactionDb->virtual_account_bank == 'BCA VIRTUAL ACCOUNT')
                                                     <h5>
-                                                        <strong>{{ $transactionDb->virtual_account_bank }}
-                                                            <img src="https://www.bca.co.id/-/media/Feature/Header/Header-Logo/logo-bca.svg?"
-                                                                class="img-fluid img-thumbnail" style="max-width: 150px"
-                                                                alt="BCA" />
-                                                        </strong>
+                                                        <strong>{{ $transactionDb->virtual_account_bank }}</strong>
+                                                        <img src="https://www.bca.co.id/-/media/Feature/Header/Header-Logo/logo-bca.svg?"
+                                                            class="img-fluid img-thumbnail" style="max-width: 150px"
+                                                            alt="BCA" />
                                                     </h5>
                                                 @elseif ($transactionDb->virtual_account_bank == 'BRI VIRTUAL ACCOUNT')
                                                     <h5>
-                                                        <strong>{{ $transactionDb->virtual_account_bank }}
-                                                            <img src="https://bri.co.id/o/bri-corporate-theme/images/bri-logo.png"
-                                                                class="img-fluid img-thumbnail" style="max-width: 150px"
-                                                                alt="BRI" />
-                                                        </strong>
+                                                        <strong>{{ $transactionDb->virtual_account_bank }}</strong>
+                                                        <img src="https://bri.co.id/o/bri-corporate-theme/images/bri-logo.png"
+                                                            class="img-fluid img-thumbnail" style="max-width: 150px"
+                                                            alt="BRI" />
                                                     </h5>
                                                 @elseif ($transactionDb->virtual_account_bank == 'BNI VIRTUAL ACCOUNT')
                                                     <h5>
-                                                        <strong>{{ $transactionDb->virtual_account_bank }}
-                                                            <img src="https://www.bni.co.id/Portals/1/bni-logo-id.png"
-                                                                class="img-fluid img-thumbnail" style="max-width: 150px"
-                                                                alt="BNI" />
-                                                        </strong>
+                                                        <strong>{{ $transactionDb->virtual_account_bank }}</strong>
+                                                        <img src="https://www.bni.co.id/Portals/1/bni-logo-id.png"
+                                                            class="img-fluid img-thumbnail" style="max-width: 150px"
+                                                            alt="BNI" />
                                                     </h5>
                                                 @endif
                                             </div>
                                             <div class="col-lg-6">
                                                 <h5>Tanggal Transaksi</h5>
-                                                <h5><strong>{{ Carbon\Carbon::parse($transactionDb->paid_at)->format('Y-m-d H:i:s') }}
-                                                        WIB</strong></h5>
+                                                <h5>
+                                                    <strong>
+                                                        {{ Carbon\Carbon::parse($transactionDb->paid_at)->format('Y-m-d') }}
+                                                        {{ Carbon\Carbon::parse($transactionDb->paid_at)->format('H:i:s') }}
+                                                        WIB</strong>
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>
