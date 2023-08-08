@@ -92,7 +92,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                    Permohonan Absen</div>
+                                    Ketidakhadiran</div>
                                 <div class="h5 mb-0 font-weight-bold"></div>
                             </div>
                             <div class="col-auto">
@@ -111,7 +111,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                    Gaji</div>
+                                    Slip Gaji</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                             </div>
                             <div class="col-auto">
