@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <h5>Tanggal Transaksi</h5>
-                                                <h5><strong>{{ date('d M Y, H:i', strtotime($transactionDb->paid_at)) }}
+                                                <h5><strong>{{ Carbon\Carbon::parse($transactionDb->paid_at)->format('Y-m-d H:i:s') }}
                                                         WIB</strong></h5>
                                             </div>
                                         </div>
