@@ -51,7 +51,7 @@ class ApiDocumentController extends Controller
                 $user->updated_by = $user->name;
                 $user->save();
 
-                $documentDb       = DocumentTemplate::all();
+                $documentDb       = DocumentTemplate::where('company_id', $user->company_employees->company_id)->get();
                 if ($documentDb) {
                     $status = 200;
                     return response()->json([

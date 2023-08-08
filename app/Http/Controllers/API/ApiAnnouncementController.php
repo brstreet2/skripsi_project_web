@@ -50,7 +50,7 @@ class ApiAnnouncementController extends Controller
                 $user->updated_by = $user->name;
                 $user->save();
 
-                $documentDb       = Announcement::orderBy('created_at', 'DESC')->first();
+                $documentDb       = Announcement::where('company_id', $user->company_employees->company_id)->orderBy('created_at', 'DESC')->first();
                 if ($documentDb) {
                     $status = 200;
                     return response()->json([
