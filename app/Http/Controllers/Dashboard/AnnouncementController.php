@@ -25,7 +25,7 @@ class AnnouncementController extends Controller
             $announcementDb                   = new Announcement();
             $announcementDb->name             = $request->name;
             $announcementDb->date             = $request->date;
-            $announcementDb->content          = $request->content;
+            $announcementDb->content          = Purifier::clean($request->content);
             $announcementDb->company_id       = Sentinel::getUser()->company->id;
             $announcementDb->save();
 
