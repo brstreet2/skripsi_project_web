@@ -224,7 +224,12 @@ Route::get('/resetpassword', function () {
     return view('auth.forgot');
 });
 
-//forget password
+//payment progress
 Route::get('/pricing/process', function () {
     return view('backend.pricing-plan.process');
+});
+
+//paymentsuccess
+Route::get('/pricing/paymentsuccess', function () {
+    return view('backend.pricing-plan.payment');
 });

@@ -81,7 +81,7 @@
       style="border: none;
              background-color: transparent
              ">
-        <div class="card-body p-5">
+        <div class="card-body p-5 aos-init aos-animate" data-aos="fade-in" data-aos-delay="200">
           <h5 class="mb-3 text-light" style="text-decoration: underline">Solusi Kami</h5>
           <h2 class="text-light">
             Membantu anda mengelola Pegawai / Karyawan untuk meningkatkan
@@ -92,7 +92,7 @@
     </div>
 
     <div class="col-md-6 col-sm-12">
-      <div class="card" style="border: none; background-color: transparent">
+      <div class="card aos-init aos-animate" data-aos="fade-left" data-aos-delay="200" style="border: none; background-color: transparent">
         <img
         alt="image"
         src="https://images.unsplash.com/photo-1671418285905-acc08f6c4b59?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDcxfHxlbXBsb3llZSUyMHBob25lfGVufDB8fHx8MTY4Nzk3Mzg3Mnww&amp;ixlib=rb-4.0.3&amp;w=400"
@@ -114,7 +114,7 @@
     style="border: none;
     background-color: transparent
     ">
-      <div class="card-body">
+      <div class="card-body aos-init aos-animate" data-aos="fade-in" data-aos-delay="400" >
         <h5 class="text-light" style="text-decoration: underline">Produk Kami</h5>
         <h2 class="text-light">
           Sistem Pengelolaan Sumber Daya Manusia berbasis Website dan Mobile
@@ -125,7 +125,7 @@
   </div>
 
     <div class="col-md-6 col-sm-12">
-      <div class="card align-items-center" style="border: none; background-color: transparent">
+      <div class="card align-items-center aos-init aos-animate" data-aos="fade-left" data-aos-delay="400" style="border: none; background-color: transparent">
         <img
         alt="image"
         src="https://images.unsplash.com/photo-1629697776809-f37ceac39e77?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDI0fHxzbWFydHBob25lfGVufDB8fHx8MTY4Nzk3NDE0OXww&amp;ixlib=rb-4.0.3&amp;w=1400"
@@ -145,79 +145,49 @@
   <div class="container aos-init aos-animate" data-aos="fade-up">
 
     <header class="section-header">
-      <h2>Team</h2>
+      <h2 class="text-light">Team</h2>
       <p>Our hard working team</p>
     </header>
 
-    <div class="row gy-4">
+    <div class="row gy-4 align-items-center">
 
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-        <div class="card">
-          <div class="card-header">
-            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        <div class="card" style="border-radius: 1rem">
+          <div class="card-header p-0">
+            <img src="{{ asset('assets/azka.jpg') }}" class="card-img-top" alt="" style="border-radius: 1rem 1rem 0 0">
           </div>
-          <div class="card-body">
-            <h4>Walter White</h4>
-            <span>Chief Executive Officer</span>
-            <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+          <div class="card-body" style="background-color: #444EFF; border-color: transparent; border-radius: 0rem 0rem 1rem 1rem;">
+            <h4 class="text-light">Azka Secio</h4>
+            <span class="text-light"><i>Backend Developer</i></span>
+            <p class="mt-1 text-light">Computer Science Student at Bina Nusantara University</p>
           </div>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-        <div class="member">
-          <div class="member-img">
-            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
+        <div class="card" style="border-radius: 1rem">
+          <div class="card-header p-0" style="border-bottom: transparent">
+            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#444EFF" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
           </div>
-          <div class="member-info">
-            <h4>Sarah Jhonson</h4>
-            <span>Product Manager</span>
-            <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
+          <div class="card-body" style="background-color: #444EFF; border-color: transparent; border-radius: 0rem 0rem 1rem 1rem;">
+            <h4 class="text-light">Azka Secio</h4>
+            <span class="text-light"><i>Backend Developer</i></span>
+            <p class="mt-1 text-light">Computer Science Student at Bina Nusantara University</p>
           </div>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-        <div class="member">
-          <div class="member-img">
-            <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
+        <div class="card" style="border-radius: 1rem">
+          <div class="card-header p-0" style="border-bottom: transparent">
+            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#444EFF" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
           </div>
-          <div class="member-info">
-            <h4>William Anderson</h4>
-            <span>CTO</span>
-            <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-        <div class="member">
-          <div class="member-img">
-            <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-          <div class="member-info">
-            <h4>Amanda Jepson</h4>
-            <span>Accountant</span>
-            <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
+          <div class="card-body" style="background-color: #444EFF; border-color: transparent; border-radius: 0rem 0rem 1rem 1rem;">
+            <h4 class="text-light">Azka Secio</h4>
+            <span class="text-light"><i>Backend Developer</i></span>
+            <p class="mt-1 text-light">Computer Science Student at Bina Nusantara University</p>
           </div>
         </div>
       </div>
