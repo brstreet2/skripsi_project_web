@@ -178,7 +178,7 @@
             $(document).on('click', '#uploadButton', function() {
                 var thisData = $('#uploadButton');
                 Swal.fire({
-                    title: 'Upload payroll file for ' + thisData.data('name') + '?',
+                    title: 'Unggah slip gaji karyawan: ' + thisData.data('name') + '?',
                     html: '<input type="text" class="form-control" id="payrollName" aria-describedby="namaHelp" placeholder="Input payroll name">' +
                         '<input class="form-control mt-3" type="file" id="payrollFile">',
                     showCancelButton: true,
