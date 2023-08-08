@@ -74,8 +74,9 @@ class PricingController extends Controller
                 'transactionDb' => Transaction::where('transaction_id', $id)->first(),
             ]);
         } else {
-            dd($transactionDb = Transaction::where('transaction_id', $id)->first());
-            // return view pembayaran berhasil
+            return view('backend.pricing-plan.payment', [
+                'transactionDb' => Transaction::where('transaction_id', $id)->first(),
+            ]);
         }
     }
 
