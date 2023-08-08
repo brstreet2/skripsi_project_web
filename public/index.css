@@ -14,11 +14,11 @@ body {
     box-shadow: #457ef3 0px 2px 8px 0px;
   }
 
-.buttonregist{
+#buttonregist{
     transition: transform .5s ease;
 }
 
-.buttonregist:hover{
+#buttonregist:hover{
     transform: scale(1.1);
 }
 

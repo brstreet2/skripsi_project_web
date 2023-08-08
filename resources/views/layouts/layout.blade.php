@@ -17,7 +17,6 @@
 
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('index.css') }}">
-    <link rel="stylesheet" href="{{ asset('landingpage.css') }}">
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
