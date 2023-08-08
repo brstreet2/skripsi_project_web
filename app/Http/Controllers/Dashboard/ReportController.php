@@ -136,6 +136,8 @@ class ReportController extends Controller
                         return 'Cuti';
                     } elseif ($dataDb->type == 1) {
                         return 'Izin';
+                    } elseif ($dataDb->type == 2) {
+                        return $dataDb->type_string;
                     }
                 }
             )

@@ -31,7 +31,7 @@
                     </div>
 
                 </div>
-                <div class="row">
+                <div class="row mb-4">
                     <table id="presence_table" class="table table-borderless text-center" style="width: 100%">
                         <thead>
                             <tr>
@@ -52,7 +52,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="row">
+                <div class="row mt-4">
                     <table id="timeoff_table" class="table table-borderless text-center" style="width: 100%">
                         <thead>
                             <tr>
@@ -80,17 +80,29 @@
 @push('css')
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css" rel="stylesheet">
     <link href="{{ asset('plugins/jquery-datatables-checkboxes/css/dataTables.checkboxes.css') }}">
 @endpush
 
 @push('scripts')
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="{{ asset('plugins/jquery-datatables-checkboxes/js/dataTables.checkboxes.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function() {
+            var userSlug = '';
+            var userName = '';
+            var userDate = '{{ Carbon\Carbon::now('Asia/Jakarta')->translatedFormat('F') }}';
+            var userDateLower = userDate.toLowerCase();
             var table = $('#presence_table').DataTable({
                 ajax: {
                     headers: {
@@ -120,6 +132,7 @@
                         selectRow: true
                     },
                 }],
+                dom: 'Bfrtip',
                 columns: [{
                         data: 'id',
                         name: 'id',
@@ -145,6 +158,44 @@
                 select: {
                     style: 'multi'
                 },
+                buttons: [{
+                        extend: 'excelHtml5',
+                        title: 'Laporan Kehadiran Bulan: ' + userDate,
+                        className: 'buttons-datatables-first',
+                        filename: function() {
+                            return 'laporan_kehadiran_' + userSlug + '_bulan_' + userDateLower;
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        title: 'Laporan Kehadiran Bulan: ' + userDate,
+                        className: 'buttons-datatables-first',
+                        filename: function() {
+                            return 'laporan_kehadiran_' + userSlug + '_bulan_' + userDateLower;
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Laporan Kehadiran Bulan: ' + userDate,
+                        className: 'buttons-datatables-first',
+                        pageSize: 'LEGAL',
+                        orientation: 'landscape',
+                        customize: function(doc) {
+                            doc.content[1].margin = [375, 0, 375, 0];
+                        },
+                        filename: function() {
+                            return 'laporan_kehadiran_' + userSlug + '_bulan_' + userDateLower;
+                        }
+                    }
+                ],
+                drawCallback: function() {
+                    var hasRows = this.api().rows({
+                        filter: 'applied'
+                    }).data().length > 0;
+                    $('.buttons-datatables-first')[0].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables-first')[1].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables-first')[2].style.visibility = hasRows ? 'visible' : 'hidden'
+                }
             });
 
             var table2 = $('#timeoff_table').DataTable({
@@ -169,6 +220,7 @@
                         selectRow: true
                     },
                 }],
+                dom: 'Bfrtip',
                 columns: [{
                         data: 'id',
                         name: 'id',
@@ -194,11 +246,51 @@
                 select: {
                     style: 'multi'
                 },
+                buttons: [{
+                        extend: 'excelHtml5',
+                        title: 'Laporan Cuti/Izin Bulan: ' + userDate,
+                        className: 'buttons-datatables',
+                        filename: function() {
+                            return 'laporan_cuti_izin_' + userSlug + '_bulan_' + userDateLower;
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        title: 'Laporan Cuti/Izin Bulan: ' + userDate,
+                        className: 'buttons-datatables',
+                        filename: function() {
+                            return 'laporan_cuti_izin_' + userSlug + '_bulan_' + userDateLower;
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Laporan Cuti/Izin Bulan: ' + userDate,
+                        className: 'buttons-datatables',
+                        pageSize: 'LEGAL',
+                        orientation: 'landscape',
+                        customize: function(doc) {
+                            doc.content[1].margin = [375, 0, 375, 0];
+                        },
+                        filename: function() {
+                            return 'laporan_cuti_izin_' + userSlug + '_bulan_' + userDateLower;
+                        }
+                    }
+                ],
+                drawCallback: function() {
+                    var hasRows = this.api().rows({
+                        filter: 'applied'
+                    }).data().length > 0;
+                    $('.buttons-datatables')[0].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables')[1].style.visibility = hasRows ? 'visible' : 'hidden'
+                    $('.buttons-datatables')[2].style.visibility = hasRows ? 'visible' : 'hidden'
+                }
             });
 
             $('#employeeSelect').change(function() {
                 table.draw();
                 table2.draw();
+                userName = $('#employeeSelect').find(":selected").text();
+                userSlug = slugify(userName);
             });
 
             $(document).on('click', '#approveBtn', function() {
@@ -326,7 +418,19 @@
                         })
                     }
                 });
-            })
+            });
+
+            function slugify(str) {
+                return String(str)
+                    .normalize('NFKD') // split accented characters into their base characters and diacritical marks
+                    .replace(/[\u0300-\u036f]/g,
+                        '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+                    .trim() // trim leading or trailing whitespace
+                    .toLowerCase() // convert to lowercase
+                    .replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
+                    .replace(/\s+/g, '-') // replace spaces with hyphens
+                    .replace(/-+/g, '-'); // remove consecutive hyphens
+            }
         });
     </script>
 @endpush

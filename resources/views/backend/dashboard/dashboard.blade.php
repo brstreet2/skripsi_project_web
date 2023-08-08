@@ -135,7 +135,9 @@
                                 <strong>Tanggal:</strong><br>
                                 {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('date'): '' }}<br>
                                 <strong>Isi:</strong><br>
-                                {{ Sentinel::getUser()->company->latest_announcements? Sentinel::getUser()->company->latest_announcements->first()->value('content'): '' }}
+                                {!! Sentinel::getUser()->company->latest_announcements
+                                    ? Sentinel::getUser()->company->latest_announcements->first()->value('content')
+                                    : '' !!}
                                 <hr>
                             @endif
                         </div>
