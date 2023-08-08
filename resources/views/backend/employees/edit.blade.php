@@ -57,7 +57,7 @@
                                     <p>Email</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="email" name="email" readonly
+                                    <input type="text" class="form-control" id="email" name="email"
                                         placeholder="Masukkan Email Aktif Karyawan"
                                         value="{{ $employee ? $employee->email : '' }}">
                                     <small class="text-danger">* Digunakan untuk masuk ke aplikasi mobile
