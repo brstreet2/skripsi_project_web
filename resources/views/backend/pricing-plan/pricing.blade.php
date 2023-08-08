@@ -38,8 +38,8 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('pricing.create.premium') }}"
-                        class="btn btn-md rounded-pill px-5 text-light fw-bolder my-4"
-                        style="background-color: #00A575">Beli</a>
+                        class="btn btn-md rounded-pill px-5 text-light fw-bolder my-4" style="background-color: #00A575"
+                        {{ Sentinel::getUser()->user_type == 2 ? 'disabled' : '' }}>Beli</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,8 @@
                     <p class="my-2 mb-5"> Generate Report </p>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('pricing.create.pro') }}" class="btn btn-md rounded-pill px-5 my-4 text-dark fw-bolder"
+                    <a href="{{ route('pricing.create.pro') }}"
+                        class="btn btn-md rounded-pill px-5 my-4 text-dark fw-bolder"
                         style="background-color: #FFD700;">Beli</a>
                 </div>
             </div>
