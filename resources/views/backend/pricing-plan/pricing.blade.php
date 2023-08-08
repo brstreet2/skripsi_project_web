@@ -38,8 +38,8 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('pricing.create.premium') }}"
-                        class="btn btn-md rounded-pill px-5 text-light fw-bolder my-4" style="background-color: #00A575"
-                        {{ Sentinel::getUser()->user_type == 2 ? 'disabled' : '' }}>Beli</a>
+                        class="btn btn-md rounded-pill px-5 text-light fw-bolder my-4 {{ Sentinel::getUser()->user_type == 2 ? 'disabled' : '' }}"
+                        style="background-color: #00A575">Beli</a>
                 </div>
             </div>
         </div>
