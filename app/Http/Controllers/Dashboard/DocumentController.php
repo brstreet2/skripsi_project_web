@@ -129,11 +129,11 @@ class DocumentController extends Controller
 
         try {
             if ($documentDb) {
-                $trim = Str::after($documentDb->url, 'https://s3-id-jkt-1.kilatstorage.id/skripsi-hr/');
+                $trim = Str::after($documentDb->url, 'https://s3-id-jkt-1.kilatstorage.id/timkerjaku/');
                 if (Storage::disk('s3')->exists($trim)) {
                     try {
                         Storage::disk('s3')->delete($trim);
-                    } catch (\Throwable $th) {
+                    } catch (\Aws\S3\Exception\S3Exception $e) {
                         return response()->json(['status' => '404', 'data' => null, 'message: Data not found.']);
                     }
                     $documentDb->deleted_at = Carbon::now();
