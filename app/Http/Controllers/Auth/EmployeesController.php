@@ -221,8 +221,9 @@ class EmployeesController extends Controller
             ->addColumn(
                 'action',
                 function ($dataDb) {
-                    return '<a href="' . route('employee.edit', $dataDb->user_id) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Karyawan" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>
-                    <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="' . $dataDb->id . '" data-name="' . $dataDb->name . '" type="button" data-bs-placement="bottom" title="Delete ' . $dataDb->name . '?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>';
+                    return '<a href="' . route('employee.edit', $dataDb->user_id) . '"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Karyawan" class="btn"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #6893df;"></i></a>';
+                    // del button
+                    // <button class="btn" data-bs-toggle="tooltip" id="deleteButton" data-id="' . $dataDb->id . '" data-name="' . $dataDb->name . '" type="button" data-bs-placement="bottom" title="Delete ' . $dataDb->name . '?"><i class="fa-solid fa-trash fa-lg" style="color: #6893df;"></i></button>
                 }
             )
             ->rawColumns(array('checkbox', 'description', 'user_name', 'action'))
