@@ -67,7 +67,7 @@ class DocumentController extends Controller
             $filenamePath  = 'documents/' . $hash . '_' . $documentTemplate->slug . '.pdf';
             try {
                 $s3     = Storage::disk('s3')->put($filenamePath, $pdf->output(), 'public');
-                $url    = Storage::disk('s3')->url($s3);
+                $url    = Storage::disk('s3')->url($filenamePath);
             } catch (\Exception $e) {
                 report($e);
                 toastr()->error('Terjadi kesalahan ...', 'Error');
@@ -126,25 +126,29 @@ class DocumentController extends Controller
         $documentDb     = DocumentTemplate::find($id);
 
         DB::beginTransaction();
-
         try {
             if ($documentDb) {
                 $trim = Str::after($documentDb->url, 'https://s3-id-jkt-1.kilatstorage.id/timkerjaku/');
-                if (Storage::disk('s3')->exists($trim)) {
-                    try {
-                        Storage::disk('s3')->delete($trim);
-                    } catch (\Aws\S3\Exception\S3Exception $e) {
-                        return response()->json(['status' => '404', 'data' => null, 'message: Data not found.']);
-                    }
-                    $documentDb->deleted_at = Carbon::now();
-                    $documentDb->deleted_by = Sentinel::getUser()->name;
-                    $documentDb->save();
-
-                    DB::commit();
-                    return response()->json(['STATUS' => 'OK']);
-                }
+                Storage::disk('s3')->delete($trim);
+                $documentDb->deleted_at = Carbon::now();
+                $documentDb->deleted_by = Sentinel::getUser()->name;
+                $documentDb->url        = "";
+                $documentDb->save();
+                DB::commit();
+                return response()->json([
+                    'error'     => false,
+                    'message'   => 'data has been deleted',
+                    'data'      => [$documentDb],
+                    'status'    => 200
+                ], 200);
             }
         } catch (\Exception $e) {
+            return response()->json([
+                'error'     => true,
+                'message'   => $e->getMessage(),
+                'data'      => null,
+                'status'    => 500
+            ], 500);
             DB::rollback();
             report($e);
         }
