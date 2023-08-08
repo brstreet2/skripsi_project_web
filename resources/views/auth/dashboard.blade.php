@@ -103,7 +103,7 @@
       <div class="card aos-init aos-animate" data-aos="fade-left" data-aos-delay="200" style="border: none; background-color: transparent">
         <img
         alt="image"
-        src="https://images.unsplash.com/photo-1671418285905-acc08f6c4b59?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDcxfHxlbXBsb3llZSUyMHBob25lfGVufDB8fHx8MTY4Nzk3Mzg3Mnww&amp;ixlib=rb-4.0.3&amp;w=400"
+        src="{{ asset('assets/laptop.png') }}"
         class="card-img-top"
         style="width: 80%;
                height: auto;
