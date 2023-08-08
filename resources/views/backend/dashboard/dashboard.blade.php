@@ -42,74 +42,85 @@
 
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Karyawan</div>
-                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-300">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>  
-                            </div> --}}
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-regular fa-user fa-2x"></i>
+            <a href="{{ route('employee.index') }}">
+                <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
+                                    Karyawan</div>
+                                {{-- <div class="h5 mb-0 font-weight-bold text-gray-300">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>  
+                                </div> --}}
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa-regular fa-user fa-2x"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
+
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Kehadiran</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-regular fa-calendar fa-2x text-gray-300"></i>
+            <a href="{{ route('attendance.index') }}">
+                <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
+                                    Kehadiran</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa-regular fa-calendar fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
+
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Permohonan Absen</div>
-                            <div class="h5 mb-0 font-weight-bold"></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-regular fa-2x fa-clock"></i>
+            <a href="{{ route('attendance.index') }}">
+                <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
+                                    Permohonan Absen</div>
+                                <div class="h5 mb-0 font-weight-bold"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa-regular fa-2x fa-clock"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
+
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
-                                Gaji</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-regular fa-2x fa-comments"></i>
+            <a href="{{ route('payroll.index') }}">
+                <div class="card py-2" style="border-left: 0.25rem solid #444eff; border-radius: .75rem">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="fs-6 font-weight-bold text-primary text-uppercase mb-1">
+                                    Gaji</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa-regular fa-2x fa-comments"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
     </div>
