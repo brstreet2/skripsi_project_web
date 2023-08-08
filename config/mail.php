@@ -39,7 +39,7 @@ return [
             'host' => env('MAIL_HOST', 'mail.timkerjaku.com'),
             'port' => env('MAIL_PORT', 465),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME', 'dev@timkerjaku.com'),
+            'username' => env('MAIL_USERNAME', 'cs@timkerjaku.com'),
             'password' => env('MAIL_PASSWORD', '@6SZDEuQ974T324'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
