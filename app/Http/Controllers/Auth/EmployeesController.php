@@ -19,7 +19,6 @@ class EmployeesController extends Controller
 
     public function index()
     {
-        // dd(count(Sentinel::getUser()->company->company_employees));
         return view('backend.employees.index');
     }
 

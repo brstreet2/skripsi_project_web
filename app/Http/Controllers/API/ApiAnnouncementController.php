@@ -74,7 +74,7 @@ class ApiAnnouncementController extends Controller
 
             return response()->json([
                 'error'     => true,
-                'message'   => dd($e),
+                'message'   => 'error',
                 'data'      => '',
                 'status'    => 403
             ], 403);

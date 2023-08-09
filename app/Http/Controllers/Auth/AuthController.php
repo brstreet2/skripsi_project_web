@@ -136,7 +136,9 @@ class AuthController extends Controller
             toastr()->info('Akun anda berhasil di aktivasi!', 'Success');
             return redirect()->route('auth.login.form');
         } catch (\Throwable $th) {
-            dd($th);
+            DB::rollback();
+            toastr()->error('Terjadi kesalahan!', 'Error');
+            return redirect()->route('auth.login.form');
         }
     }
 

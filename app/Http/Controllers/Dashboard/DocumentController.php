@@ -83,7 +83,8 @@ class DocumentController extends Controller
             return redirect()->route('document.index');
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e->getMessage());
+            toastr()->error('Terjadi kesalahan ...', 'Error');
+            return back();
         }
     }
 

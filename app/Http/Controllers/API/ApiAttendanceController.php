@@ -148,7 +148,7 @@ class ApiAttendanceController extends Controller
 
             return response()->json([
                 'error'     => true,
-                'message'   => dd($e),
+                'message'   => 'error',
                 'data'      => '',
                 'status'    => 407
             ], 407);
@@ -224,7 +224,7 @@ class ApiAttendanceController extends Controller
 
             return response()->json([
                 'error'     => true,
-                'message'   => dd($e),
+                'message'   => 'error',
                 'data'      => '',
                 'status'    => 403
             ], 403);
@@ -306,7 +306,7 @@ class ApiAttendanceController extends Controller
 
             return response()->json([
                 'error'     => true,
-                'message'   => dd($e),
+                'message'   => 'error',
                 'data'      => '',
                 'status'    => 403
             ], 403);
